@@ -1,0 +1,7 @@
+version: "3.9"
+services:
+  springboot:
+    container_name: springboot
+    build: .
+    ports:
+      - "8080:8080"
