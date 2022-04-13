@@ -1,4 +1,4 @@
-package net.schoolvery.schoolveryserver.global.security;
+package net.schoolvery.schoolveryserver.global.config.security;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
