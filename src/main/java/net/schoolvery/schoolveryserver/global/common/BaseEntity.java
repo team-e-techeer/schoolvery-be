@@ -1,4 +1,4 @@
-package net.schoolvery.schoolveryserver.domain.model;
+package net.schoolvery.schoolveryserver.global.common;
 
 import lombok.Getter;
 import org.springframework.data.annotation.CreatedDate;
