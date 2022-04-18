@@ -38,6 +38,9 @@ dependencies {
 	implementation 'com.google.guava:guava:31.0.1-jre'
 	implementation "com.querydsl:querydsl-jpa:${queryDslVersion}"
 	implementation "com.querydsl:querydsl-apt:${queryDslVersion}"
+	//spring-doc ( Swagger )
+	implementation 'org.springdoc:springdoc-openapi-ui:1.6.6'
+	
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	runtimeOnly 'com.h2database:h2'
@@ -45,6 +48,8 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
+
+
 }
 
 tasks.named('test') {
