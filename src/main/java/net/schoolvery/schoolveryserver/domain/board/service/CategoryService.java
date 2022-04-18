@@ -1,5 +1,6 @@
 package net.schoolvery.schoolveryserver.domain.board.service;
 
+import net.schoolvery.schoolveryserver.domain.board.dto.request.CategoryUpdateRequestDto;
 import net.schoolvery.schoolveryserver.domain.board.entity.Category;
 import net.schoolvery.schoolveryserver.domain.board.dto.request.CategoryCreateRequestDto;
 import net.schoolvery.schoolveryserver.domain.board.dto.response.CategoryResponseDto;
@@ -23,4 +24,5 @@ public interface CategoryService {
 
     CategoryResponseDto createCategory(CategoryCreateRequestDto dto);
     void deleteCategory(Integer id);
+    CategoryResponseDto updateCategory(Integer id, CategoryUpdateRequestDto dto);
 }

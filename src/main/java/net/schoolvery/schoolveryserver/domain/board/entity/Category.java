@@ -29,4 +29,9 @@ public class Category extends BaseEntity{
 
     @Column(name = "DESCRIPTION" ,nullable = false)
     private String description;
+
+    public void update(String name, String description) {
+        this.name = name;
+        this.description = description;
+    }
 }

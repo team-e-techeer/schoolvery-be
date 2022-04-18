@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 import net.schoolvery.schoolveryserver.domain.board.dto.request.CategoryCreateRequestDto;
+import net.schoolvery.schoolveryserver.domain.board.dto.request.CategoryUpdateRequestDto;
 import net.schoolvery.schoolveryserver.domain.board.dto.response.CategoryResponseDto;
 @RestController
 @RequestMapping(value = "/api/v1/posts/category")
@@ -19,12 +20,18 @@ public class CategoryController {
         CategoryResponseDto result = categoryService.createCategory(categoryCreateRequestDto);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
-    //카테고리 삭제
+    // 카테고리 삭제
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteCategory(@PathVariable Integer id) {
         categoryService.deleteCategory(id);
         return ResponseEntity.ok()
                 .body(null);
     }
-
+    // 카테고리 수정
+    @PutMapping("/{id}")
+    public ResponseEntity<CategoryResponseDto> updateCategory(@PathVariable Integer id, @RequestBody CategoryUpdateRequestDto  categoryUpdateRequestDto) {
+        CategoryResponseDto updatedDto = categoryService.updateCategory(id, categoryUpdateRequestDto);
+        return ResponseEntity.ok()
+                .body(updatedDto);
+    }
 }
