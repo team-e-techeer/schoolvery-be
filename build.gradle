@@ -40,7 +40,7 @@ dependencies {
 	implementation "com.querydsl:querydsl-apt:${queryDslVersion}"
 	//spring-doc ( Swagger )
 	implementation 'org.springdoc:springdoc-openapi-ui:1.6.6'
-	
+
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	runtimeOnly 'com.h2database:h2'
