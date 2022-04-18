@@ -1,4 +1,5 @@
 package net.schoolvery.schoolveryserver.domain.hello.service;
+import com.querydsl.core.BooleanBuilder;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import net.schoolvery.schoolveryserver.domain.hello.dto.request.HelloCreateRequestDto;
@@ -34,6 +35,8 @@ public class HelloServiceImpl implements HelloService{
     public PageResultDto<HelloResponseDto, Hello> getAllUser(PageRequestDto requestDto) {
 
         Pageable pageable = requestDto.getPageable(Sort.by("name").descending());
+
+        BooleanBuilder booleanBuilder = getSearch(requestDto);
         Page<Hello> result = helloRepository.findAll(pageable);
 
         Function<Hello, HelloResponseDto> fn = (entity -> entityToDto(entity));
@@ -59,5 +62,23 @@ public class HelloServiceImpl implements HelloService{
     @Override
     public void remove(Long id) {
         helloRepository.deleteById(id);
+    }
+
+    private BooleanBuilder getSearch(PageRequestDto requestDto) {
+        String Type = requestDto.getType();
+        BooleanBuilder booleanBuilder = new BooleanBuilder();
+//        QHello qGuestbook = QHello.hello;
+//        String keyword = requestDto.getKeyword();
+//        BooleanBuilder expression = qGuestbook.id.gt(0L);
+
+//        booleanBuilder.and(expression);
+//        if(type == null || type.trim().length() == 0) {
+//            return booleanBuilder;
+//        }
+
+//        BooleanBuilder conditionBuilder = new BooleanBuilder();
+
+        return booleanBuilder;
+
     }
 }
