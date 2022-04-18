@@ -23,6 +23,7 @@ public class Hello extends BaseEntity {
     private String greeting;
 
     public void modify(String greeting) {
+
         this.greeting = greeting;
     }
 
