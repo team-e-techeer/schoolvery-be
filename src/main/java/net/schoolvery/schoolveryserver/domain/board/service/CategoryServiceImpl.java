@@ -13,8 +13,12 @@ import org.springframework.stereotype.Service;
 public class CategoryServiceImpl implements CategoryService{
     private final CategoryRepository categoryRepository;
     @Override
-    public CategoryResponseDto create(CategoryCreateRequestDto dto) {
+    public CategoryResponseDto createCategory(CategoryCreateRequestDto dto) {
         Category entity = dtoToEntity(dto);
         return entityToDto(categoryRepository.save(entity));
+    }
+    @Override
+    public void deleteCategory(Integer id) {
+        categoryRepository.deleteById(id);
     }
 }

@@ -14,11 +14,13 @@ public interface CategoryService {
     }
     default CategoryResponseDto entityToDto (Category entity) {
         CategoryResponseDto dto = CategoryResponseDto.builder()
+                .id(entity.getId())
                 .name(entity.getName())
                 .description(entity.getName())
                 .build();
         return dto;
     }
 
-    CategoryResponseDto create(CategoryCreateRequestDto dto);
+    CategoryResponseDto createCategory(CategoryCreateRequestDto dto);
+    void deleteCategory(Integer id);
 }
