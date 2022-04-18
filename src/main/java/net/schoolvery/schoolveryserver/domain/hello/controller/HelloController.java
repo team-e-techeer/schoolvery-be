@@ -23,10 +23,6 @@ import javax.validation.Valid;
 public class HelloController {
     private final HelloService helloService;
 
-    public String index() {
-        return "hello";
-    }
-
     @GetMapping("/list")
     public ResponseEntity<PageResultDto> list(PageRequestDto pageRequestDto) {
 
@@ -55,6 +51,7 @@ public class HelloController {
         )
                 .body(result);
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
         helloService.remove(id);
