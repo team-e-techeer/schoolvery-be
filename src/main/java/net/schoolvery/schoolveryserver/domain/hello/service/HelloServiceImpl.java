@@ -1,11 +1,13 @@
 package net.schoolvery.schoolveryserver.domain.hello.service;
 import com.querydsl.core.BooleanBuilder;
+import com.querydsl.core.types.dsl.BooleanExpression;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import net.schoolvery.schoolveryserver.domain.hello.dto.request.HelloCreateRequestDto;
 import net.schoolvery.schoolveryserver.domain.hello.dto.request.HelloUpdateRequestDto;
 import net.schoolvery.schoolveryserver.domain.hello.dto.response.HelloResponseDto;
 import net.schoolvery.schoolveryserver.domain.hello.entity.Hello;
+import net.schoolvery.schoolveryserver.domain.hello.entity.QHello;
 import net.schoolvery.schoolveryserver.domain.hello.repository.HelloRepository;
 import net.schoolvery.schoolveryserver.global.common.dto.PageRequestDto;
 import net.schoolvery.schoolveryserver.global.common.dto.PageResultDto;
@@ -37,7 +39,7 @@ public class HelloServiceImpl implements HelloService{
         Pageable pageable = requestDto.getPageable(Sort.by("name").descending());
 
         BooleanBuilder booleanBuilder = getSearch(requestDto);
-        Page<Hello> result = helloRepository.findAll(pageable);
+        Page<Hello> result = helloRepository.findAll(booleanBuilder, pageable);
 
         Function<Hello, HelloResponseDto> fn = (entity -> entityToDto(entity));
         return new PageResultDto<>(result, fn);
@@ -65,19 +67,22 @@ public class HelloServiceImpl implements HelloService{
     }
 
     private BooleanBuilder getSearch(PageRequestDto requestDto) {
-        String Type = requestDto.getType();
+
         BooleanBuilder booleanBuilder = new BooleanBuilder();
-//        QHello qGuestbook = QHello.hello;
-//        String keyword = requestDto.getKeyword();
-//        BooleanBuilder expression = qGuestbook.id.gt(0L);
+        QHello qHello = QHello.hello;
+        String keyword = requestDto.getKeyword();
+        BooleanExpression expression = qHello.id.gt(0L);
 
-//        booleanBuilder.and(expression);
-//        if(type == null || type.trim().length() == 0) {
-//            return booleanBuilder;
-//        }
+        booleanBuilder.and(expression);
 
-//        BooleanBuilder conditionBuilder = new BooleanBuilder();
+        if (keyword == null || keyword.trim().length() == 0) {
+            return booleanBuilder;
+        }
 
+        BooleanBuilder conditionBuilder = new BooleanBuilder();
+        conditionBuilder.or(qHello.greeting.contains(keyword));
+
+        booleanBuilder.and(conditionBuilder);
         return booleanBuilder;
 
     }
