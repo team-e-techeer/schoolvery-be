@@ -24,9 +24,9 @@ public class Category extends BaseEntity{
     @GeneratedValue(strategy = GenerationType.IDENTITY) //@GeneratedValue -> PK 설정, GenerationType.IDENTITY -> AutoIncrement
     private Integer id;
 
-    @Column(nullable = false)
+    @Column(name = "NAME" ,nullable = false)
     private String name;
 
-    @Column(nullable = false)
+    @Column(name = "DESCRIPTION" ,nullable = false)
     private String description;
 }
