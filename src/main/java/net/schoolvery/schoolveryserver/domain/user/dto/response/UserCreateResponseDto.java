@@ -1,15 +1,15 @@
-package net.schoolvery.schoolveryserver.domain.user.dto.request;
+package net.schoolvery.schoolveryserver.domain.user.dto.response;
 
-
-import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class UserCreateRequestDto {
+@AllArgsConstructor
+public class UserCreateResponseDto {
+
+    private String id;
 
     private String name;
     private String nickname;
@@ -19,6 +19,5 @@ public class UserCreateRequestDto {
     private String school;
     private String email;
     private String password;
-
 
 }
