@@ -1,16 +1,14 @@
-package net.schoolvery.schoolveryserver.domain.hello.dto.response;
+package net.schoolvery.schoolveryserver.domain.hello.dto.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+@Getter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-public class HelloResponseDto {
-    private String name;
+public class HelloUpdateRequestDto {
     private String greeting;
 }
-
