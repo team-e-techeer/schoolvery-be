@@ -11,16 +11,17 @@ import java.util.UUID;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Table(name = "User")
-@Builder
 @Entity
+@Builder
 public class User extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id = UUID.randomUUID().toString();
+    private String id;
 
     private String name;
     private int school_id;
+    private String school;
     private String nickname;
     private String email;
     private String password;
@@ -28,4 +29,5 @@ public class User extends BaseEntity {
     private int school_num;
     private int phone_num;
     private String address;
+
 }
