@@ -13,18 +13,19 @@ import javax.persistence.*;
 @ToString
 public class Hello extends BaseEntity {
 
-    @Id@GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  private Long id;
 
-    @Column(length = 50, nullable = false)
-    private String name;
+  @Column(length = 50, nullable = false)
+  private String name;
 
-    @Column(length = 50, nullable = false)
-    private String greeting;
+  @Column(length = 50, nullable = false)
+  private String greeting;
 
-    public void modify(String greeting) {
+  public void modify(String greeting) {
 
-        this.greeting = greeting;
-    }
+    this.greeting = greeting;
+  }
 
 }
