@@ -1,20 +1,16 @@
 package net.schoolvery.schoolveryserver.domain.user.dto.response;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
-import java.util.UUID;
 
 @Getter
 @Setter
 @AllArgsConstructor
-@Builder
-public class UserCreateResponseDto {
+@Data
+public class GetUserResponseDto {
 
-    private String id = UUID.randomUUID().toString();
+    private String id;
 
     private String name;
     private String nickname;
@@ -26,5 +22,4 @@ public class UserCreateResponseDto {
     private String password;
     private LocalDate modDate;
     private LocalDate regDate;
-
 }
