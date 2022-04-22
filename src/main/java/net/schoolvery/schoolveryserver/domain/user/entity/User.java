@@ -2,6 +2,7 @@ package net.schoolvery.schoolveryserver.domain.user.entity;
 
 import lombok.*;
 import net.schoolvery.schoolveryserver.global.common.BaseEntity;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.UUID;
@@ -16,7 +17,11 @@ import java.util.UUID;
 public class User extends BaseEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(
+            name = "UUID",
+            strategy = "uuid2"
+    )
     private String id;
 
     private String name;
@@ -29,5 +34,10 @@ public class User extends BaseEntity {
     private int school_num;
     private int phone_num;
     private String address;
+
+    public void modifyUser(String nickname, String password) {
+        this.nickname = nickname;
+        this.password = password;
+    }
 
 }
