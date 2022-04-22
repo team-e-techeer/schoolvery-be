@@ -1,22 +1,16 @@
 package net.schoolvery.schoolveryserver.domain.user.dto.response;
 
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
-import java.util.UUID;
-
-@Getter
-@Setter
-@AllArgsConstructor
 @Builder
-public class UserCreateResponseDto {
+@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+public class UserUpdateResponseDto {
 
-    private String id ;
-
-    private String name;
+    private String id;
     private String nickname;
     private int phone_num;
     private int school_id;
@@ -24,7 +18,5 @@ public class UserCreateResponseDto {
     private String school;
     private String email;
     private String password;
-    private LocalDate modDate;
-    private LocalDate regDate;
 
 }
