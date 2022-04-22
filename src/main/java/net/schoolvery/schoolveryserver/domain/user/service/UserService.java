@@ -1,12 +1,21 @@
 package net.schoolvery.schoolveryserver.domain.user.service;
 
 import net.schoolvery.schoolveryserver.domain.user.dto.request.UserCreateRequestDto;
+import net.schoolvery.schoolveryserver.domain.user.dto.request.UserUpdateRequestDto;
+import net.schoolvery.schoolveryserver.domain.user.dto.response.GetUserResponseDto;
 import net.schoolvery.schoolveryserver.domain.user.dto.response.UserCreateResponseDto;
+import net.schoolvery.schoolveryserver.domain.user.dto.response.UserUpdateResponseDto;
 import net.schoolvery.schoolveryserver.domain.user.entity.User;
-
-import java.util.List;
+import net.schoolvery.schoolveryserver.global.common.dto.PageRequestDto;
+import net.schoolvery.schoolveryserver.global.common.dto.PageResultDto;
 
 public interface UserService {
+
+    UserCreateResponseDto createUser(UserCreateRequestDto userCreateRequestDto);
+
+    PageResultDto<GetUserResponseDto, User> getAllUser(PageRequestDto pageRequestDto);
+    UserUpdateResponseDto modifyUser(String id, UserUpdateRequestDto userUpdateRequestDto);
+    void deleteUser(String id);
 
     default User createUserRequest(UserCreateRequestDto userCreateRequestDto) {
         User user = User.builder()
@@ -36,10 +45,18 @@ public interface UserService {
 
     }
 
-    public List<User> findAllUser();
+    default User updateUser(String id, UserUpdateRequestDto userUpdateRequestDto) {
+        User user = User.builder()
+                .nickname(userUpdateRequestDto.getNickname())
+                .phone_num(userUpdateRequestDto.getPhone_num())
+                .school_id(userUpdateRequestDto.getSchool_id())
+                .school_num(userUpdateRequestDto.getSchool_num())
+                .school(userUpdateRequestDto.getSchool())
+                .email(userUpdateRequestDto.getEmail())
+                .password(userUpdateRequestDto.getPassword())
+                .build();
 
-    public String delete(String idx);
-
-
+        return user;
+    }
 
 }
