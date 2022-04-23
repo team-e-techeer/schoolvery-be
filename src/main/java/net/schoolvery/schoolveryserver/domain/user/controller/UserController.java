@@ -5,18 +5,18 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import net.schoolvery.schoolveryserver.domain.user.dto.request.UserCreateRequestDto;
 import net.schoolvery.schoolveryserver.domain.user.dto.request.UserUpdateRequestDto;
-import net.schoolvery.schoolveryserver.domain.user.dto.response.GetUserResponseDto;
 import net.schoolvery.schoolveryserver.domain.user.dto.response.UserCreateResponseDto;
 import net.schoolvery.schoolveryserver.domain.user.dto.response.UserUpdateResponseDto;
+import net.schoolvery.schoolveryserver.domain.user.entity.User;
 import net.schoolvery.schoolveryserver.domain.user.service.UserService;
 import net.schoolvery.schoolveryserver.global.common.dto.PageRequestDto;
 import net.schoolvery.schoolveryserver.global.common.dto.PageResultDto;
-import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Tag(name = "User Controller", description = "User Controller REST API")
 @RestController
@@ -29,12 +29,9 @@ public class UserController {
 
     // All Users find
     @GetMapping("")
-    public ResponseEntity<PageResultDto> Allusersfind(PageRequestDto pageRequestDto) {
-
-        PageResultDto user = userService.getAllUser(pageRequestDto);
-
+    public ResponseEntity<List<User>> getUser() {
         return ResponseEntity.ok()
-                .body(user);
+                .body(userService.getAllUsers());
     }
 
     // Create Users
