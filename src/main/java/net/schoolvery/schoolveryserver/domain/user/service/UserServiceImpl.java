@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -40,10 +41,11 @@ public class UserServiceImpl implements UserService {
 
     // User Read ( All )
     @Override
-    public PageResultDto<GetUserResponseDto, User> getAllUser(PageRequestDto pageRequestDto) {
-
-        return null;
+    public List<User> getAllUsers() {
+        log.info("Find all users");
+        return userRepository.findAll();
     }
+
 
     // User modify ( Update )
     @Override

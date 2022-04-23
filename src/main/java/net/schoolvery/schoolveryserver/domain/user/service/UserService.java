@@ -9,11 +9,12 @@ import net.schoolvery.schoolveryserver.domain.user.entity.User;
 import net.schoolvery.schoolveryserver.global.common.dto.PageRequestDto;
 import net.schoolvery.schoolveryserver.global.common.dto.PageResultDto;
 
+import java.util.List;
+
 public interface UserService {
 
     UserCreateResponseDto createUser(UserCreateRequestDto userCreateRequestDto);
-
-    PageResultDto<GetUserResponseDto, User> getAllUser(PageRequestDto pageRequestDto);
+    List<User> getAllUsers();
     UserUpdateResponseDto modifyUser(String id, UserUpdateRequestDto userUpdateRequestDto);
     void deleteUser(String id);
 
