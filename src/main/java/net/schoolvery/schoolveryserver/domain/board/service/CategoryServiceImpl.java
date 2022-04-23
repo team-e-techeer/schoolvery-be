@@ -8,9 +8,7 @@ import net.schoolvery.schoolveryserver.domain.board.dto.response.CategoryRespons
 import net.schoolvery.schoolveryserver.domain.board.entity.Category;
 import net.schoolvery.schoolveryserver.domain.board.respository.CategoryRepository;
 import org.springframework.stereotype.Service;
-
 import java.util.Optional;
-
 @Service
 @Log4j2
 @RequiredArgsConstructor
@@ -35,5 +33,10 @@ public class CategoryServiceImpl implements CategoryService{
         );
         Category updatedEntity = categoryRepository.save(entity);
         return entityToDto(updatedEntity);
+    }
+    @Override
+    public CategoryResponseDto getCategoryById(Integer id) {
+        Optional<Category> result = categoryRepository.findById(id);
+        return result.isPresent()? entityToDto(result.get()): null;
     }
 }
