@@ -8,6 +8,8 @@ import org.springframework.http.ResponseEntity;
 import net.schoolvery.schoolveryserver.domain.board.dto.request.CategoryCreateRequestDto;
 import net.schoolvery.schoolveryserver.domain.board.dto.request.CategoryUpdateRequestDto;
 import net.schoolvery.schoolveryserver.domain.board.dto.response.CategoryResponseDto;
+import net.schoolvery.schoolveryserver.global.common.dto.PageRequestDto;
+import net.schoolvery.schoolveryserver.global.common.dto.PageResultDto;
 import io.swagger.v3.oas.annotations.tags.Tag;
 @RestController
 @RequestMapping(value = "/api/v1/posts/category")
@@ -35,11 +37,18 @@ public class CategoryController {
         return ResponseEntity.ok()
                 .body(updatedDto);
     }
-    // 해당 카테고리 조회 -> 해당 게시물
+    // 해당 카테고리 조회
     @GetMapping("/{id}")
     public ResponseEntity<CategoryResponseDto> getCategoryById(@PathVariable Integer id) {
         CategoryResponseDto dto = categoryService.getCategoryById(id);
         return ResponseEntity.ok()
                 .body(dto);
+    }
+    // 전체 카테고리 조회
+    @GetMapping("/list")
+    public ResponseEntity<PageResultDto> getCategoryList(PageRequestDto pageRequestDto) {
+        PageResultDto result = categoryService.getAllCategory(pageRequestDto);
+        return ResponseEntity.ok()
+                .body(result);
     }
 }

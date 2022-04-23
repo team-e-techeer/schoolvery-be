@@ -4,7 +4,8 @@ import net.schoolvery.schoolveryserver.domain.board.dto.request.CategoryUpdateRe
 import net.schoolvery.schoolveryserver.domain.board.entity.Category;
 import net.schoolvery.schoolveryserver.domain.board.dto.request.CategoryCreateRequestDto;
 import net.schoolvery.schoolveryserver.domain.board.dto.response.CategoryResponseDto;
-
+import net.schoolvery.schoolveryserver.global.common.dto.PageRequestDto;
+import net.schoolvery.schoolveryserver.global.common.dto.PageResultDto;
 public interface CategoryService {
     default Category dtoToEntity (CategoryCreateRequestDto dto) {
         Category entity = Category.builder()
@@ -26,4 +27,5 @@ public interface CategoryService {
     void deleteCategory(Integer id);
     CategoryResponseDto updateCategory(Integer id, CategoryUpdateRequestDto dto);
     CategoryResponseDto getCategoryById(Integer id);
+    PageResultDto<CategoryResponseDto, Category> getAllCategory(PageRequestDto requestDto);
 }
