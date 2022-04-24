@@ -19,6 +19,4 @@ public class UserCreateRequestDto {
     private String school;
     private String email;
     private String password;
-
-
 }
