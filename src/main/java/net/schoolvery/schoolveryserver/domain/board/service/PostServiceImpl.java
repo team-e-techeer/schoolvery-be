@@ -34,7 +34,7 @@ public class PostServiceImpl implements PostService{
   }
 
   @Override
-  public PageResultDto<PostResponseDto, Post> getAllPost(PageRequestDto requestDto) {
+  public PageResultDto<PostResponseDto, Post> getPosts(PageRequestDto requestDto) {
 
     Pageable pageable = requestDto.getPageable(Sort.by("title").descending());
 
@@ -69,24 +69,45 @@ public class PostServiceImpl implements PostService{
     postRepository.deleteById(id);
   }
 
+  // Todo : getSearch : at title -> o
+  // Todo : getSchool
+  // Todo : getCategory
+  // Todo : booleanexpresstion
+
   private BooleanBuilder getSearch(PageRequestDto requestDto) {
 
     BooleanBuilder booleanBuilder = new BooleanBuilder();
-    QPost qPost = QPost.post;
-    String keyword = requestDto.getKeyword();
-    BooleanExpression expression = qPost.id.gt(0L);
 
+    QPost qPost = QPost.post;
+
+    String keyword = requestDto.getKeyword();
+    Long schoolId = requestDto.getSchoolId();
+    Long categoryId = requestDto.getCategoryId();
+
+    BooleanExpression expression = qPost.id.gt(0L);
     booleanBuilder.and(expression);
 
-    if (keyword == null || keyword.trim().length() == 0) {
-      return booleanBuilder;
+//    if (keyword == null || keyword.trim().length() == 0) {
+//      return booleanBuilder;
+//    }
+
+    if (schoolId != null) {
+      booleanBuilder.and(qPost.schoolId.eq(schoolId));
     }
 
-    BooleanBuilder conditionBuilder = new BooleanBuilder();
-    conditionBuilder.or(qPost.title.contains(keyword));
+    // keyword or category 임
+    if (keyword != null) {
+//      BooleanBuilder conditionBuilder = new BooleanBuilder();
+//      conditionBuilder.or(qPost.title.contains(keyword));
+//
+//      booleanBuilder.and(conditionBuilder);
+      booleanBuilder.and(qPost.title.contains(keyword));
+    }
 
-    booleanBuilder.and(conditionBuilder);
+    if (categoryId != null) {
+      booleanBuilder.and(qPost.categoryId.eq(categoryId));
+    }
+
     return booleanBuilder;
-
   }
 }

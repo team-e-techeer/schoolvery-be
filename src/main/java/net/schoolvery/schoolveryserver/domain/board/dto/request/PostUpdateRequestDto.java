@@ -1,6 +1,5 @@
 package net.schoolvery.schoolveryserver.domain.board.dto.request;
 
-import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,9 +10,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class PostUpdateRequestDto {
+//  private String userId;
   private String title;
   private String location;
-  private String people_num;
-  private String delivery_fee;
+  private String peopleNum;
+  private String deliveryFee;
   private String content;
 }

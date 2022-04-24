@@ -24,22 +24,24 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @Controller
-@RequestMapping("/api/v1/board/post")
+@RequestMapping("/api/v1/posts")
 @Log4j2
 @RequiredArgsConstructor
 public class PostController {
+
     private final PostService postService;
 
-    @GetMapping("/list")
+    @GetMapping
     public ResponseEntity<PageResultDto> list(PageRequestDto pageRequestDto) {
 
-        PageResultDto result = postService.getAllPost(pageRequestDto);
+        PageResultDto result = postService.getPosts(pageRequestDto);
         return ResponseEntity.ok()
             .body(result);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<PostResponseDto> getUserById(@PathVariable Long id) {
+    public ResponseEntity<PostResponseDto> getPostById(@PathVariable Long id) {
+
         PostResponseDto dto = postService.getPostById(id);
         return ResponseEntity.ok()
             .body(dto);
@@ -49,6 +51,7 @@ public class PostController {
     @ResponseStatus(HttpStatus.CREATED)
     @ResponseBody
     public ResponseEntity<PostResponseDto> create (@Valid @RequestBody PostCreateRequestDto dto) {
+
         PostResponseDto result = postService.create(dto);
         return ResponseEntity.created(
             WebMvcLinkBuilder
@@ -60,14 +63,16 @@ public class PostController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
+    public ResponseEntity<Void> deletePost(@PathVariable Long id) {
+
         postService.remove(id);
         return ResponseEntity.ok()
             .body(null);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<PostResponseDto> updateUser(@PathVariable Long id, @RequestBody PostUpdateRequestDto dto) {
+    public ResponseEntity<PostResponseDto> updatePost(@PathVariable Long id, @RequestBody PostUpdateRequestDto dto) {
+
         postService.modify(id, dto);
         return ResponseEntity.ok()
             .body(null);

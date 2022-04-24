@@ -13,9 +13,11 @@ import lombok.NoArgsConstructor;
 public class PostCreateRequestDto {
 
   private String title;
+  private Long schoolId;
+  private Long categoryId;
   private String location;
-  private String people_num;
-  private String delivery_fee;
+  private String peopleNum;
+  private String deliveryFee;
   private String content;
   private String store;
 

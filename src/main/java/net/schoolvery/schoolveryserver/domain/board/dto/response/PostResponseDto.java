@@ -15,8 +15,10 @@ public class PostResponseDto {
   private Long id;
   private String title;
   private String location;
-  private String people_num;
-  private String delivery_fee;
+  private Long schoolId;
+  private Long categoryId;
+  private String peopleNum;
+  private String deliveryFee;
   private String content;
   private String store;
 }

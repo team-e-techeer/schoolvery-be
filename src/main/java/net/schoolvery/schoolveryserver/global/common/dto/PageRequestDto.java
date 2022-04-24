@@ -15,6 +15,8 @@ public class PageRequestDto {
     private int page;
     private int size;
     private String keyword;
+    private Long schoolId;
+    private Long categoryId;
 
     public PageRequestDto(){
         this.page = 1;

@@ -29,25 +29,25 @@ public class Post extends BaseEntity {
   private String title;
 
 //  @Column(length = 1500, nullable = false)
-//  private String user_id;
+//  private String userId;
 
-//  @Column(length = 1500, nullable = false)
-//  private String school_id;
+  @Column(length = 1500, nullable = false)
+  private Long schoolId;
 
-//  @Column(length = 50, nullable = false)
-//  private String category_id;
+  @Column(length = 50, nullable = true)
+  private Long categoryId;
 
   @Column(length = 100, nullable = false)
   private String location;
 
   @Column(length = 1500, nullable = false)
-  private String people_num;
+  private String peopleNum;
 
   @Column(length = 50, nullable = true)
   private LocalDateTime deadline;
 
   @Column(length = 100, nullable = true)
-  private String delivery_fee;
+  private String deliveryFee;
 
   @Column(length = 1500, nullable = false)
   private String content;
