@@ -17,10 +17,12 @@ public interface PostService {
 
   default Post createDtoToEntity(PostCreateRequestDto dto){
     Post entity = Post.builder()
+        .userId(dto.getUserId())
         .title(dto.getTitle())
         .location(dto.getLocation())
         .schoolId(dto.getSchoolId())
         .categoryId(dto.getCategoryId())
+        .deadline(dto.getDeadline())
         .peopleNum(dto.getPeopleNum())
         .deliveryFee(dto.getDeliveryFee())
         .content(dto.getContent())
@@ -33,6 +35,7 @@ public interface PostService {
     Post entity = Post.builder()
         .title(dto.getTitle())
         .location(dto.getLocation())
+        .deadline(dto.getDeadline())
         .peopleNum(dto.getPeopleNum())
         .content(dto.getContent())
         .deliveryFee(dto.getDeliveryFee())

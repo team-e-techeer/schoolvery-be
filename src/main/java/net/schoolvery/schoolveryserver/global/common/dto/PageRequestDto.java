@@ -1,6 +1,7 @@
 package net.schoolvery.schoolveryserver.global.common.dto;
 
 
+import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,9 +15,10 @@ import org.springframework.data.domain.Sort;
 public class PageRequestDto {
     private int page;
     private int size;
+    private String type;
     private String keyword;
-    private Long schoolId;
-    private Long categoryId;
+    private UUID schoolId;
+    private UUID categoryId;
 
     public PageRequestDto(){
         this.page = 1;

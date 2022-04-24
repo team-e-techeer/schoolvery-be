@@ -3,6 +3,7 @@ package net.schoolvery.schoolveryserver.domain.board.service;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import java.util.Optional;
+import java.util.UUID;
 import java.util.function.Function;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -36,7 +37,7 @@ public class PostServiceImpl implements PostService{
   @Override
   public PageResultDto<PostResponseDto, Post> getPosts(PageRequestDto requestDto) {
 
-    Pageable pageable = requestDto.getPageable(Sort.by("title").descending());
+    Pageable pageable = requestDto.getPageable(Sort.by("deadline"));
 
     BooleanBuilder booleanBuilder = getSearch(requestDto);
     Page<Post> result = postRepository.findAll(booleanBuilder, pageable);
@@ -58,7 +59,12 @@ public class PostServiceImpl implements PostService{
       Post entity = result.get();
       entity.modify(
           dto.getTitle(),
-          dto.getLocation()
+          dto.getLocation(),
+          dto.getDeadline(),
+          dto.getPeopleNum(),
+          dto.getDeliveryFee(),
+          dto.getCategoryId(),
+          dto.getContent()
       );
       postRepository.save(entity);
     }
@@ -69,9 +75,7 @@ public class PostServiceImpl implements PostService{
     postRepository.deleteById(id);
   }
 
-  // Todo : getSearch : at title -> o
-  // Todo : getSchool
-  // Todo : getCategory
+  // Todo : getSearch : at title -> o, store, location
   // Todo : booleanexpresstion
 
   private BooleanBuilder getSearch(PageRequestDto requestDto) {
@@ -80,28 +84,25 @@ public class PostServiceImpl implements PostService{
 
     QPost qPost = QPost.post;
 
+    String type = requestDto.getType();
     String keyword = requestDto.getKeyword();
-    Long schoolId = requestDto.getSchoolId();
-    Long categoryId = requestDto.getCategoryId();
+    UUID schoolId = requestDto.getSchoolId();
+    UUID categoryId = requestDto.getCategoryId();
 
     BooleanExpression expression = qPost.id.gt(0L);
     booleanBuilder.and(expression);
-
-//    if (keyword == null || keyword.trim().length() == 0) {
-//      return booleanBuilder;
-//    }
 
     if (schoolId != null) {
       booleanBuilder.and(qPost.schoolId.eq(schoolId));
     }
 
-    // keyword or category 임
     if (keyword != null) {
-//      BooleanBuilder conditionBuilder = new BooleanBuilder();
-//      conditionBuilder.or(qPost.title.contains(keyword));
-//
-//      booleanBuilder.and(conditionBuilder);
-      booleanBuilder.and(qPost.title.contains(keyword));
+      if(type.contains("store"))
+        booleanBuilder.and(qPost.store.contains(keyword));
+      if(type.contains("title"))
+        booleanBuilder.and(qPost.title.contains(keyword));
+      if(type.contains("location"))
+        booleanBuilder.and(qPost.location.contains(keyword));
     }
 
     if (categoryId != null) {
