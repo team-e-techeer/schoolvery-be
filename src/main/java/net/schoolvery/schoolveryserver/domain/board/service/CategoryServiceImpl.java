@@ -9,7 +9,7 @@ import net.schoolvery.schoolveryserver.domain.board.dto.request.CategoryUpdateRe
 import net.schoolvery.schoolveryserver.domain.board.dto.response.CategoryResponseDto;
 import net.schoolvery.schoolveryserver.domain.board.entity.Category;
 import net.schoolvery.schoolveryserver.domain.board.entity.QCategory;
-import net.schoolvery.schoolveryserver.domain.board.respository.CategoryRepository;
+import net.schoolvery.schoolveryserver.domain.board.repository.CategoryRepository;
 import net.schoolvery.schoolveryserver.global.common.dto.PageRequestDto;
 import net.schoolvery.schoolveryserver.global.common.dto.PageResultDto;
 import org.springframework.data.domain.Page;
