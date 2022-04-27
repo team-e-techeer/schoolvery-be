@@ -22,10 +22,10 @@ public class User extends BaseEntity {
             name = "UUID",
             strategy = "uuid2"
     )
-    private String id;
+    private UUID id;
 
     private String name;
-    private int school_id;
+//    private String school_id;
     private String school;
     private String nickname;
     private String email;

@@ -9,20 +9,19 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 import net.schoolvery.schoolveryserver.global.common.BaseEntity;
-import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
+@Table(name = "post")
 @Getter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 public class Post extends BaseEntity {
 
   @Id
@@ -32,10 +31,10 @@ public class Post extends BaseEntity {
   @Column(length = 100, nullable = false)
   private String title;
 
-  @Column(length = 1500, nullable = false)
+  @Column(length = 150, nullable = false)
   private UUID userId;
 
-  @Column(length = 1500, nullable = false)
+  @Column(length = 150, nullable = false)
   private UUID schoolId;
 
   @Column(length = 50, nullable = true)
@@ -44,7 +43,7 @@ public class Post extends BaseEntity {
   @Column(length = 100, nullable = false)
   private String location;
 
-  @Column(length = 1500, nullable = false)
+  @Column(length = 45, nullable = false)
   private Integer peopleNum;
 
   @Column(length = 50, nullable = true)
@@ -54,10 +53,10 @@ public class Post extends BaseEntity {
   @Column(length = 100, nullable = true)
   private Integer deliveryFee;
 
-  @Column(length = 1500, nullable = false)
+  @Column(length = 150, nullable = false)
   private String content;
 
-  @Column(length = 1500, nullable = false)
+  @Column(length = 150, nullable = false)
   private String store;
 
   @Column(length = 50, nullable = true)
@@ -72,5 +71,4 @@ public class Post extends BaseEntity {
     this.categoryId = categoryId;
     this.content = content;
   }
-
 }

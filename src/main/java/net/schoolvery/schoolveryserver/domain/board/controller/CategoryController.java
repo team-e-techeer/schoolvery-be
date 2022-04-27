@@ -47,10 +47,10 @@ public class CategoryController {
                 .body(dto);
     }
 
-    @GetMapping("/list")
-    public ResponseEntity<PageResultDto> getCategoryList(PageRequestDto pageRequestDto) {
-        PageResultDto result = categoryService.getAllCategory(pageRequestDto);
-        return ResponseEntity.ok()
-                .body(result);
-    }
+//    @GetMapping("/list")
+//    public ResponseEntity<PageResultDto> getCategoryList(PageRequestDto pageRequestDto) {
+//        PageResultDto result = categoryService.getAllCategory(pageRequestDto);
+//        return ResponseEntity.ok()
+//                .body(result);
+//    }
 }

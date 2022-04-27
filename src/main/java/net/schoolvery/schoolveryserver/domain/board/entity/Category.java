@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import javax.persistence.*;
+
 @Entity
 @Table(name = "category")
 @Builder

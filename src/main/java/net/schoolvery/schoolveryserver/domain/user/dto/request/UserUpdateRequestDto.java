@@ -11,7 +11,7 @@ public class UserUpdateRequestDto {
 
     private String nickname;
     private int phone_num;
-    private int school_id;
+//    private String school_id;
     private int school_num;
     private String school;
     private String email;
