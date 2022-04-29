@@ -3,14 +3,16 @@ package net.schoolvery.schoolveryserver.domain.user.service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import net.schoolvery.schoolveryserver.domain.user.dto.request.UserCreateRequestDto;
+import net.schoolvery.schoolveryserver.domain.user.dto.request.UserLoginRequestDto;
 import net.schoolvery.schoolveryserver.domain.user.dto.request.UserUpdateRequestDto;
-import net.schoolvery.schoolveryserver.domain.user.dto.response.GetUserResponseDto;
 import net.schoolvery.schoolveryserver.domain.user.dto.response.UserCreateResponseDto;
 import net.schoolvery.schoolveryserver.domain.user.dto.response.UserUpdateResponseDto;
 import net.schoolvery.schoolveryserver.domain.user.entity.User;
 import net.schoolvery.schoolveryserver.domain.user.repository.UserRepository;
-import net.schoolvery.schoolveryserver.global.common.dto.PageRequestDto;
-import net.schoolvery.schoolveryserver.global.common.dto.PageResultDto;
+import net.schoolvery.schoolveryserver.global.error.exception.BusinessException;
+import net.schoolvery.schoolveryserver.global.error.exception.ErrorCode;
+import net.schoolvery.schoolveryserver.global.utils.AES128;
+import net.schoolvery.schoolveryserver.global.utils.JwtTokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,10 +31,21 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private final UserRepository userRepository;
 
+    @Autowired
+    private final JwtTokenProvider jwtTokenProvider;
+
 
     // User Create
     @Override
     public UserCreateResponseDto createUser(UserCreateRequestDto userCreateRequestDto) {
+//        try {
+//            String password = new AES128("password").encrypt(userCreateRequestDto.getPassword());
+//            userCreateRequestDto.setPassword(password);
+//
+//        } catch (Exception e) {
+//            throw new BusinessException(ErrorCode.PASSWORD_ENCRYPTION_ERROR);
+//        }
+
         User user = createUserRequest(userCreateRequestDto);
         userRepository.save(user);
 
@@ -69,5 +82,12 @@ public class UserServiceImpl implements UserService {
         userRepository.deleteAllById(id);
     }
 
+    @Override
+    public String login(UserLoginRequestDto userLoginRequestDto) {
 
+        User user = userRepository.findByEmail(userLoginRequestDto.getEmail())
+                .orElseThrow(IllegalAccessError::new);
+
+        return jwtTokenProvider.createToken(user.getEmail());
+    }
 }

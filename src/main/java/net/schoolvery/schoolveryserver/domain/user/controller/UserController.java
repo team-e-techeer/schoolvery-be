@@ -5,13 +5,13 @@ import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import net.schoolvery.schoolveryserver.domain.user.dto.request.UserCreateRequestDto;
+import net.schoolvery.schoolveryserver.domain.user.dto.request.UserLoginRequestDto;
 import net.schoolvery.schoolveryserver.domain.user.dto.request.UserUpdateRequestDto;
 import net.schoolvery.schoolveryserver.domain.user.dto.response.UserCreateResponseDto;
+import net.schoolvery.schoolveryserver.domain.user.dto.response.UserLoginResponseDto;
 import net.schoolvery.schoolveryserver.domain.user.dto.response.UserUpdateResponseDto;
 import net.schoolvery.schoolveryserver.domain.user.entity.User;
 import net.schoolvery.schoolveryserver.domain.user.service.UserService;
-import net.schoolvery.schoolveryserver.global.common.dto.PageRequestDto;
-import net.schoolvery.schoolveryserver.global.common.dto.PageResultDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -48,7 +48,8 @@ public class UserController {
     }
 
     // Update Users
-    @PutMapping("/{id}")
+
+    @PatchMapping("/{id}")
     public ResponseEntity<UserUpdateResponseDto> updateUser(@PathVariable UUID id, @RequestBody UserUpdateRequestDto userUpdateRequestDto) {
         UserUpdateResponseDto update = userService.modifyUser(id, userUpdateRequestDto);
 
@@ -62,5 +63,15 @@ public class UserController {
         userService.deleteUser(id);
         return ResponseEntity.ok()
                 .body(null);
+    }
+
+
+    @PostMapping("/login")
+    public ResponseEntity<UserLoginResponseDto> login(@RequestBody UserLoginRequestDto userLoginRequestDto) {
+
+        String token = userService.login(userLoginRequestDto);
+
+        return ResponseEntity.ok()
+                .body(new UserLoginResponseDto(token,userLoginRequestDto.getEmail()));
     }
 }

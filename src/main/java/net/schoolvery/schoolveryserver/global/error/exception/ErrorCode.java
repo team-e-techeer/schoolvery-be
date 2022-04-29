@@ -17,6 +17,9 @@ public enum ErrorCode {
   // Member
   EMAIL_DUPLICATION(400, "M001", "Email is Duplication"),
   LOGIN_INPUT_INVALID(400, "M002", "Login input is invalid"),
+  PASSWORD_ENCRYPTION_ERROR(400,"M003","비밀번호 암호화 실패"),
+  PASSWORD_DECRYPTION_ERROR(400, "M004", "비밀번호 복호화에 실패")
+
 
   ;
   private final String code;
