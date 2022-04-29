@@ -1,4 +1,4 @@
-package net.schoolvery.schoolveryserver;
+package net.schoolvery.schoolveryserver.UserTest;
 
 import net.schoolvery.schoolveryserver.global.utils.AES128;
 import org.junit.jupiter.api.Test;
