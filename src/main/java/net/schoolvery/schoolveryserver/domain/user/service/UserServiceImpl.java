@@ -49,8 +49,8 @@ public class UserServiceImpl implements UserService {
 
     // User modify ( Update )
     @Override
-    public UserUpdateResponseDto modifyUser(String id, UserUpdateRequestDto userUpdateRequestDto) {
-        Optional<User> user_result = userRepository.findById(UUID.fromString(id));
+    public UserUpdateResponseDto modifyUser(UUID id, UserUpdateRequestDto userUpdateRequestDto) {
+        Optional<User> user_result = userRepository.findById(id);
 
         if (user_result.isPresent()) {
             User user = user_result.get();
@@ -65,7 +65,7 @@ public class UserServiceImpl implements UserService {
 
     // User delete
     @Override
-    public void deleteUser(String id) {
+    public void deleteUser(UUID id) {
         userRepository.deleteAllById(id);
     }
 
