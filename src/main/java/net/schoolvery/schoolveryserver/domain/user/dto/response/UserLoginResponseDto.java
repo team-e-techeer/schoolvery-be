@@ -9,6 +9,6 @@ import lombok.*;
 public class UserLoginResponseDto {
 
     private String email;
-    private String password;
+    private String jwts;
 
 }
