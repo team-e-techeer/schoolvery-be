@@ -5,13 +5,13 @@ import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import net.schoolvery.schoolveryserver.domain.user.dto.request.UserCreateRequestDto;
+import net.schoolvery.schoolveryserver.domain.user.dto.request.UserLoginRequestDto;
 import net.schoolvery.schoolveryserver.domain.user.dto.request.UserUpdateRequestDto;
+import net.schoolvery.schoolveryserver.domain.user.dto.response.TokenResponse;
 import net.schoolvery.schoolveryserver.domain.user.dto.response.UserCreateResponseDto;
 import net.schoolvery.schoolveryserver.domain.user.dto.response.UserUpdateResponseDto;
 import net.schoolvery.schoolveryserver.domain.user.entity.User;
 import net.schoolvery.schoolveryserver.domain.user.service.UserService;
-import net.schoolvery.schoolveryserver.global.common.dto.PageRequestDto;
-import net.schoolvery.schoolveryserver.global.common.dto.PageResultDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -62,5 +62,13 @@ public class UserController {
         userService.deleteUser(id);
         return ResponseEntity.ok()
                 .body(null);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<TokenResponse> login(@RequestBody UserLoginRequestDto userLoginRequestDto) {
+
+        String token = userService.createToken(userLoginRequestDto);
+        return ResponseEntity.ok()
+                .body(new TokenResponse(token,"bearer"));
     }
 }
