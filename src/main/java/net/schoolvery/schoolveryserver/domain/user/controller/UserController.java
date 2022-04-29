@@ -64,11 +64,13 @@ public class UserController {
                 .body(null);
     }
 
+
     @PostMapping("/login")
     public ResponseEntity<UserLoginResponseDto> login(@RequestBody UserLoginRequestDto userLoginRequestDto) {
 
-        String token = userService.createToken(userLoginRequestDto);
+        String token = userService.login(userLoginRequestDto);
+
         return ResponseEntity.ok()
-                .body(new UserLoginResponseDto(token, "bearer",userLoginRequestDto.getEmail()));
+                .body(new UserLoginResponseDto(token,userLoginRequestDto.getEmail()));
     }
 }
