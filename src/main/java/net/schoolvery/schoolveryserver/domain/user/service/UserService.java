@@ -14,7 +14,7 @@ public interface UserService {
 
     UserCreateResponseDto createUser(UserCreateRequestDto userCreateRequestDto);
     List<User> getAllUsers();
-    UserUpdateResponseDto modifyUser(String id, UserUpdateRequestDto userUpdateRequestDto);
+    UserUpdateResponseDto modifyUser(UUID id, UserUpdateRequestDto userUpdateRequestDto);
     void deleteUser(UUID id);
 
     String login(UserLoginRequestDto userLoginRequestDto);
@@ -49,7 +49,7 @@ public interface UserService {
 
     }
 
-    default User updateUser(String id, UserUpdateRequestDto userUpdateRequestDto) {
+    default User updateUser(UUID id, UserUpdateRequestDto userUpdateRequestDto) {
         User user = User.builder()
                 .nickname(userUpdateRequestDto.getNickname())
                 .phone_num(userUpdateRequestDto.getPhone_num())
