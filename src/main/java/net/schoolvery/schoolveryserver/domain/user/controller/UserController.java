@@ -7,8 +7,8 @@ import lombok.extern.log4j.Log4j2;
 import net.schoolvery.schoolveryserver.domain.user.dto.request.UserCreateRequestDto;
 import net.schoolvery.schoolveryserver.domain.user.dto.request.UserLoginRequestDto;
 import net.schoolvery.schoolveryserver.domain.user.dto.request.UserUpdateRequestDto;
-import net.schoolvery.schoolveryserver.domain.user.dto.response.TokenResponse;
 import net.schoolvery.schoolveryserver.domain.user.dto.response.UserCreateResponseDto;
+import net.schoolvery.schoolveryserver.domain.user.dto.response.UserLoginResponseDto;
 import net.schoolvery.schoolveryserver.domain.user.dto.response.UserUpdateResponseDto;
 import net.schoolvery.schoolveryserver.domain.user.entity.User;
 import net.schoolvery.schoolveryserver.domain.user.service.UserService;
@@ -65,10 +65,10 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<TokenResponse> login(@RequestBody UserLoginRequestDto userLoginRequestDto) {
+    public ResponseEntity<UserLoginResponseDto> login(@RequestBody UserLoginRequestDto userLoginRequestDto) {
 
         String token = userService.createToken(userLoginRequestDto);
         return ResponseEntity.ok()
-                .body(new TokenResponse(token,"bearer"));
+                .body(new UserLoginResponseDto(token, "bearer",userLoginRequestDto.getEmail()));
     }
 }

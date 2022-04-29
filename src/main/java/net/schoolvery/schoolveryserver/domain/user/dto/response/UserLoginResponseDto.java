@@ -8,7 +8,8 @@ import lombok.*;
 @AllArgsConstructor
 public class UserLoginResponseDto {
 
+    private String accessToken;
+    private String tokenType;
     private String email;
-    private String jwts;
 
 }
