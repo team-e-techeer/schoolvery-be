@@ -3,6 +3,7 @@ package net.schoolvery.schoolveryserver.domain.user.service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import net.schoolvery.schoolveryserver.domain.user.dto.request.UserCreateRequestDto;
+import net.schoolvery.schoolveryserver.domain.user.dto.request.UserLoginRequestDto;
 import net.schoolvery.schoolveryserver.domain.user.dto.request.UserUpdateRequestDto;
 import net.schoolvery.schoolveryserver.domain.user.dto.response.GetUserResponseDto;
 import net.schoolvery.schoolveryserver.domain.user.dto.response.UserCreateResponseDto;
@@ -11,6 +12,7 @@ import net.schoolvery.schoolveryserver.domain.user.entity.User;
 import net.schoolvery.schoolveryserver.domain.user.repository.UserRepository;
 import net.schoolvery.schoolveryserver.global.common.dto.PageRequestDto;
 import net.schoolvery.schoolveryserver.global.common.dto.PageResultDto;
+import net.schoolvery.schoolveryserver.global.utils.JwtTokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +30,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private final UserRepository userRepository;
+
+    @Autowired
+    private final JwtTokenProvider jwtTokenProvider;
 
 
     // User Create
@@ -67,6 +72,17 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteUser(UUID id) {
         userRepository.deleteAllById(id);
+    }
+
+
+
+    @Override
+    public String createToken(UserLoginRequestDto userLoginRequestDto) {
+
+        User user = userRepository.findByEmail(userLoginRequestDto.getEmail())
+                .orElseThrow(IllegalAccessError::new);
+
+        return jwtTokenProvider.createToken(user.getEmail());
     }
 
 

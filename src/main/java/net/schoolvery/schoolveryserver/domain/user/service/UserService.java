@@ -2,6 +2,7 @@ package net.schoolvery.schoolveryserver.domain.user.service;
 
 import java.util.UUID;
 import net.schoolvery.schoolveryserver.domain.user.dto.request.UserCreateRequestDto;
+import net.schoolvery.schoolveryserver.domain.user.dto.request.UserLoginRequestDto;
 import net.schoolvery.schoolveryserver.domain.user.dto.request.UserUpdateRequestDto;
 import net.schoolvery.schoolveryserver.domain.user.dto.response.GetUserResponseDto;
 import net.schoolvery.schoolveryserver.domain.user.dto.response.UserCreateResponseDto;
@@ -18,6 +19,8 @@ public interface UserService {
     List<User> getAllUsers();
     UserUpdateResponseDto modifyUser(String id, UserUpdateRequestDto userUpdateRequestDto);
     void deleteUser(UUID id);
+
+    String createToken(UserLoginRequestDto userLoginRequestDto);
 
     default User createUserRequest(UserCreateRequestDto userCreateRequestDto) {
         User user = User.builder()
