@@ -8,10 +8,8 @@ import org.springframework.http.MediaType;
 
 import java.util.UUID;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @DisplayName("User API 테스트")
@@ -46,6 +44,25 @@ public class UserAPITest extends SpringTestSupport {
                 .andDo(print());
 
     }
+
+//    @DisplayName("Update Users")
+//    @Test
+//    void 유저_업데이트() throws Exception {
+//        UUID id = UUID.randomUUID();
+//        String user = mapper.writeValueAsString(new User(id, "김의빈2", "성결대학교2",
+//                "Joe2", "asdo@naver.com2", "asdas1232", "asdffadf2", 135132, 01042423,
+//                "asdasd2"));
+//
+//        mockMvc.perform(
+//                        patch("/api/v1/{id}", id)
+//                                .contentType(MediaType.APPLICATION_JSON)
+//                                .content(user)
+//                )
+//                .andExpect(status().isOk())
+//                .andDo(print());
+//    }
+
+
 
 
 
