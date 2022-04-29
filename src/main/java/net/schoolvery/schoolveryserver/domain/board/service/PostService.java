@@ -4,6 +4,7 @@ import java.util.List;
 import net.schoolvery.schoolveryserver.domain.board.dto.request.PostCreateRequestDto;
 import net.schoolvery.schoolveryserver.domain.board.dto.request.PostUpdateRequestDto;
 import net.schoolvery.schoolveryserver.domain.board.dto.response.PostResponseDto;
+import net.schoolvery.schoolveryserver.domain.board.entity.Category;
 import net.schoolvery.schoolveryserver.domain.board.entity.Post;
 import net.schoolvery.schoolveryserver.global.common.dto.PageRequestDto;
 import net.schoolvery.schoolveryserver.global.common.dto.PageResultDto;
@@ -16,12 +17,13 @@ public interface PostService {
   void remove(Long id);
 
   default Post createDtoToEntity(PostCreateRequestDto dto){
+
     Post entity = Post.builder()
         .userId(dto.getUserId())
         .title(dto.getTitle())
         .location(dto.getLocation())
         .schoolId(dto.getSchoolId())
-        .categoryId(dto.getCategoryId())
+        .category(Category.builder().id(dto.getCategoryId()).build())
         .deadline(dto.getDeadline())
         .peopleNum(dto.getPeopleNum())
         .deliveryFee(dto.getDeliveryFee())
@@ -49,7 +51,7 @@ public interface PostService {
         .title(entity.getTitle())
         .location(entity.getLocation())
         .schoolId(entity.getSchoolId())
-        .categoryId(entity.getCategoryId())
+        .categoryId(entity.getCategory().getId())
         .peopleNum(entity.getPeopleNum())
         .deliveryFee(entity.getDeliveryFee())
         .content(entity.getContent())

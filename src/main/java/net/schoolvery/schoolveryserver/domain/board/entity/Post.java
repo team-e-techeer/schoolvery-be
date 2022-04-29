@@ -6,9 +6,11 @@ import java.time.format.DateTimeFormatter;
 import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -37,8 +39,8 @@ public class Post extends BaseEntity {
   @Column(length = 150, nullable = false)
   private UUID schoolId;
 
-  @Column(length = 50, nullable = true)
-  private UUID categoryId;
+  @ManyToOne(fetch = FetchType.LAZY)
+  private Category category;
 
   @Column(length = 100, nullable = false)
   private String location;
@@ -62,13 +64,12 @@ public class Post extends BaseEntity {
   @Column(length = 50, nullable = true)
   private String status;
 
-  public void modify (String title, String location, LocalDateTime deadline, Integer peopleNum, Integer deliveryFee, UUID categoryId, String content) {
+  public void modify (String title, String location, LocalDateTime deadline, Integer peopleNum, Integer deliveryFee, String content) {
     this.title = title;
     this.location = location;
     this.deadline = deadline;
     this.peopleNum = peopleNum;
     this.deliveryFee = deliveryFee;
-    this.categoryId = categoryId;
     this.content = content;
   }
 }

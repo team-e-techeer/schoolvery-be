@@ -17,10 +17,11 @@ public class PostResponseDto {
   private String title;
   private String location;
   private UUID schoolId;
-  private UUID categoryId;
+  private Integer categoryId;
   private Integer peopleNum;
   private Integer deliveryFee;
   private LocalDateTime deadline;
   private String content;
   private String store;
+
 }

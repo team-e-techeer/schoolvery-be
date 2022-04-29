@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import net.schoolvery.schoolveryserver.domain.board.entity.Category;
 
 @Builder
 @AllArgsConstructor
@@ -16,7 +17,8 @@ public class PostCreateRequestDto {
   private String title;
   private UUID schoolId;
   private UUID userId;
-  private UUID categoryId;
+//  private String categoryName;
+  private Integer categoryId;
   private String location;
   private Integer peopleNum;
   private Integer deliveryFee;

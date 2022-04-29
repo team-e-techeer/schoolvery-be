@@ -18,7 +18,8 @@ public class PostUpdateRequestDto {
   private Integer peopleNum;
   private Integer deliveryFee;
   private String content;
-  private UUID categoryId;
+//  private String categoryName;  //카테고리 이름
+  private Integer categoryId;  //카테고리 ID
   private LocalDateTime deadline;
 
 }
