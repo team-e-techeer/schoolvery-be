@@ -34,10 +34,10 @@ public class Post extends BaseEntity {
   private String title;
 
   @Column(length = 150, nullable = false)
-  private UUID userId;
+  private UUID user_id;
 
   @Column(length = 150, nullable = false)
-  private UUID schoolId;
+  private UUID school_id;
 
   @ManyToOne(fetch = FetchType.LAZY)
   private Category category;
@@ -46,14 +46,14 @@ public class Post extends BaseEntity {
   private String location;
 
   @Column(length = 45, nullable = false)
-  private Integer peopleNum;
+  private Integer people_num;
 
   @Column(length = 50, nullable = true)
   @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm", timezone = "Asia/Seoul")
   private LocalDateTime deadline;
 
   @Column(length = 100, nullable = true)
-  private Integer deliveryFee;
+  private Integer delivery_fee;
 
   @Column(length = 150, nullable = false)
   private String content;
@@ -64,12 +64,12 @@ public class Post extends BaseEntity {
   @Column(length = 50, nullable = true)
   private String status;
 
-  public void modify (String title, String location, LocalDateTime deadline, Integer peopleNum, Integer deliveryFee, String content) {
+  public void modify (String title, String location, LocalDateTime deadline, Integer people_num, Integer delivery_fee, String content) {
     this.title = title;
     this.location = location;
     this.deadline = deadline;
-    this.peopleNum = peopleNum;
-    this.deliveryFee = deliveryFee;
+    this.people_num = people_num;
+    this.delivery_fee = delivery_fee;
     this.content = content;
   }
 }

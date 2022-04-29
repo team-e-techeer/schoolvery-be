@@ -61,8 +61,8 @@ public class PostServiceImpl implements PostService{
           dto.getTitle(),
           dto.getLocation(),
           dto.getDeadline(),
-          dto.getPeopleNum(),
-          dto.getDeliveryFee(),
+          dto.getPeople_num(),
+          dto.getDelivery_fee(),
           dto.getContent()
       );
       postRepository.save(entity);

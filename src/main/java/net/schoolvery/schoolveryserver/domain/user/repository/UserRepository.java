@@ -10,6 +10,6 @@ import java.util.UUID;
 @Repository
 public interface UserRepository extends JpaRepository<User, UUID>, QuerydslPredicateExecutor<User>{
 
-    void deleteAllById(UUID id);
+    void deleteAllById(String id);
 
 }

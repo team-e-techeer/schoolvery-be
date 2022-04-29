@@ -19,14 +19,14 @@ public interface PostService {
   default Post createDtoToEntity(PostCreateRequestDto dto){
 
     Post entity = Post.builder()
-        .userId(dto.getUserId())
+        .user_id(dto.getUser_id())
         .title(dto.getTitle())
         .location(dto.getLocation())
-        .schoolId(dto.getSchoolId())
-        .category(Category.builder().id(dto.getCategoryId()).build())
+        .school_id(dto.getSchool_id())
+        .category(Category.builder().id(dto.getCategory_id()).build())
         .deadline(dto.getDeadline())
-        .peopleNum(dto.getPeopleNum())
-        .deliveryFee(dto.getDeliveryFee())
+        .people_num(dto.getPeople_num())
+        .deliveryFee(dto.getDelivery_fee())
         .content(dto.getContent())
         .store(dto.getStore())
         .build();
@@ -38,9 +38,9 @@ public interface PostService {
         .title(dto.getTitle())
         .location(dto.getLocation())
         .deadline(dto.getDeadline())
-        .peopleNum(dto.getPeopleNum())
+        .people_num(dto.getPeople_num())
         .content(dto.getContent())
-        .deliveryFee(dto.getDeliveryFee())
+        .delivery_fee(dto.getDelivery_fee())
         .build();
     return entity;
   }
@@ -50,10 +50,10 @@ public interface PostService {
         .id(entity.getId())
         .title(entity.getTitle())
         .location(entity.getLocation())
-        .schoolId(entity.getSchoolId())
-        .categoryId(entity.getCategory().getId())
-        .peopleNum(entity.getPeopleNum())
-        .deliveryFee(entity.getDeliveryFee())
+        .school_id(entity.getSchool_id())
+        .category_id(entity.getCategory().getId())
+        .people_num(entity.getPeople_num())
+        .delivery_fee(entity.getDelivery_fee())
         .content(entity.getContent())
         .store(entity.getStore())
         .build();

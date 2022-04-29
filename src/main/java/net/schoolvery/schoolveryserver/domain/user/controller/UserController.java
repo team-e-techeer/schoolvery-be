@@ -48,7 +48,7 @@ public class UserController {
     }
 
     // Update Users
-    @PatchMapping("/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<UserUpdateResponseDto> updateUser(@PathVariable String id, @RequestBody UserUpdateRequestDto userUpdateRequestDto) {
         UserUpdateResponseDto update = userService.modifyUser(id, userUpdateRequestDto);
 
@@ -58,7 +58,7 @@ public class UserController {
 
     // delete Users
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteUser(@PathVariable UUID id) {
+    public ResponseEntity<Void> deleteUser(@PathVariable String id) {
         userService.deleteUser(id);
         return ResponseEntity.ok()
                 .body(null);

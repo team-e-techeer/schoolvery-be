@@ -17,7 +17,7 @@ public interface UserService {
     UserCreateResponseDto createUser(UserCreateRequestDto userCreateRequestDto);
     List<User> getAllUsers();
     UserUpdateResponseDto modifyUser(String id, UserUpdateRequestDto userUpdateRequestDto);
-    void deleteUser(UUID id);
+    void deleteUser(String id);
 
     default User createUserRequest(UserCreateRequestDto userCreateRequestDto) {
         User user = User.builder()
