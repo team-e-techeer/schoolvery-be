@@ -4,6 +4,7 @@ import java.util.List;
 import net.schoolvery.schoolveryserver.domain.board.dto.request.PostCreateRequestDto;
 import net.schoolvery.schoolveryserver.domain.board.dto.request.PostUpdateRequestDto;
 import net.schoolvery.schoolveryserver.domain.board.dto.response.PostResponseDto;
+import net.schoolvery.schoolveryserver.domain.board.entity.Category;
 import net.schoolvery.schoolveryserver.domain.board.entity.Post;
 import net.schoolvery.schoolveryserver.global.common.dto.PageRequestDto;
 import net.schoolvery.schoolveryserver.global.common.dto.PageResultDto;
@@ -16,15 +17,16 @@ public interface PostService {
   void remove(Long id);
 
   default Post createDtoToEntity(PostCreateRequestDto dto){
+
     Post entity = Post.builder()
-        .userId(dto.getUserId())
+        .user_id(dto.getUser_id())
         .title(dto.getTitle())
         .location(dto.getLocation())
-        .schoolId(dto.getSchoolId())
-        .categoryId(dto.getCategoryId())
+        .school_id(dto.getSchool_id())
+        .category(Category.builder().id(dto.getCategory_id()).build())
         .deadline(dto.getDeadline())
-        .peopleNum(dto.getPeopleNum())
-        .deliveryFee(dto.getDeliveryFee())
+        .people_num(dto.getPeople_num())
+        .delivery_fee(dto.getDelivery_fee())
         .content(dto.getContent())
         .store(dto.getStore())
         .build();
@@ -36,9 +38,9 @@ public interface PostService {
         .title(dto.getTitle())
         .location(dto.getLocation())
         .deadline(dto.getDeadline())
-        .peopleNum(dto.getPeopleNum())
+        .people_num(dto.getPeople_num())
         .content(dto.getContent())
-        .deliveryFee(dto.getDeliveryFee())
+        .delivery_fee(dto.getDelivery_fee())
         .build();
     return entity;
   }
@@ -48,10 +50,10 @@ public interface PostService {
         .id(entity.getId())
         .title(entity.getTitle())
         .location(entity.getLocation())
-        .schoolId(entity.getSchoolId())
-        .categoryId(entity.getCategoryId())
-        .peopleNum(entity.getPeopleNum())
-        .deliveryFee(entity.getDeliveryFee())
+        .school_id(entity.getSchool_id())
+        .category_id(entity.getCategory().getId())
+        .people_num(entity.getPeople_num())
+        .delivery_fee(entity.getDelivery_fee())
         .content(entity.getContent())
         .store(entity.getStore())
         .build();

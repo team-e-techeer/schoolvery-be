@@ -20,7 +20,9 @@ public class CategoryController {
     
     private final CategoryService categoryService;
 
-    @PostMapping("/")
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    @ResponseBody
     public ResponseEntity<CategoryResponseDto> createCategory(@RequestBody CategoryCreateRequestDto categoryCreateRequestDto){
         CategoryResponseDto result = categoryService.createCategory(categoryCreateRequestDto);
         return new ResponseEntity<>(result, HttpStatus.OK);
@@ -47,10 +49,10 @@ public class CategoryController {
                 .body(dto);
     }
 
-//    @GetMapping("/list")
-//    public ResponseEntity<PageResultDto> getCategoryList(PageRequestDto pageRequestDto) {
-//        PageResultDto result = categoryService.getAllCategory(pageRequestDto);
-//        return ResponseEntity.ok()
-//                .body(result);
-//    }
+    @GetMapping
+    public ResponseEntity<PageResultDto> getCategoryList(PageRequestDto pageRequestDto) {
+        PageResultDto result = categoryService.getAllCategory(pageRequestDto);
+        return ResponseEntity.ok()
+                .body(result);
+    }
 }

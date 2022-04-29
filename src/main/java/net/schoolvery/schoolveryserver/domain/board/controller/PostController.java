@@ -1,5 +1,6 @@
 package net.schoolvery.schoolveryserver.domain.board.controller;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -22,11 +23,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
 @RequestMapping("/api/v1/posts")
 @Log4j2
 @RequiredArgsConstructor
+@RestController
+@Tag(name = "Post Controller", description = "Post Controller REST API")
 public class PostController {
 
     private final PostService postService;

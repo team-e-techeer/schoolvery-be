@@ -61,9 +61,8 @@ public class PostServiceImpl implements PostService{
           dto.getTitle(),
           dto.getLocation(),
           dto.getDeadline(),
-          dto.getPeopleNum(),
-          dto.getDeliveryFee(),
-          dto.getCategoryId(),
+          dto.getPeople_num(),
+          dto.getDelivery_fee(),
           dto.getContent()
       );
       postRepository.save(entity);
@@ -87,7 +86,7 @@ public class PostServiceImpl implements PostService{
     String type = requestDto.getType();
     String keyword = requestDto.getKeyword();
     UUID schoolId = requestDto.getSchoolId();
-    UUID categoryId = requestDto.getCategoryId();
+    Integer categoryId = requestDto.getCategoryId();
 
     BooleanExpression expression = qPost.id.gt(0L);
     booleanBuilder.and(expression);
@@ -106,7 +105,7 @@ public class PostServiceImpl implements PostService{
     }
 
     if (categoryId != null) {
-      booleanBuilder.and(qPost.categoryId.eq(categoryId));
+      booleanBuilder.and(qPost.category.id.eq(categoryId));
     }
 
     return booleanBuilder;

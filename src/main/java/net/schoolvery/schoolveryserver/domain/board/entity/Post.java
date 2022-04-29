@@ -6,9 +6,11 @@ import java.time.format.DateTimeFormatter;
 import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -32,26 +34,26 @@ public class Post extends BaseEntity {
   private String title;
 
   @Column(length = 150, nullable = false)
-  private UUID userId;
+  private UUID user_id;
 
   @Column(length = 150, nullable = false)
-  private UUID schoolId;
+  private UUID school_id;
 
-  @Column(length = 50, nullable = true)
-  private UUID categoryId;
+  @ManyToOne(fetch = FetchType.LAZY)
+  private Category category;
 
   @Column(length = 100, nullable = false)
   private String location;
 
   @Column(length = 45, nullable = false)
-  private Integer peopleNum;
+  private Integer people_num;
 
   @Column(length = 50, nullable = true)
   @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm", timezone = "Asia/Seoul")
   private LocalDateTime deadline;
 
   @Column(length = 100, nullable = true)
-  private Integer deliveryFee;
+  private Integer delivery_fee;
 
   @Column(length = 150, nullable = false)
   private String content;
@@ -62,13 +64,12 @@ public class Post extends BaseEntity {
   @Column(length = 50, nullable = true)
   private String status;
 
-  public void modify (String title, String location, LocalDateTime deadline, Integer peopleNum, Integer deliveryFee, UUID categoryId, String content) {
+  public void modify (String title, String location, LocalDateTime deadline, Integer people_num, Integer delivery_fee, String content) {
     this.title = title;
     this.location = location;
     this.deadline = deadline;
-    this.peopleNum = peopleNum;
-    this.deliveryFee = deliveryFee;
-    this.categoryId = categoryId;
+    this.people_num = people_num;
+    this.delivery_fee = delivery_fee;
     this.content = content;
   }
 }
