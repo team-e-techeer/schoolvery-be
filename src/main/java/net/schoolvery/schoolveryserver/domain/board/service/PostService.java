@@ -26,7 +26,7 @@ public interface PostService {
         .category(Category.builder().id(dto.getCategory_id()).build())
         .deadline(dto.getDeadline())
         .people_num(dto.getPeople_num())
-        .deliveryFee(dto.getDelivery_fee())
+        .delivery_fee(dto.getDelivery_fee())
         .content(dto.getContent())
         .store(dto.getStore())
         .build();
