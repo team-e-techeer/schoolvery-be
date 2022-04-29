@@ -2,6 +2,7 @@ package net.schoolvery.schoolveryserver.domain.board.dto.request;
 
 import com.sun.istack.NotNull;
 import lombok.*;
+
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor

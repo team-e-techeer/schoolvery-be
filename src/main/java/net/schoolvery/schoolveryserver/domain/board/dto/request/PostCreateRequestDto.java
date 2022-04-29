@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import net.schoolvery.schoolveryserver.domain.board.entity.Category;
 
 @Builder
 @AllArgsConstructor
@@ -14,12 +15,13 @@ import lombok.NoArgsConstructor;
 public class PostCreateRequestDto {
 
   private String title;
-  private UUID schoolId;
-  private UUID userId;
-  private UUID categoryId;
+  private UUID school_id;
+  private UUID user_id;
+//  private String categoryName;
+  private Integer category_id;
   private String location;
-  private Integer peopleNum;
-  private Integer deliveryFee;
+  private Integer people_num;
+  private Integer delivery_fee;
   private LocalDateTime deadline;
   private String content;
   private String store;
