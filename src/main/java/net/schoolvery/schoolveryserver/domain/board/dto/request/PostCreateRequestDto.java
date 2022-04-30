@@ -15,13 +15,13 @@ import net.schoolvery.schoolveryserver.domain.board.entity.Category;
 public class PostCreateRequestDto {
 
   private String title;
-  private UUID school_id;
-  private UUID user_id;
+  private Integer schoolId;
+  private UUID userId;
 //  private String categoryName;
-  private Integer category_id;
+  private Integer categoryId;
   private String location;
-  private Integer people_num;
-  private Integer delivery_fee;
+  private Integer peopleNum;
+  private Integer deliveryFee;
   private LocalDateTime deadline;
   private String content;
   private String store;

@@ -30,9 +30,15 @@ public class User extends BaseEntity {
     private String nickname;
     private String email;
     private String password;
-    private String profile_image_url;
-    private int school_num;
-    private int phone_num;
+
+    @Column(name = "profile_image_url")
+    private String profileImageUrl;
+
+    @Column(name ="school_num")
+    private int schoolNum;
+
+    @Column(name = "phone_num")
+    private int phoneNum;
     private String address;
 
     public void modifyUser(String nickname, String password) {
