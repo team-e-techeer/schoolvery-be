@@ -7,17 +7,14 @@ assignees: ''
 
 ---
 
-**🫧 Is your feature request related to a problem? Please describe.**
-A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
+**🫧 구현 기능 ** 
+create chat app
 
-**✨ Describe the solution you'd like**
-A clear and concise description of what you want to happen.
+**✨ 결정 사항**
 
-**🍀 Describe alternatives you've considered**
-A clear and concise description of any alternative solutions or features you've considered.
+**🍀 이 기능을 구현하는데 사용한(추가한) 기술 스택 혹은 라이브러리 혹은 툴**
 
 🍴 Progress
-
-- [ ] todo1
-- [ ] todo2
-- [ ] todo3
+- [x] todo 1
+- [ ] todo 2
+- [ ] todo 3
