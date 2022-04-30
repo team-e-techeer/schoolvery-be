@@ -17,14 +17,16 @@ import java.util.UUID;
 public class Room extends BaseEntity {
     @Id
     @GeneratedValue(generator = "UUID",strategy = GenerationType.IDENTITY)
-    @GenericGenerator(
-            name = "UUID",
-            strategy = "uuid2"
-    )
+    @GenericGenerator(name = "UUID", strategy = "uuid2")
     private UUID id;
 
     @Column(name = "NAME", nullable = false)
     private String name;
+
+    @Column(name = "POSTID", nullable = false)
+    @GeneratedValue(generator = "UUID",strategy = GenerationType.IDENTITY)
+    @GenericGenerator(name = "UUID", strategy = "uuid2")
+    private UUID post_id;
 
 //    public void update(String name) {
 //        this.name = name;
