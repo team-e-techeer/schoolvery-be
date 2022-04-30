@@ -43,7 +43,7 @@ public class Post extends BaseEntity {
     private User user;
 
     @Column(name = "school_id", length = 150, nullable = false)
-    private UUID schoolId;
+    private Integer schoolId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Category category;

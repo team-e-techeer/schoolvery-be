@@ -17,7 +17,7 @@ public class PageRequestDto {
     private int size;
     private String type;
     private String keyword;
-    private UUID schoolId;
+    private Integer schoolId;
     private Integer categoryId;
 
     public PageRequestDto(){

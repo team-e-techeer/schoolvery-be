@@ -3,7 +3,6 @@ package net.schoolvery.schoolveryserver.domain.board.service;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import java.util.Optional;
-import java.util.UUID;
 import java.util.function.Function;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -85,7 +84,7 @@ public class PostServiceImpl implements PostService {
 
         String type = requestDto.getType();
         String keyword = requestDto.getKeyword();
-        UUID schoolId = requestDto.getSchoolId();
+        Integer schoolId = requestDto.getSchoolId();
         Integer categoryId = requestDto.getCategoryId();
 
         if (schoolId != null) {

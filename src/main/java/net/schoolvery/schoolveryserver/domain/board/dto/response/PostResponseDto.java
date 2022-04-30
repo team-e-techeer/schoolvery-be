@@ -16,7 +16,7 @@ public class PostResponseDto {
   private Long id;
   private String title;
   private String location;
-  private UUID schoolId;
+  private Integer schoolId;
   private Integer categoryId;
   private Integer peopleNum;
   private Integer deliveryFee;

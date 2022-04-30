@@ -15,7 +15,7 @@ import net.schoolvery.schoolveryserver.domain.board.entity.Category;
 public class PostCreateRequestDto {
 
   private String title;
-  private UUID schoolId;
+  private Integer schoolId;
   private UUID userId;
 //  private String categoryName;
   private Integer categoryId;
