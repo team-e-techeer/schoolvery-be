@@ -1,7 +1,10 @@
 package net.schoolvery.schoolveryserver.domain.board.controller;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import net.schoolvery.schoolveryserver.domain.board.service.CategoryService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +20,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @RequiredArgsConstructor
 @Tag(name = "Category Controller", description = "Category Controller REST API")
 public class CategoryController {
-    
+
     private final CategoryService categoryService;
 
     @PostMapping

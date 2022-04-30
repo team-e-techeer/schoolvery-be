@@ -6,6 +6,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,7 +18,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import net.schoolvery.schoolveryserver.domain.user.entity.User;
 import net.schoolvery.schoolveryserver.global.common.BaseEntity;
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicInsert;
 
 @Entity
 @Table(name = "post")
@@ -24,52 +29,55 @@ import net.schoolvery.schoolveryserver.global.common.BaseEntity;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@DynamicInsert
 public class Post extends BaseEntity {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-  @Column(length = 100, nullable = false)
-  private String title;
+    @Column(length = 100, nullable = false)
+    private String title;
 
-  @Column(length = 150, nullable = false)
-  private UUID user_id;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private User user;
 
-  @Column(length = 150, nullable = false)
-  private UUID school_id;
+    @Column(name = "school_id", length = 150, nullable = false)
+    private Integer schoolId;
 
-  @ManyToOne(fetch = FetchType.LAZY)
-  private Category category;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Category category;
 
-  @Column(length = 100, nullable = false)
-  private String location;
+    @Column(length = 100, nullable = false)
+    private String location;
 
-  @Column(length = 45, nullable = false)
-  private Integer people_num;
+    @Column(name = "people_num", length = 45, nullable = false)
+    private Integer peopleNum;
 
-  @Column(length = 50, nullable = true)
-  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm", timezone = "Asia/Seoul")
-  private LocalDateTime deadline;
+    @Column(length = 50, nullable = true)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm", timezone = "Asia/Seoul")
+    private LocalDateTime deadline;
 
-  @Column(length = 100, nullable = true)
-  private Integer delivery_fee;
+    @Column(name = "delivery_fee", length = 100, nullable = true)
+    private Integer deliveryFee;
 
-  @Column(length = 150, nullable = false)
-  private String content;
+    @Column(length = 150, nullable = false)
+    private String content;
 
-  @Column(length = 150, nullable = false)
-  private String store;
+    @Column(length = 150, nullable = false)
+    private String store;
 
-  @Column(length = 50, nullable = true)
-  private String status;
+    @Enumerated(EnumType.STRING)
+    @ColumnDefault("'OPEN'")
+    private Status status;
 
-  public void modify (String title, String location, LocalDateTime deadline, Integer people_num, Integer delivery_fee, String content) {
-    this.title = title;
-    this.location = location;
-    this.deadline = deadline;
-    this.people_num = people_num;
-    this.delivery_fee = delivery_fee;
-    this.content = content;
-  }
+    public void modify(String title, String location, LocalDateTime deadline, Integer peopleNum,
+        Integer deliveryFee, String content) {
+        this.title = title;
+        this.location = location;
+        this.deadline = deadline;
+        this.peopleNum = peopleNum;
+        this.deliveryFee = deliveryFee;
+        this.content = content;
+    }
 }

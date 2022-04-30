@@ -25,8 +25,8 @@ public interface UserService {
                 .nickname(userCreateRequestDto.getNickname())
                 .email(userCreateRequestDto.getEmail())
                 .password(userCreateRequestDto.getPassword())
-                .school_num(userCreateRequestDto.getSchool_num())
-                .phone_num(userCreateRequestDto.getPhone_num())
+                .schoolNum(userCreateRequestDto.getSchoolNum())
+                .phoneNum(userCreateRequestDto.getPhoneNum())
                 .school(userCreateRequestDto.getSchool())
                 .build();
 
@@ -40,8 +40,8 @@ public interface UserService {
                 .nickname(user.getNickname())
                 .email(user.getEmail())
                 .password(user.getPassword())
-                .school_num(user.getSchool_num())
-                .phone_num(user.getPhone_num())
+                .schoolNum(user.getSchoolNum())
+                .phoneNum(user.getPhoneNum())
                 .school(user.getSchool())
                 .build();
 
@@ -52,8 +52,8 @@ public interface UserService {
     default User updateUser(UUID id, UserUpdateRequestDto userUpdateRequestDto) {
         User user = User.builder()
                 .nickname(userUpdateRequestDto.getNickname())
-                .phone_num(userUpdateRequestDto.getPhone_num())
-                .school_num(userUpdateRequestDto.getSchool_num())
+                .phoneNum(userUpdateRequestDto.getPhoneNum())
+                .schoolNum(userUpdateRequestDto.getSchoolNum())
                 .school(userUpdateRequestDto.getSchool())
                 .email(userUpdateRequestDto.getEmail())
                 .password(userUpdateRequestDto.getPassword())

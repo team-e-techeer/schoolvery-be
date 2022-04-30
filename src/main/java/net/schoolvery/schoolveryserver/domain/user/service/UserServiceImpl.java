@@ -59,7 +59,6 @@ public class UserServiceImpl implements UserService {
         return userRepository.findAll();
     }
 
-
     // User modify ( Update )
     @Override
     public UserUpdateResponseDto modifyUser(UUID id, UserUpdateRequestDto userUpdateRequestDto) {
