@@ -36,8 +36,8 @@ public class Post extends BaseEntity {
   @Column(length = 150, nullable = false)
   private UUID user_id;
 
-  @Column(length = 150, nullable = false)
-  private UUID school_id;
+  @Column(name = "school_id", length = 150, nullable = false)
+  private UUID schoolId;
 
   @ManyToOne(fetch = FetchType.LAZY)
   private Category category;

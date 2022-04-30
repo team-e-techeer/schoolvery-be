@@ -88,13 +88,15 @@ public class PostServiceImpl implements PostService {
         UUID schoolId = requestDto.getSchoolId();
         Integer categoryId = requestDto.getCategoryId();
 
-        BooleanExpression expression = qPost.id.gt(0L);
-        booleanBuilder.and(expression);
-
         if (schoolId != null) {
             booleanBuilder.and(qPost.schoolId.eq(schoolId));
         }
 
+        if (categoryId != null) {
+            booleanBuilder.and(qPost.category.id.eq(categoryId));
+        }
+
+        // keyword + type : keyword 존재, type must have
         if (keyword != null) {
             if (type.contains("store")) {
                 booleanBuilder.and(qPost.store.contains(keyword));
@@ -105,10 +107,6 @@ public class PostServiceImpl implements PostService {
             if (type.contains("location")) {
                 booleanBuilder.and(qPost.location.contains(keyword));
             }
-        }
-
-        if (categoryId != null) {
-            booleanBuilder.and(qPost.category.id.eq(categoryId));
         }
 
         return booleanBuilder;

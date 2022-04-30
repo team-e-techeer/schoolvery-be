@@ -1,6 +1,7 @@
 package net.schoolvery.schoolveryserver.domain.board.controller;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
+import java.util.UUID;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -46,6 +47,26 @@ public class PostController {
     public ResponseEntity<PostResponseDto> getPostById(@PathVariable Long id) {
 
         PostResponseDto dto = postService.getPostById(id);
+        return ResponseEntity.ok()
+            .body(dto);
+    }
+
+    @GetMapping("/school/{schoolId}")
+    public ResponseEntity<PageResultDto> getPostBySchoolId(@PathVariable UUID schoolId, PageRequestDto pageRequestDto) {
+
+        pageRequestDto.setSchoolId(schoolId);
+        PageResultDto dto = postService.getPosts(pageRequestDto);
+        return ResponseEntity.ok()
+            .body(dto);
+    }
+
+    @GetMapping("/school/{schoolId}/{categoryId}")
+    public ResponseEntity<PageResultDto> getPostBySchoolIdAndCategoryId(@PathVariable UUID schoolId, @PathVariable Integer categoryId, PageRequestDto pageRequestDto) {
+
+        pageRequestDto.setSchoolId(schoolId);
+        pageRequestDto.setCategoryId(categoryId);
+
+        PageResultDto dto = postService.getPosts(pageRequestDto);
         return ResponseEntity.ok()
             .body(dto);
     }

@@ -1,6 +1,6 @@
 package net.schoolvery.schoolveryserver.domain.board.service;
 
-import java.util.List;
+import java.util.UUID;
 import net.schoolvery.schoolveryserver.domain.board.dto.request.PostCreateRequestDto;
 import net.schoolvery.schoolveryserver.domain.board.dto.request.PostUpdateRequestDto;
 import net.schoolvery.schoolveryserver.domain.board.dto.response.PostResponseDto;
@@ -12,6 +12,7 @@ import net.schoolvery.schoolveryserver.global.common.dto.PageResultDto;
 public interface PostService {
   PostResponseDto create(PostCreateRequestDto dto);
   PageResultDto<PostResponseDto, Post> getPosts(PageRequestDto requestDto);
+//  PageResultDto<PostResponseDto, Post> getPostBySchoolId(UUID schoolId, PageRequestDto requestDto);
   PostResponseDto getPostById(Long id);
   void modify(Long id, PostUpdateRequestDto dto);
   void remove(Long id);
@@ -22,7 +23,7 @@ public interface PostService {
         .user_id(dto.getUser_id())
         .title(dto.getTitle())
         .location(dto.getLocation())
-        .school_id(dto.getSchool_id())
+        .schoolId(dto.getSchool_id())
         .category(Category.builder().id(dto.getCategory_id()).build())
         .deadline(dto.getDeadline())
         .people_num(dto.getPeople_num())
@@ -50,7 +51,7 @@ public interface PostService {
         .id(entity.getId())
         .title(entity.getTitle())
         .location(entity.getLocation())
-        .school_id(entity.getSchool_id())
+        .school_id(entity.getSchoolId())
         .category_id(entity.getCategory().getId())
         .people_num(entity.getPeople_num())
         .delivery_fee(entity.getDelivery_fee())
@@ -60,4 +61,3 @@ public interface PostService {
     return dto;
   }
 }
-
