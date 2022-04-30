@@ -6,6 +6,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,6 +20,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import net.schoolvery.schoolveryserver.domain.user.entity.User;
 import net.schoolvery.schoolveryserver.global.common.BaseEntity;
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicInsert;
 
 @Entity
 @Table(name = "post")
@@ -25,6 +29,7 @@ import net.schoolvery.schoolveryserver.global.common.BaseEntity;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@DynamicInsert
 public class Post extends BaseEntity {
 
   @Id
@@ -62,8 +67,9 @@ public class Post extends BaseEntity {
   @Column(length = 150, nullable = false)
   private String store;
 
-  @Column(length = 50, nullable = true)
-  private String status;
+  @Enumerated(EnumType.STRING)
+  @ColumnDefault("'OPEN'")
+  private Status status;
 
   public void modify (String title, String location, LocalDateTime deadline, Integer peopleNum, Integer deliveryFee, String content) {
     this.title = title;
