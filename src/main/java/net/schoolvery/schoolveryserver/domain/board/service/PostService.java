@@ -6,13 +6,13 @@ import net.schoolvery.schoolveryserver.domain.board.dto.request.PostUpdateReques
 import net.schoolvery.schoolveryserver.domain.board.dto.response.PostResponseDto;
 import net.schoolvery.schoolveryserver.domain.board.entity.Category;
 import net.schoolvery.schoolveryserver.domain.board.entity.Post;
+import net.schoolvery.schoolveryserver.domain.user.entity.User;
 import net.schoolvery.schoolveryserver.global.common.dto.PageRequestDto;
 import net.schoolvery.schoolveryserver.global.common.dto.PageResultDto;
 
 public interface PostService {
   PostResponseDto create(PostCreateRequestDto dto);
   PageResultDto<PostResponseDto, Post> getPosts(PageRequestDto requestDto);
-//  PageResultDto<PostResponseDto, Post> getPostBySchoolId(UUID schoolId, PageRequestDto requestDto);
   PostResponseDto getPostById(Long id);
   void modify(Long id, PostUpdateRequestDto dto);
   void remove(Long id);
@@ -20,7 +20,7 @@ public interface PostService {
   default Post createDtoToEntity(PostCreateRequestDto dto){
 
     Post entity = Post.builder()
-        .user_id(dto.getUser_id())
+        .user(User.builder().id(dto.getUser_id()).build())
         .title(dto.getTitle())
         .location(dto.getLocation())
         .schoolId(dto.getSchool_id())

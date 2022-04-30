@@ -16,6 +16,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import net.schoolvery.schoolveryserver.domain.user.entity.User;
 import net.schoolvery.schoolveryserver.global.common.BaseEntity;
 
 @Entity
@@ -33,8 +34,8 @@ public class Post extends BaseEntity {
   @Column(length = 100, nullable = false)
   private String title;
 
-  @Column(length = 150, nullable = false)
-  private UUID user_id;
+  @ManyToOne(fetch = FetchType.LAZY)
+  private User user;
 
   @Column(name = "school_id", length = 150, nullable = false)
   private UUID schoolId;
