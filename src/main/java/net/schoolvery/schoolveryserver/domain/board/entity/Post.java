@@ -32,51 +32,52 @@ import org.hibernate.annotations.DynamicInsert;
 @DynamicInsert
 public class Post extends BaseEntity {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-  @Column(length = 100, nullable = false)
-  private String title;
+    @Column(length = 100, nullable = false)
+    private String title;
 
-  @ManyToOne(fetch = FetchType.LAZY)
-  private User user;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private User user;
 
-  @Column(name = "school_id", length = 150, nullable = false)
-  private UUID schoolId;
+    @Column(name = "school_id", length = 150, nullable = false)
+    private UUID schoolId;
 
-  @ManyToOne(fetch = FetchType.LAZY)
-  private Category category;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Category category;
 
-  @Column(length = 100, nullable = false)
-  private String location;
+    @Column(length = 100, nullable = false)
+    private String location;
 
-  @Column(name = "people_num", length = 45, nullable = false)
-  private Integer peopleNum;
+    @Column(name = "people_num", length = 45, nullable = false)
+    private Integer peopleNum;
 
-  @Column(length = 50, nullable = true)
-  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm", timezone = "Asia/Seoul")
-  private LocalDateTime deadline;
+    @Column(length = 50, nullable = true)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm", timezone = "Asia/Seoul")
+    private LocalDateTime deadline;
 
-  @Column(name = "delivery_fee", length = 100, nullable = true)
-  private Integer deliveryFee;
+    @Column(name = "delivery_fee", length = 100, nullable = true)
+    private Integer deliveryFee;
 
-  @Column(length = 150, nullable = false)
-  private String content;
+    @Column(length = 150, nullable = false)
+    private String content;
 
-  @Column(length = 150, nullable = false)
-  private String store;
+    @Column(length = 150, nullable = false)
+    private String store;
 
-  @Enumerated(EnumType.STRING)
-  @ColumnDefault("'OPEN'")
-  private Status status;
+    @Enumerated(EnumType.STRING)
+    @ColumnDefault("'OPEN'")
+    private Status status;
 
-  public void modify (String title, String location, LocalDateTime deadline, Integer peopleNum, Integer deliveryFee, String content) {
-    this.title = title;
-    this.location = location;
-    this.deadline = deadline;
-    this.peopleNum = peopleNum;
-    this.deliveryFee = deliveryFee;
-    this.content = content;
-  }
+    public void modify(String title, String location, LocalDateTime deadline, Integer peopleNum,
+        Integer deliveryFee, String content) {
+        this.title = title;
+        this.location = location;
+        this.deadline = deadline;
+        this.peopleNum = peopleNum;
+        this.deliveryFee = deliveryFee;
+        this.content = content;
+    }
 }

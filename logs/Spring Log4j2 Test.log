@@ -1,0 +1,18 @@
+[36m2022/04/30 02:57:24,613[m [32m[INFO ][m  [org.hibernate.validator.internal.util.Version] [33m[background-preinit][m- HV000001: Hibernate Validator 6.2.3.Final
+ -[36m2022/04/30 02:57:29,414[m [32m[INFO ][m  [org.hibernate.jpa.internal.util.LogHelper] [33m[restartedMain][m- HHH000204: Processing PersistenceUnitInfo [name: default]
+ -[36m2022/04/30 02:57:29,497[m [32m[INFO ][m  [org.hibernate.Version] [33m[restartedMain][m- HHH000412: Hibernate ORM core version 5.6.7.Final
+ -[36m2022/04/30 02:57:29,748[m [32m[INFO ][m  [org.hibernate.annotations.common.reflection.java.JavaReflectionManager] [33m[restartedMain][m- HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+ -[36m2022/04/30 02:57:29,878[m [32m[INFO ][m  [org.hibernate.dialect.Dialect] [33m[restartedMain][m- HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+ -[36m2022/04/30 02:57:30,977[m [32m[INFO ][m  [org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator] [33m[restartedMain][m- HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+ -[36m2022/04/30 02:57:46,935[m [32m[INFO ][m  [net.schoolvery.schoolveryserver.domain.board.controller.CategoryController] [33m[http-nio-8080-exec-2][m- Hello. This is LogManager's logger
+ -[36m2022/04/30 02:59:24,382[m [32m[INFO ][m  [org.hibernate.validator.internal.util.Version] [33m[background-preinit][m- HV000001: Hibernate Validator 6.2.3.Final
+ -[36m2022/04/30 02:59:28,359[m [32m[INFO ][m  [org.hibernate.jpa.internal.util.LogHelper] [33m[restartedMain][m- HHH000204: Processing PersistenceUnitInfo [name: default]
+ -[36m2022/04/30 02:59:28,424[m [32m[INFO ][m  [org.hibernate.Version] [33m[restartedMain][m- HHH000412: Hibernate ORM core version 5.6.7.Final
+ -[36m2022/04/30 02:59:28,748[m [32m[INFO ][m  [org.hibernate.annotations.common.reflection.java.JavaReflectionManager] [33m[restartedMain][m- HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+ -[36m2022/04/30 02:59:28,866[m [32m[INFO ][m  [org.hibernate.dialect.Dialect] [33m[restartedMain][m- HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+ -[36m2022/04/30 02:59:30,172[m [32m[INFO ][m  [org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator] [33m[restartedMain][m- HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+ -[36m2022/04/30 02:59:46,112[m [32m[INFO ][m  [net.schoolvery.schoolveryserver.domain.hello.controller.HelloController] [33m[http-nio-8080-exec-2][m- Hello. This is LogManager's logger
+ -[36m2022/04/30 02:59:46,114[m [32m[INFO ][m  [net.schoolvery.schoolveryserver.domain.hello.controller.HelloController] [33m[http-nio-8080-exec-2][m- Hello. This is Lombok's logger
+ -[36m2022/04/30 03:00:13,108[m [32m[INFO ][m  [net.schoolvery.schoolveryserver.domain.hello.controller.HelloController] [33m[http-nio-8080-exec-3][m- Hello. This is LogManager's logger
+ -[36m2022/04/30 03:00:13,110[m [32m[INFO ][m  [net.schoolvery.schoolveryserver.domain.hello.controller.HelloController] [33m[http-nio-8080-exec-3][m- Hello. This is Lombok's logger
+ -
