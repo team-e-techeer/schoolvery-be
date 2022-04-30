@@ -32,7 +32,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	implementation 'org.springframework.boot:spring-boot-starter-hateoas'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
-
+	implementation 'org.springframework.boot:spring-boot-starter-websocket'
 	//Jwt token
 //	implementation group: 'io.jsonwebtoken', name: 'jjwt-api', version: '0.11.2'
 //	implementation group: 'io.jsonwebtoken', name: 'jjwt-impl', version: '0.11.2'
@@ -47,6 +47,11 @@ dependencies {
 	implementation "com.querydsl:querydsl-jpa:${queryDslVersion}"
 	implementation "com.querydsl:querydsl-apt:${queryDslVersion}"
 
+	//websocket
+	implementation 'org.springframework.boot:spring-boot-starter-websocket'
+	implementation 'org.webjars:sockjs-client:1.1.2'
+	implementation 'org.webjars:stomp-websocket:2.3.3-1'
+	
 	//spring-doc ( Swagger )
 	implementation 'org.springdoc:springdoc-openapi-ui:1.6.6'
 
