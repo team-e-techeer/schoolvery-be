@@ -18,9 +18,9 @@ public class UserCreateResponseDto {
 
     private String name;
     private String nickname;
-    private int phone_num;
+    private int phoneNum;
 //    private String school_id;
-    private int school_num;
+    private int schoolNum;
     private String school;
     private String email;
     private String password;

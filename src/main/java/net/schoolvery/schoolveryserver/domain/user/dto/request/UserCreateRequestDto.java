@@ -13,8 +13,8 @@ public class UserCreateRequestDto {
 
     private String name;
     private String nickname;
-    private int phone_num;
-    private int school_num;
+    private int phoneNum;
+    private int schoolNum;
     private String school;
     private String email;
     private String password;

@@ -46,15 +46,15 @@ public class Post extends BaseEntity {
   @Column(length = 100, nullable = false)
   private String location;
 
-  @Column(length = 45, nullable = false)
-  private Integer people_num;
+  @Column(name = "people_num", length = 45, nullable = false)
+  private Integer peopleNum;
 
   @Column(length = 50, nullable = true)
   @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm", timezone = "Asia/Seoul")
   private LocalDateTime deadline;
 
-  @Column(length = 100, nullable = true)
-  private Integer delivery_fee;
+  @Column(name = "delivery_fee", length = 100, nullable = true)
+  private Integer deliveryFee;
 
   @Column(length = 150, nullable = false)
   private String content;
@@ -65,12 +65,12 @@ public class Post extends BaseEntity {
   @Column(length = 50, nullable = true)
   private String status;
 
-  public void modify (String title, String location, LocalDateTime deadline, Integer people_num, Integer delivery_fee, String content) {
+  public void modify (String title, String location, LocalDateTime deadline, Integer peopleNum, Integer deliveryFee, String content) {
     this.title = title;
     this.location = location;
     this.deadline = deadline;
-    this.people_num = people_num;
-    this.delivery_fee = delivery_fee;
+    this.peopleNum = peopleNum;
+    this.deliveryFee = deliveryFee;
     this.content = content;
   }
 }
