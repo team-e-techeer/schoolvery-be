@@ -5,13 +5,11 @@ import lombok.extern.log4j.Log4j2;
 import net.schoolvery.schoolveryserver.domain.user.dto.request.UserCreateRequestDto;
 import net.schoolvery.schoolveryserver.domain.user.dto.request.UserLoginRequestDto;
 import net.schoolvery.schoolveryserver.domain.user.dto.request.UserUpdateRequestDto;
+import net.schoolvery.schoolveryserver.domain.user.dto.response.GetUserResponseDto;
 import net.schoolvery.schoolveryserver.domain.user.dto.response.UserCreateResponseDto;
 import net.schoolvery.schoolveryserver.domain.user.dto.response.UserUpdateResponseDto;
 import net.schoolvery.schoolveryserver.domain.user.entity.User;
 import net.schoolvery.schoolveryserver.domain.user.repository.UserRepository;
-import net.schoolvery.schoolveryserver.global.error.exception.BusinessException;
-import net.schoolvery.schoolveryserver.global.error.exception.ErrorCode;
-import net.schoolvery.schoolveryserver.global.utils.AES128;
 import net.schoolvery.schoolveryserver.global.utils.JwtTokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -59,6 +57,14 @@ public class UserServiceImpl implements UserService {
         return userRepository.findAll();
     }
 
+    @Override
+    public GetUserResponseDto findByUserid(UUID id) {
+
+        Optional<User> result = userRepository.findById(id);
+        return result.isPresent() ? findUserResponse(result.get()) : null;
+    }
+
+
     // User modify ( Update )
     @Override
     public UserUpdateResponseDto modifyUser(UUID id, UserUpdateRequestDto userUpdateRequestDto) {
@@ -75,11 +81,13 @@ public class UserServiceImpl implements UserService {
         return null;
     }
 
+
     // User delete
     @Override
     public void deleteUser(UUID id) {
         userRepository.deleteAllById(id);
     }
+
 
     @Override
     public String login(UserLoginRequestDto userLoginRequestDto) {
@@ -89,4 +97,5 @@ public class UserServiceImpl implements UserService {
 
         return jwtTokenProvider.createToken(user.getEmail());
     }
+
 }

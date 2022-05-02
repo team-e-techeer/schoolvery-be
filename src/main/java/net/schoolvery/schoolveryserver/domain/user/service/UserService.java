@@ -4,6 +4,7 @@ import java.util.UUID;
 import net.schoolvery.schoolveryserver.domain.user.dto.request.UserCreateRequestDto;
 import net.schoolvery.schoolveryserver.domain.user.dto.request.UserLoginRequestDto;
 import net.schoolvery.schoolveryserver.domain.user.dto.request.UserUpdateRequestDto;
+import net.schoolvery.schoolveryserver.domain.user.dto.response.GetUserResponseDto;
 import net.schoolvery.schoolveryserver.domain.user.dto.response.UserCreateResponseDto;
 import net.schoolvery.schoolveryserver.domain.user.dto.response.UserUpdateResponseDto;
 import net.schoolvery.schoolveryserver.domain.user.entity.User;
@@ -16,8 +17,9 @@ public interface UserService {
     List<User> getAllUsers();
     UserUpdateResponseDto modifyUser(UUID id, UserUpdateRequestDto userUpdateRequestDto);
     void deleteUser(UUID id);
-
     String login(UserLoginRequestDto userLoginRequestDto);
+    GetUserResponseDto findByUserid(UUID id);
+
 
     default User createUserRequest(UserCreateRequestDto userCreateRequestDto) {
         User user = User.builder()
@@ -49,17 +51,20 @@ public interface UserService {
 
     }
 
-    default User updateUser(UUID id, UserUpdateRequestDto userUpdateRequestDto) {
-        User user = User.builder()
-                .nickname(userUpdateRequestDto.getNickname())
-                .phoneNum(userUpdateRequestDto.getPhoneNum())
-                .schoolNum(userUpdateRequestDto.getSchoolNum())
-                .school(userUpdateRequestDto.getSchool())
-                .email(userUpdateRequestDto.getEmail())
-                .password(userUpdateRequestDto.getPassword())
+    default GetUserResponseDto findUserResponse(User user) {
+        GetUserResponseDto dto = GetUserResponseDto.builder()
+                .id(user.getId())
+                .name(user.getName())
+                .nickname(user.getNickname())
+                .email(user.getEmail())
+                .password(user.getPassword())
+                .schoolNum(user.getSchoolNum())
+                .phoneNum(user.getPhoneNum())
+                .school(user.getSchool())
                 .build();
 
-        return user;
+        return dto;
     }
+
 
 }
