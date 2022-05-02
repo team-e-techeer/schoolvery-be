@@ -10,6 +10,9 @@ import net.schoolvery.schoolveryserver.domain.user.dto.response.UserCreateRespon
 import net.schoolvery.schoolveryserver.domain.user.dto.response.UserUpdateResponseDto;
 import net.schoolvery.schoolveryserver.domain.user.entity.User;
 import net.schoolvery.schoolveryserver.domain.user.repository.UserRepository;
+import net.schoolvery.schoolveryserver.global.error.exception.BusinessException;
+import net.schoolvery.schoolveryserver.global.error.exception.ErrorCode;
+import net.schoolvery.schoolveryserver.global.utils.AES128;
 import net.schoolvery.schoolveryserver.global.utils.JwtTokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,13 +39,13 @@ public class UserServiceImpl implements UserService {
     // User Create
     @Override
     public UserCreateResponseDto createUser(UserCreateRequestDto userCreateRequestDto) {
-//        try {
-//            String password = new AES128("password").encrypt(userCreateRequestDto.getPassword());
-//            userCreateRequestDto.setPassword(password);
-//
-//        } catch (Exception e) {
-//            throw new BusinessException(ErrorCode.PASSWORD_ENCRYPTION_ERROR);
-//        }
+        try {
+            String password = new AES128("${spring.security.user.password}").encrypt(userCreateRequestDto.getPassword());
+            userCreateRequestDto.setPassword(password);
+
+        } catch (Exception e) {
+            throw new BusinessException(ErrorCode.PASSWORD_ENCRYPTION_ERROR);
+        }
 
         User user = createUserRequest(userCreateRequestDto);
         userRepository.save(user);
@@ -87,7 +90,6 @@ public class UserServiceImpl implements UserService {
     public void deleteUser(UUID id) {
         userRepository.deleteAllById(id);
     }
-
 
     @Override
     public String login(UserLoginRequestDto userLoginRequestDto) {
