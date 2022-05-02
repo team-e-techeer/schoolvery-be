@@ -7,6 +7,7 @@ import lombok.extern.log4j.Log4j2;
 import net.schoolvery.schoolveryserver.domain.user.dto.request.UserCreateRequestDto;
 import net.schoolvery.schoolveryserver.domain.user.dto.request.UserLoginRequestDto;
 import net.schoolvery.schoolveryserver.domain.user.dto.request.UserUpdateRequestDto;
+import net.schoolvery.schoolveryserver.domain.user.dto.response.GetUserResponseDto;
 import net.schoolvery.schoolveryserver.domain.user.dto.response.UserCreateResponseDto;
 import net.schoolvery.schoolveryserver.domain.user.dto.response.UserLoginResponseDto;
 import net.schoolvery.schoolveryserver.domain.user.dto.response.UserUpdateResponseDto;
@@ -35,6 +36,17 @@ public class UserController {
                 .body(userService.getAllUsers());
     }
 
+    // find User by id
+    @GetMapping("/{id}")
+    public ResponseEntity<GetUserResponseDto> getuserId(@PathVariable UUID id) {
+
+        GetUserResponseDto user = userService.findByUserid(id);
+
+        return ResponseEntity.ok()
+                .body(user);
+    }
+    
+
     // Create Users
     @PostMapping("/signup")
     @ResponseStatus(HttpStatus.CREATED)
@@ -48,7 +60,6 @@ public class UserController {
     }
 
     // Update Users
-
     @PatchMapping("/{id}")
     public ResponseEntity<UserUpdateResponseDto> updateUser(@PathVariable UUID id, @RequestBody UserUpdateRequestDto userUpdateRequestDto) {
         UserUpdateResponseDto update = userService.modifyUser(id, userUpdateRequestDto);
@@ -74,4 +85,5 @@ public class UserController {
         return ResponseEntity.ok()
                 .body(new UserLoginResponseDto(token,userLoginRequestDto.getEmail()));
     }
+
 }
