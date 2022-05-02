@@ -9,6 +9,7 @@ import java.time.LocalDate;
 @Setter
 @AllArgsConstructor
 @Data
+@Builder
 public class GetUserResponseDto {
 
     private UUID id;
