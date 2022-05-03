@@ -1,4 +1,5 @@
 package net.schoolvery.schoolveryserver.domain.chat.entity;
+
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,8 +28,4 @@ public class Room extends BaseEntity {
     @GeneratedValue(generator = "UUID",strategy = GenerationType.IDENTITY)
     @GenericGenerator(name = "UUID", strategy = "uuid2")
     private UUID post_id;
-
-//    public void update(String name) {
-//        this.name = name;
-//    }
 }
