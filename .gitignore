@@ -42,3 +42,5 @@ secrets.yml
 .sts4-cache
 © 2022 GitHub, Inc.
 logs
+
+.env
