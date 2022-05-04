@@ -1,8 +1,10 @@
 package net.schoolvery.schoolveryserver.domain.chat.controller;
 
 import lombok.extern.log4j.Log4j2;
+import net.schoolvery.schoolveryserver.domain.board.dto.request.CategoryUpdateRequestDto;
 import net.schoolvery.schoolveryserver.domain.chat.dto.request.MessageCreateRequestDto;
 import net.schoolvery.schoolveryserver.domain.chat.dto.request.RoomCreateRequestDto;
+import net.schoolvery.schoolveryserver.domain.chat.dto.request.RoomUpdateRequestDto;
 import net.schoolvery.schoolveryserver.domain.chat.dto.response.RoomResponseDto;
 import net.schoolvery.schoolveryserver.domain.chat.service.MessageService;
 import net.schoolvery.schoolveryserver.domain.chat.service.RoomService;
@@ -35,6 +37,13 @@ public class ChatController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteChatRoom(@PathVariable UUID id) {
         roomService.deleteChatRoom(id);
+        return ResponseEntity.ok()
+                .body(null);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Void> updateChatRoom(@PathVariable UUID id, @RequestBody RoomUpdateRequestDto roomUpdateRequestDto) {
+        roomService.updateChatRoom(id, roomUpdateRequestDto);
         return ResponseEntity.ok()
                 .body(null);
     }

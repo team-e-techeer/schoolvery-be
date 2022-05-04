@@ -1,6 +1,7 @@
 package net.schoolvery.schoolveryserver.domain.chat.service;
 
 import net.schoolvery.schoolveryserver.domain.chat.dto.request.RoomCreateRequestDto;
+import net.schoolvery.schoolveryserver.domain.chat.dto.request.RoomUpdateRequestDto;
 import net.schoolvery.schoolveryserver.domain.chat.dto.response.RoomResponseDto;
 import net.schoolvery.schoolveryserver.domain.chat.entity.Room;
 
@@ -22,7 +23,14 @@ public interface RoomService {
                 .build();
         return dto;
     }
-
+    default Room updateDtoToEntity (RoomUpdateRequestDto dto) {
+        Room entity = Room.builder()
+                .name(dto.getName())
+                .post_id(dto.getPost_id())
+                .build();
+        return entity;
+    }
     RoomResponseDto createChatRoom(RoomCreateRequestDto dto);
     void deleteChatRoom(UUID room_id);
+    void updateChatRoom(UUID room_id, RoomUpdateRequestDto dto);
 }
