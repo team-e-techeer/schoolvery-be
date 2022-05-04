@@ -8,6 +8,7 @@ import net.schoolvery.schoolveryserver.domain.chat.dto.request.RoomUpdateRequest
 import net.schoolvery.schoolveryserver.domain.chat.dto.response.RoomResponseDto;
 import net.schoolvery.schoolveryserver.domain.chat.service.MessageService;
 import net.schoolvery.schoolveryserver.domain.chat.service.RoomService;
+import net.schoolvery.schoolveryserver.global.common.dto.PageResultDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -42,9 +43,23 @@ public class ChatController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Void> updateChatRoom(@PathVariable UUID id, @RequestBody RoomUpdateRequestDto roomUpdateRequestDto) {
-        roomService.updateChatRoom(id, roomUpdateRequestDto);
+    public ResponseEntity<RoomResponseDto> updateChatRoom(@PathVariable UUID id, @RequestBody RoomUpdateRequestDto roomUpdateRequestDto) {
+        RoomResponseDto result = roomService.updateChatRoom(id, roomUpdateRequestDto);
         return ResponseEntity.ok()
-                .body(null);
+                .body(result);
+    }
+
+//    @GetMapping
+//    public ResponseEntity<PageResultDto> getRooms(PageRequestDto pageRequestDto) {
+//        PageResultDto result = roomService.getPosts(pageRequestDto);
+//        return ResponseEntity.ok()
+//                .body(result);
+//    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<RoomResponseDto> getRoom(@PathVariable UUID id) {
+        RoomResponseDto dto = roomService.getRoomById(id);
+        return ResponseEntity.ok()
+                .body(dto);
     }
 }

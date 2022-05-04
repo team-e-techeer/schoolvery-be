@@ -31,8 +31,16 @@ public class RoomServiceImpl implements RoomService {
 
     @Override
     @Transactional
-    public void updateChatRoom(UUID room_id, RoomUpdateRequestDto dto) {
+    public RoomResponseDto updateChatRoom(UUID room_id, RoomUpdateRequestDto dto) {
         Room entity = updateDtoToEntity(dto);
         roomRepository.findByRoomId(room_id,entity.getName(),dto.getPost_id());
+        entity = roomRepository.getByRoomId(room_id);
+        return entityToDto(entity);
+    }
+
+    @Override
+    public RoomResponseDto getRoomById(UUID id){
+        Room entity = roomRepository.getByRoomId(id);
+        return entityToDto(entity);
     }
 }

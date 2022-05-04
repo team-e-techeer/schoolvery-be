@@ -13,4 +13,7 @@ public interface RoomRepository extends JpaRepository <Room,Long> {
     @Modifying
     @Query("update Room r set r.name=:name, r.post_id=:post_id where r.id=:id")
     void findByRoomId(@Param("id") UUID id, @Param("name")String name, @Param("post_id") Long post_id);
+
+    @Query("SELECT r FROM Room r WHERE r.id =:id")
+    Room getByRoomId(@Param("id") UUID id);
 }
