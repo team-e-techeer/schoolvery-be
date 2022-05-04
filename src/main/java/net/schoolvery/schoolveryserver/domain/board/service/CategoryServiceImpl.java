@@ -1,5 +1,6 @@
 package net.schoolvery.schoolveryserver.domain.board.service;
 
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import com.querydsl.core.BooleanBuilder; //쿼리 WHERE 뒤의 조건을 생성해주는 것
@@ -66,6 +67,12 @@ public class CategoryServiceImpl implements CategoryService{
         Function<Category, CategoryResponseDto> fn = (entity -> entityToDto(entity));
         return new PageResultDto<>(result, fn);
     }
+
+    @Override
+    public List<Category> getAllCategory() {
+        return this.categoryRepository.findAll();
+    }
+
     //QueryDSL
     private BooleanBuilder getSearch(PageRequestDto requestDto) {
         BooleanBuilder booleanBuilder = new BooleanBuilder();
