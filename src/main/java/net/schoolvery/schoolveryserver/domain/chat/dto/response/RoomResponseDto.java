@@ -5,7 +5,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class ChatResponseDto {
+public class RoomResponseDto {
     private UUID id;
     private String name;
     private Long post_id;
