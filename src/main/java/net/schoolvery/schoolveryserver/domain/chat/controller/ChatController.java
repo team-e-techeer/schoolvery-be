@@ -1,14 +1,11 @@
 package net.schoolvery.schoolveryserver.domain.chat.controller;
 
 import lombok.extern.log4j.Log4j2;
-import net.schoolvery.schoolveryserver.domain.board.dto.request.CategoryUpdateRequestDto;
-import net.schoolvery.schoolveryserver.domain.chat.dto.request.MessageCreateRequestDto;
 import net.schoolvery.schoolveryserver.domain.chat.dto.request.RoomCreateRequestDto;
 import net.schoolvery.schoolveryserver.domain.chat.dto.request.RoomUpdateRequestDto;
 import net.schoolvery.schoolveryserver.domain.chat.dto.response.RoomResponseDto;
 import net.schoolvery.schoolveryserver.domain.chat.service.MessageService;
 import net.schoolvery.schoolveryserver.domain.chat.service.RoomService;
-import net.schoolvery.schoolveryserver.global.common.dto.PageResultDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.messaging.handler.annotation.MessageMapping;
