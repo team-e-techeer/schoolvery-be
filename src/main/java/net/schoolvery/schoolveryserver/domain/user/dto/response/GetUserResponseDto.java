@@ -1,9 +1,11 @@
 package net.schoolvery.schoolveryserver.domain.user.dto.response;
 
-import java.util.UUID;
-import lombok.*;
-
 import java.time.LocalDate;
+import java.util.UUID;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 @Getter
 @Setter
@@ -15,12 +17,10 @@ public class GetUserResponseDto {
 
     private String name;
     private String nickname;
-    private int phoneNum;
-//    private String school_id;
-    private int schoolNum;
+    private String phoneNum;
+    private Integer schoolNum;
     private String school;
     private String email;
-    private String password;
     private LocalDate modDate;
     private LocalDate regDate;
 }

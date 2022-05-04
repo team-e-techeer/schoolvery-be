@@ -12,4 +12,7 @@ import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 public interface PostRepository extends JpaRepository<Post, Long>, QuerydslPredicateExecutor<Post> {
 
 //    Page<Post> findBySchoolId(UUID school_id, Pageable pageable);
+
+    @Query("SELECT CASE WHEN COUNT(s) > 0 THEN TRUE ELSE FALSE END FROM Post s WHERE s.id = ?1")
+    Boolean isPostExitsById(Integer id);
 }

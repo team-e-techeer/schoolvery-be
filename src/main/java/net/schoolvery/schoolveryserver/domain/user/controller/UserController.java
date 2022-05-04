@@ -4,6 +4,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import net.schoolvery.schoolveryserver.domain.board.dto.response.PostResponseDto;
 import net.schoolvery.schoolveryserver.domain.user.dto.request.UserCreateRequestDto;
 import net.schoolvery.schoolveryserver.domain.user.dto.request.UserLoginRequestDto;
 import net.schoolvery.schoolveryserver.domain.user.dto.request.UserUpdateRequestDto;
@@ -33,6 +34,15 @@ public class UserController {
     public ResponseEntity<List<User>> getUser() {
         return ResponseEntity.ok()
                 .body(userService.getAllUsers());
+    }
+
+    // getCategoryById
+    @GetMapping("/{id}")
+    public ResponseEntity<UserCreateResponseDto> getUserById(@PathVariable UUID id) {
+
+        UserCreateResponseDto dto = userService.getUserById(id);
+        return ResponseEntity.ok()
+            .body(dto);
     }
 
     // Create Users
