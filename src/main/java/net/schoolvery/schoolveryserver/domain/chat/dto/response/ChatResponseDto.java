@@ -8,5 +8,5 @@ import lombok.*;
 public class ChatResponseDto {
     private UUID id;
     private String name;
-    private UUID post_id;
+    private Long post_id;
 }
