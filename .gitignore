@@ -41,6 +41,7 @@ secrets.yml
 .gradletasknamecache
 .sts4-cache
 © 2022 GitHub, Inc.
+logs/
 logs
 
 .env

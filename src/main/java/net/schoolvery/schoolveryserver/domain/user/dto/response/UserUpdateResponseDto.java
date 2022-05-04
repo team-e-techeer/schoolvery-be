@@ -13,9 +13,8 @@ public class UserUpdateResponseDto {
 
     private UUID id;
     private String nickname;
-    private int phoneNum;
-//    private String school_id;
-    private int schoolNum;
+    private String phoneNum;
+    private Integer schoolNum;
     private String school;
     private String email;
     private String password;

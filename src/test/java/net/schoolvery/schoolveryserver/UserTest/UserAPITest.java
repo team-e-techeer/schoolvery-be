@@ -19,7 +19,7 @@ public class UserAPITest extends SpringTestSupport {
     @Test
     void 유저생성() throws Exception {
         String user = mapper.writeValueAsString(new User(UUID.randomUUID(), "김의빈", "성결대학교",
-                "Joe", "asdo@naver.com", "asdas123", "asdffadf", 13513, 0104242,
+                "Joe", "asdo@naver.com", "asdas123", "asdffadf", 13513, "104242",
                 "asdasd"));
 
         mockMvc.perform(
