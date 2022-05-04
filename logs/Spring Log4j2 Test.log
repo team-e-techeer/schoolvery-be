@@ -65,4 +65,101 @@ insert into post (moddate, regdate, category_id, content, deadline, delivery_fee
  -[36m2022/04/30 04:07:04,887[m [32m[INFO ][m  [org.hibernate.annotations.common.reflection.java.JavaReflectionManager] [33m[restartedMain][m- HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
  -[36m2022/04/30 04:07:04,988[m [32m[INFO ][m  [org.hibernate.dialect.Dialect] [33m[restartedMain][m- HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
  -[36m2022/04/30 04:07:06,039[m [32m[INFO ][m  [org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator] [33m[restartedMain][m- HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+ -[36m2022/04/30 05:15:28,454[m [32m[INFO ][m  [org.hibernate.validator.internal.util.Version] [33m[background-preinit][m- HV000001: Hibernate Validator 6.2.3.Final
+ -[36m2022/04/30 05:15:32,632[m [32m[INFO ][m  [org.hibernate.jpa.internal.util.LogHelper] [33m[restartedMain][m- HHH000204: Processing PersistenceUnitInfo [name: default]
+ -[36m2022/04/30 05:15:32,691[m [32m[INFO ][m  [org.hibernate.Version] [33m[restartedMain][m- HHH000412: Hibernate ORM core version 5.6.7.Final
+ -[36m2022/04/30 05:15:32,898[m [32m[INFO ][m  [org.hibernate.annotations.common.reflection.java.JavaReflectionManager] [33m[restartedMain][m- HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+ -[36m2022/04/30 05:15:33,042[m [32m[INFO ][m  [org.hibernate.dialect.Dialect] [33m[restartedMain][m- HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+ -[36m2022/04/30 05:15:34,115[m [32m[INFO ][m  [org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator] [33m[restartedMain][m- HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+ -[36m2022/04/30 05:16:23,218[m [32m[INFO ][m  [org.hibernate.validator.internal.util.Version] [33m[background-preinit][m- HV000001: Hibernate Validator 6.2.3.Final
+ -[36m2022/04/30 05:16:29,586[m [32m[INFO ][m  [org.hibernate.jpa.internal.util.LogHelper] [33m[restartedMain][m- HHH000204: Processing PersistenceUnitInfo [name: default]
+ -[36m2022/04/30 05:16:29,779[m [32m[INFO ][m  [org.hibernate.Version] [33m[restartedMain][m- HHH000412: Hibernate ORM core version 5.6.7.Final
+ -[36m2022/04/30 05:16:30,327[m [32m[INFO ][m  [org.hibernate.annotations.common.reflection.java.JavaReflectionManager] [33m[restartedMain][m- HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+ -[36m2022/04/30 05:16:30,508[m [32m[INFO ][m  [org.hibernate.dialect.Dialect] [33m[restartedMain][m- HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+ -[36m2022/04/30 05:16:31,962[m [32m[INFO ][m  [org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator] [33m[restartedMain][m- HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+ -[36m2022/04/30 05:21:00,106[m [32m[INFO ][m  [org.hibernate.validator.internal.util.Version] [33m[background-preinit][m- HV000001: Hibernate Validator 6.2.3.Final
+ -[36m2022/04/30 05:21:05,947[m [32m[INFO ][m  [org.hibernate.jpa.internal.util.LogHelper] [33m[restartedMain][m- HHH000204: Processing PersistenceUnitInfo [name: default]
+ -[36m2022/04/30 05:21:06,077[m [32m[INFO ][m  [org.hibernate.Version] [33m[restartedMain][m- HHH000412: Hibernate ORM core version 5.6.7.Final
+ -[36m2022/04/30 05:21:06,502[m [32m[INFO ][m  [org.hibernate.annotations.common.reflection.java.JavaReflectionManager] [33m[restartedMain][m- HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+ -[36m2022/04/30 05:21:06,676[m [32m[INFO ][m  [org.hibernate.dialect.Dialect] [33m[restartedMain][m- HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+ -[36m2022/04/30 05:21:08,931[m [32m[INFO ][m  [org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator] [33m[restartedMain][m- HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+ -[36m2022/04/30 05:28:40,500[m [32m[INFO ][m  [org.hibernate.validator.internal.util.Version] [33m[background-preinit][m- HV000001: Hibernate Validator 6.2.3.Final
+ -[36m2022/04/30 05:28:46,052[m [32m[INFO ][m  [org.hibernate.jpa.internal.util.LogHelper] [33m[restartedMain][m- HHH000204: Processing PersistenceUnitInfo [name: default]
+ -[36m2022/04/30 05:28:46,144[m [32m[INFO ][m  [org.hibernate.Version] [33m[restartedMain][m- HHH000412: Hibernate ORM core version 5.6.7.Final
+ -[36m2022/04/30 05:28:46,548[m [32m[INFO ][m  [org.hibernate.annotations.common.reflection.java.JavaReflectionManager] [33m[restartedMain][m- HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+ -[36m2022/04/30 05:28:46,960[m [32m[INFO ][m  [org.hibernate.dialect.Dialect] [33m[restartedMain][m- HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+ -[36m2022/04/30 05:28:49,607[m [32m[INFO ][m  [org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator] [33m[restartedMain][m- HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+ -[36m2022/04/30 05:31:57,109[m [32m[INFO ][m  [org.hibernate.validator.internal.util.Version] [33m[background-preinit][m- HV000001: Hibernate Validator 6.2.3.Final
+ -[36m2022/04/30 05:32:02,730[m [32m[INFO ][m  [org.hibernate.jpa.internal.util.LogHelper] [33m[restartedMain][m- HHH000204: Processing PersistenceUnitInfo [name: default]
+ -[36m2022/04/30 05:32:02,800[m [32m[INFO ][m  [org.hibernate.Version] [33m[restartedMain][m- HHH000412: Hibernate ORM core version 5.6.7.Final
+ -[36m2022/04/30 05:32:03,142[m [32m[INFO ][m  [org.hibernate.annotations.common.reflection.java.JavaReflectionManager] [33m[restartedMain][m- HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+ -[36m2022/04/30 05:32:03,332[m [32m[INFO ][m  [org.hibernate.dialect.Dialect] [33m[restartedMain][m- HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+ -[36m2022/04/30 05:32:04,787[m [32m[INFO ][m  [org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator] [33m[restartedMain][m- HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+ -[36m2022/04/30 05:32:24,670[m [32m[INFO ][m  [net.schoolvery.schoolveryserver.domain.user.service.UserServiceImpl] [33m[http-nio-8080-exec-4][m- Find all users
+ -[36m2022/04/30 05:32:59,068[m [32m[INFO ][m  [net.schoolvery.schoolveryserver.domain.user.service.UserServiceImpl] [33m[http-nio-8080-exec-6][m- Find all users
+ -[36m2022/04/30 05:35:15,603[m [32m[INFO ][m  [net.schoolvery.schoolveryserver.domain.user.service.UserServiceImpl] [33m[http-nio-8080-exec-3][m- Find all users
+ -[36m2022/04/30 05:40:03,264[m [32m[INFO ][m  [org.hibernate.validator.internal.util.Version] [33m[background-preinit][m- HV000001: Hibernate Validator 6.2.3.Final
+ -[36m2022/04/30 05:40:10,682[m [32m[INFO ][m  [org.hibernate.jpa.internal.util.LogHelper] [33m[restartedMain][m- HHH000204: Processing PersistenceUnitInfo [name: default]
+ -[36m2022/04/30 05:40:10,807[m [32m[INFO ][m  [org.hibernate.Version] [33m[restartedMain][m- HHH000412: Hibernate ORM core version 5.6.7.Final
+ -[36m2022/04/30 05:40:11,189[m [32m[INFO ][m  [org.hibernate.annotations.common.reflection.java.JavaReflectionManager] [33m[restartedMain][m- HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+ -[36m2022/04/30 05:40:11,353[m [32m[INFO ][m  [org.hibernate.dialect.Dialect] [33m[restartedMain][m- HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+ -[36m2022/04/30 05:40:13,493[m [32m[INFO ][m  [org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator] [33m[restartedMain][m- HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+ -[36m2022/04/30 05:40:30,096[m [32m[INFO ][m  [net.schoolvery.schoolveryserver.domain.user.service.UserServiceImpl] [33m[http-nio-8080-exec-3][m- Find all users
+ -[36m2022/04/30 05:40:52,823[m [32m[INFO ][m  [net.schoolvery.schoolveryserver.domain.user.service.UserServiceImpl] [33m[http-nio-8080-exec-2][m- Find all users
+ -[36m2022/04/30 05:41:13,144[m [32m[INFO ][m  [net.schoolvery.schoolveryserver.domain.user.service.UserServiceImpl] [33m[http-nio-8080-exec-8][m- Find all users
+ -[36m2022/04/30 05:41:35,465[m [32m[INFO ][m  [net.schoolvery.schoolveryserver.domain.user.service.UserServiceImpl] [33m[http-nio-8080-exec-10][m- Find all users
+ -[36m2022/04/30 05:41:56,919[m [32m[INFO ][m  [net.schoolvery.schoolveryserver.domain.user.service.UserServiceImpl] [33m[http-nio-8080-exec-4][m- Find all users
+ -[36m2022/04/30 05:41:58,011[m [32m[INFO ][m  [net.schoolvery.schoolveryserver.domain.user.service.UserServiceImpl] [33m[http-nio-8080-exec-5][m- Find all users
+ -[36m2022/04/30 05:42:02,478[m [32m[INFO ][m  [net.schoolvery.schoolveryserver.domain.user.service.UserServiceImpl] [33m[http-nio-8080-exec-3][m- Find all users
+ -[36m2022/04/30 05:42:36,915[m [32m[INFO ][m  [net.schoolvery.schoolveryserver.domain.user.service.UserServiceImpl] [33m[http-nio-8080-exec-2][m- Find all users
+ -[36m2022/04/30 05:45:45,669[m [32m[INFO ][m  [org.hibernate.validator.internal.util.Version] [33m[background-preinit][m- HV000001: Hibernate Validator 6.2.3.Final
+ -[36m2022/04/30 05:45:51,802[m [32m[INFO ][m  [org.hibernate.jpa.internal.util.LogHelper] [33m[restartedMain][m- HHH000204: Processing PersistenceUnitInfo [name: default]
+ -[36m2022/04/30 05:45:51,896[m [32m[INFO ][m  [org.hibernate.Version] [33m[restartedMain][m- HHH000412: Hibernate ORM core version 5.6.7.Final
+ -[36m2022/04/30 05:45:52,245[m [32m[INFO ][m  [org.hibernate.annotations.common.reflection.java.JavaReflectionManager] [33m[restartedMain][m- HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+ -[36m2022/04/30 05:45:52,398[m [32m[INFO ][m  [org.hibernate.dialect.Dialect] [33m[restartedMain][m- HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+ -[36m2022/04/30 05:45:54,029[m [32m[INFO ][m  [org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator] [33m[restartedMain][m- HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+ -[36m2022/04/30 05:46:25,988[m [32m[INFO ][m  [net.schoolvery.schoolveryserver.domain.user.service.UserServiceImpl] [33m[http-nio-8080-exec-7][m- Find all users
+ -[36m2022/04/30 05:46:46,030[m [32m[INFO ][m  [net.schoolvery.schoolveryserver.domain.user.service.UserServiceImpl] [33m[http-nio-8080-exec-1][m- Find all users
+ -[36m2022/04/30 06:01:04,720[m [32m[INFO ][m  [org.hibernate.validator.internal.util.Version] [33m[background-preinit][m- HV000001: Hibernate Validator 6.2.3.Final
+ -[36m2022/04/30 06:01:11,035[m [32m[INFO ][m  [org.hibernate.jpa.internal.util.LogHelper] [33m[restartedMain][m- HHH000204: Processing PersistenceUnitInfo [name: default]
+ -[36m2022/04/30 06:01:11,113[m [32m[INFO ][m  [org.hibernate.Version] [33m[restartedMain][m- HHH000412: Hibernate ORM core version 5.6.7.Final
+ -[36m2022/04/30 06:01:11,456[m [32m[INFO ][m  [org.hibernate.annotations.common.reflection.java.JavaReflectionManager] [33m[restartedMain][m- HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+ -[36m2022/04/30 06:01:11,601[m [32m[INFO ][m  [org.hibernate.dialect.Dialect] [33m[restartedMain][m- HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+ -[36m2022/04/30 06:01:13,103[m [32m[INFO ][m  [org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator] [33m[restartedMain][m- HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+ -[36m2022/04/30 06:02:46,438[m [32m[INFO ][m  [net.schoolvery.schoolveryserver.domain.user.service.UserServiceImpl] [33m[http-nio-8080-exec-7][m- Find all users
+ -[36m2022/04/30 06:05:39,680[m [32m[INFO ][m  [org.hibernate.validator.internal.util.Version] [33m[background-preinit][m- HV000001: Hibernate Validator 6.2.3.Final
+ -[36m2022/04/30 06:05:46,826[m [32m[INFO ][m  [org.hibernate.jpa.internal.util.LogHelper] [33m[restartedMain][m- HHH000204: Processing PersistenceUnitInfo [name: default]
+ -[36m2022/04/30 06:05:46,957[m [32m[INFO ][m  [org.hibernate.Version] [33m[restartedMain][m- HHH000412: Hibernate ORM core version 5.6.7.Final
+ -[36m2022/04/30 06:05:47,520[m [32m[INFO ][m  [org.hibernate.annotations.common.reflection.java.JavaReflectionManager] [33m[restartedMain][m- HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+ -[36m2022/04/30 06:05:47,680[m [32m[INFO ][m  [org.hibernate.dialect.Dialect] [33m[restartedMain][m- HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+ -[36m2022/04/30 06:05:49,189[m [32m[INFO ][m  [org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator] [33m[restartedMain][m- HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+ -[36m2022/04/30 06:09:57,643[m [32m[INFO ][m  [net.schoolvery.schoolveryserver.domain.user.service.UserServiceImpl] [33m[http-nio-8080-exec-7][m- Find all users
+ -[36m2022/04/30 06:11:11,171[m [33m[WARN ][m  [org.hibernate.engine.jdbc.spi.SqlExceptionHelper] [33m[http-nio-8080-exec-2][m- SQL Error: 23506, SQLState: 23506
+ -[36m2022/04/30 06:11:11,176[m [31m[ERROR][m  [org.hibernate.engine.jdbc.spi.SqlExceptionHelper] [33m[http-nio-8080-exec-2][m- Referential integrity constraint violation: "FK72MT33DHHS48HF9GCQRQ4FXTE: PUBLIC.POST FOREIGN KEY(USER_ID) REFERENCES PUBLIC.USER(ID) (X'9d32611c007043a89017e77fcf1418f3')"; SQL statement:
+insert into post (moddate, regdate, category_id, content, deadline, delivery_fee, location, people_num, school_id, store, title, user_id, id) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, default) [23506-200]
+ -[36m2022/04/30 06:46:04,550[m [32m[INFO ][m  [org.hibernate.validator.internal.util.Version] [33m[background-preinit][m- HV000001: Hibernate Validator 6.2.3.Final
+ -[36m2022/04/30 06:46:15,130[m [32m[INFO ][m  [org.hibernate.jpa.internal.util.LogHelper] [33m[restartedMain][m- HHH000204: Processing PersistenceUnitInfo [name: default]
+ -[36m2022/04/30 06:46:15,279[m [32m[INFO ][m  [org.hibernate.Version] [33m[restartedMain][m- HHH000412: Hibernate ORM core version 5.6.7.Final
+ -[36m2022/04/30 06:46:15,777[m [32m[INFO ][m  [org.hibernate.annotations.common.reflection.java.JavaReflectionManager] [33m[restartedMain][m- HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+ -[36m2022/04/30 06:46:15,967[m [32m[INFO ][m  [org.hibernate.dialect.Dialect] [33m[restartedMain][m- HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+ -[36m2022/04/30 06:46:18,271[m [32m[INFO ][m  [org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator] [33m[restartedMain][m- HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+ -[36m2022/04/30 06:53:32,953[m [32m[INFO ][m  [net.schoolvery.schoolveryserver.domain.user.service.UserServiceImpl] [33m[http-nio-8080-exec-4][m- Find all users
+ -[36m2022/04/30 07:02:59,463[m [32m[INFO ][m  [org.hibernate.validator.internal.util.Version] [33m[background-preinit][m- HV000001: Hibernate Validator 6.2.3.Final
+ -[36m2022/04/30 07:03:07,384[m [32m[INFO ][m  [org.hibernate.jpa.internal.util.LogHelper] [33m[restartedMain][m- HHH000204: Processing PersistenceUnitInfo [name: default]
+ -[36m2022/04/30 07:03:07,486[m [32m[INFO ][m  [org.hibernate.Version] [33m[restartedMain][m- HHH000412: Hibernate ORM core version 5.6.7.Final
+ -[36m2022/04/30 07:03:08,017[m [32m[INFO ][m  [org.hibernate.annotations.common.reflection.java.JavaReflectionManager] [33m[restartedMain][m- HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+ -[36m2022/04/30 07:03:08,471[m [32m[INFO ][m  [org.hibernate.dialect.Dialect] [33m[restartedMain][m- HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+ -[36m2022/04/30 07:03:10,083[m [32m[INFO ][m  [org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator] [33m[restartedMain][m- HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+ -[36m2022/04/30 07:11:21,699[m [32m[INFO ][m  [org.hibernate.validator.internal.util.Version] [33m[background-preinit][m- HV000001: Hibernate Validator 6.2.3.Final
+ -[36m2022/04/30 07:11:30,492[m [32m[INFO ][m  [org.hibernate.jpa.internal.util.LogHelper] [33m[restartedMain][m- HHH000204: Processing PersistenceUnitInfo [name: default]
+ -[36m2022/04/30 07:11:30,701[m [32m[INFO ][m  [org.hibernate.Version] [33m[restartedMain][m- HHH000412: Hibernate ORM core version 5.6.7.Final
+ -[36m2022/04/30 07:11:31,136[m [32m[INFO ][m  [org.hibernate.annotations.common.reflection.java.JavaReflectionManager] [33m[restartedMain][m- HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+ -[36m2022/04/30 07:11:31,377[m [32m[INFO ][m  [org.hibernate.dialect.Dialect] [33m[restartedMain][m- HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+ -[36m2022/04/30 07:11:33,276[m [32m[INFO ][m  [org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator] [33m[restartedMain][m- HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+ -[36m2022/04/30 08:24:06,350[m [32m[INFO ][m  [org.hibernate.validator.internal.util.Version] [33m[background-preinit][m- HV000001: Hibernate Validator 6.2.3.Final
+ -[36m2022/04/30 08:24:15,063[m [32m[INFO ][m  [org.hibernate.jpa.internal.util.LogHelper] [33m[restartedMain][m- HHH000204: Processing PersistenceUnitInfo [name: default]
+ -[36m2022/04/30 08:24:15,225[m [32m[INFO ][m  [org.hibernate.Version] [33m[restartedMain][m- HHH000412: Hibernate ORM core version 5.6.7.Final
+ -[36m2022/04/30 08:24:16,364[m [32m[INFO ][m  [org.hibernate.annotations.common.reflection.java.JavaReflectionManager] [33m[restartedMain][m- HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+ -[36m2022/04/30 08:24:16,683[m [32m[INFO ][m  [org.hibernate.dialect.Dialect] [33m[restartedMain][m- HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+ -[36m2022/04/30 08:24:19,673[m [32m[INFO ][m  [org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator] [33m[restartedMain][m- HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
  -

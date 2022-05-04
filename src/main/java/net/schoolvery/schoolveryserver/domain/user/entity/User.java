@@ -25,7 +25,6 @@ public class User extends BaseEntity {
     private UUID id;
 
     private String name;
-//    private String school_id;
     private String school;
     private String nickname;
     private String email;
@@ -35,10 +34,11 @@ public class User extends BaseEntity {
     private String profileImageUrl;
 
     @Column(name ="school_num")
-    private int schoolNum;
+    private Integer schoolNum;
 
     @Column(name = "phone_num")
-    private int phoneNum;
+    private String phoneNum;
+
     private String address;
 
     public void modifyUser(String nickname, String password) {

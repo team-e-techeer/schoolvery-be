@@ -2,9 +2,11 @@ package net.schoolvery.schoolveryserver.domain.user.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import net.schoolvery.schoolveryserver.domain.board.entity.Post;
 import net.schoolvery.schoolveryserver.domain.user.dto.request.UserCreateRequestDto;
 import net.schoolvery.schoolveryserver.domain.user.dto.request.UserLoginRequestDto;
 import net.schoolvery.schoolveryserver.domain.user.dto.request.UserUpdateRequestDto;
+import net.schoolvery.schoolveryserver.domain.user.dto.response.GetUserResponseDto;
 import net.schoolvery.schoolveryserver.domain.user.dto.response.UserCreateResponseDto;
 import net.schoolvery.schoolveryserver.domain.user.dto.response.UserUpdateResponseDto;
 import net.schoolvery.schoolveryserver.domain.user.entity.User;
@@ -68,7 +70,7 @@ public class UserServiceImpl implements UserService {
             User user = user_result.get();
             user.modifyUser(
                     userUpdateRequestDto.getNickname(),
-                    userUpdateRequestDto.getPassword()
+                    userUpdateRequestDto.getPhoneNum()
             );
             userRepository.save(user);
         }
@@ -79,6 +81,12 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteUser(UUID id) {
         userRepository.deleteAllById(id);
+    }
+
+    @Override
+    public UserCreateResponseDto getUserById(UUID id) {
+        Optional<User> result = userRepository.findById(id);
+        return result.isPresent() ? createUserResponse(result.get()) : null;
     }
 
     @Override

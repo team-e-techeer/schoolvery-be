@@ -22,16 +22,20 @@ import java.util.Optional;
 @Log4j2
 @RequiredArgsConstructor
 public class CategoryServiceImpl implements CategoryService{
+
     private final CategoryRepository categoryRepository;
+
     @Override
     public CategoryResponseDto createCategory(CategoryCreateRequestDto dto) {
         Category entity = dtoToEntity(dto);
         return entityToDto(categoryRepository.save(entity));
     }
+
     @Override
     public void deleteCategory(Integer id) {
         categoryRepository.deleteById(id);
     }
+
     @Override
     public CategoryResponseDto updateCategory(Integer id, CategoryUpdateRequestDto dto){
         Optional<Category> result = categoryRepository.findById(id);
@@ -43,16 +47,22 @@ public class CategoryServiceImpl implements CategoryService{
         Category updatedEntity = categoryRepository.save(entity);
         return entityToDto(updatedEntity);
     }
+
     @Override
     public CategoryResponseDto getCategoryById(Integer id) {
         Optional<Category> result = categoryRepository.findById(id);
         return result.isPresent()? entityToDto(result.get()): null;
     }
+
     @Override
     public PageResultDto<CategoryResponseDto, Category> getAllCategory(PageRequestDto requestDto) {
+
         Pageable pageable = requestDto.getPageable(Sort.by("name").descending());
+
         BooleanBuilder booleanBuilder = getSearch(requestDto);
+
         Page<Category> result = categoryRepository.findAll(booleanBuilder, pageable);
+
         Function<Category, CategoryResponseDto> fn = (entity -> entityToDto(entity));
         return new PageResultDto<>(result, fn);
     }
@@ -64,11 +74,14 @@ public class CategoryServiceImpl implements CategoryService{
         String keyword = requestDto.getKeyword();
         BooleanExpression expression = qCategory.id.gt(0L);
         booleanBuilder.and(expression);
+
         if (keyword == null || keyword.trim().length() == 0) {
             return booleanBuilder;
         }
+
         BooleanBuilder conditionBuilder = new BooleanBuilder();
-        conditionBuilder.or(qCategory.description.contains(keyword));
+        conditionBuilder.and(qCategory.description.contains(keyword));
+
         booleanBuilder.and(conditionBuilder);
         return booleanBuilder;
     }
