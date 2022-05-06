@@ -93,11 +93,20 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public String login(UserLoginRequestDto userLoginRequestDto) {
+        // 로그인 시도시, login_pw 암호화
+        try {
+            String password = new AES128("${spring.security.user.password}").encrypt(userLoginRequestDto.getPassword());
+            userLoginRequestDto.setPassword(password);
 
-        User user = userRepository.findByEmail(userLoginRequestDto.getEmail())
-                .orElseThrow(IllegalAccessError::new);
+            User user = userRepository.findByPassword(userLoginRequestDto.getPassword())
+                    .orElseThrow(IllegalAccessError::new);
 
-        return jwtTokenProvider.createToken(user.getEmail());
+            return jwtTokenProvider.createToken(user.getEmail());
+
+        } catch (Exception e) {
+            throw new BusinessException(ErrorCode.LOGIN_INPUT_INVALID);
+        }
+
     }
 
 }
