@@ -9,8 +9,6 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
       MYSQL_DATABASE: ${DB_DATABASE}
-    ports:
-      - "3306:3306"
     # 현재 db는 개발용이기에 volume 설정 X
 
   adminer: # db 클라이언트
@@ -30,4 +28,7 @@ services:
       - mysql
     environment:
       WAIT_HOSTS: mysql:3306
+      SPRING_DATASOURCE_URL: jdbc:mysql://${DB_HOST}:3306/${DB_DATABASE}
+      SPRING_DATASOURCE_USERNAME: ${DB_USERNAME}
+      SPRING_DATASOURCE_PASSWORD: ${DB_ROOT_PASSWORD}
     env_file: ./.env
