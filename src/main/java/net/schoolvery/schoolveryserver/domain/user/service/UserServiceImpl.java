@@ -22,6 +22,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import static net.schoolvery.schoolveryserver.global.error.exception.ErrorCode.*;
+
 
 @Service
 @Log4j2
@@ -44,7 +46,7 @@ public class UserServiceImpl implements UserService {
             userCreateRequestDto.setPassword(password);
 
         } catch (Exception e) {
-            throw new BusinessException(ErrorCode.PASSWORD_ENCRYPTION_ERROR);
+            throw new BusinessException(PASSWORD_ENCRYPTION_ERROR);
         }
 
         User user = createUserRequest(userCreateRequestDto);
@@ -98,13 +100,17 @@ public class UserServiceImpl implements UserService {
             String password = new AES128("${spring.security.user.password}").encrypt(userLoginRequestDto.getPassword());
             userLoginRequestDto.setPassword(password);
 
-            User user = userRepository.findByPassword(userLoginRequestDto.getPassword())
-                    .orElseThrow(IllegalAccessError::new);
+        } catch (Exception e) {
+            throw new BusinessException(PASSWORD_ENCRYPTION_ERROR);
+        }
 
+        try {
+            User user = userRepository.findByPassword(userLoginRequestDto.getPassword()).get();
             return jwtTokenProvider.createToken(user.getEmail());
 
         } catch (Exception e) {
-            throw new BusinessException(ErrorCode.LOGIN_INPUT_INVALID);
+            System.out.println(e);
+            throw new BusinessException(LOGIN_FAILED);
         }
 
     }
