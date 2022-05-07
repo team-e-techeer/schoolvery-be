@@ -3,6 +3,10 @@ package net.schoolvery.schoolveryserver.domain.chat.service;
 import net.schoolvery.schoolveryserver.domain.chat.dto.request.MessageCreateRequestDto;
 import net.schoolvery.schoolveryserver.domain.chat.dto.response.MessageResponseDto;
 import net.schoolvery.schoolveryserver.domain.chat.entity.Message;
+
+import java.util.List;
+import java.util.UUID;
+
 public interface MessageService {
     default Message dtoToEntity (MessageCreateRequestDto dto) {
         Message entity = Message.builder()
@@ -22,5 +26,6 @@ public interface MessageService {
         return dto;
     }
 
-    void createMessage(MessageCreateRequestDto dto);
+    void sendMessage(MessageCreateRequestDto messageCreateRequestDto);
+    List<MessageResponseDto> getMessages(UUID room_id);
 }
