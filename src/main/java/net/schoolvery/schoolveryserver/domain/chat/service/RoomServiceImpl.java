@@ -33,7 +33,7 @@ public class RoomServiceImpl implements RoomService {
     @Transactional
     public RoomResponseDto updateChatRoom(UUID room_id, RoomUpdateRequestDto dto) {
         Room entity = updateDtoToEntity(dto);
-        roomRepository.findByRoomId(room_id,entity.getName(),dto.getPost_id());
+        roomRepository.updateRoomInfo(room_id,entity.getName(),dto.getPost_id());
         entity = roomRepository.getByRoomId(room_id);
         return entityToDto(entity);
     }
