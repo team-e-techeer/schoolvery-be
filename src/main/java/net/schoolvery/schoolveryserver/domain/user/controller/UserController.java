@@ -86,11 +86,20 @@ public class UserController {
                 .body(new UserLoginResponseDto(token, userLoginRequestDto.getEmail()));
     }
 
-    @GetMapping("/check")
+    @GetMapping("/check/email")
     public ResponseEntity<Boolean> checkUserEmail(@RequestBody UserCreateRequestDto userCreateRequestDto) {
         String email = userCreateRequestDto.getEmail();
 
         Boolean result = userService.findByUserEmail(email);
+
+        return ResponseEntity.ok()
+                .body(result);
+    }
+
+    @GetMapping("/check/nickname")
+    public ResponseEntity<Boolean> checkUserNickname(@RequestBody UserCreateRequestDto userCreateRequestDto) {
+        String nickname = userCreateRequestDto.getNickname();
+        Boolean result = userService.findByUserNickname(nickname);
 
         return ResponseEntity.ok()
                 .body(result);
