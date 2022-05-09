@@ -45,7 +45,7 @@ public class UserController {
         return ResponseEntity.ok()
                 .body(user);
     }
-    
+
 
     // Create Users
     @PostMapping("/signup")
@@ -83,7 +83,16 @@ public class UserController {
         String token = userService.login(userLoginRequestDto);
 
         return ResponseEntity.ok()
-                .body(new UserLoginResponseDto(token,userLoginRequestDto.getEmail()));
+                .body(new UserLoginResponseDto(token, userLoginRequestDto.getEmail()));
     }
 
+    @GetMapping("/check")
+    public ResponseEntity<Boolean> checkUserEmail(@RequestBody UserCreateRequestDto userCreateRequestDto) {
+        String email = userCreateRequestDto.getEmail();
+
+        Boolean result = userService.findByUserEmail(email);
+
+        return ResponseEntity.ok()
+                .body(result);
+    }
 }
