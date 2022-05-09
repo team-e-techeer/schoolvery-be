@@ -20,6 +20,7 @@ public interface UserService {
     String login(UserLoginRequestDto userLoginRequestDto);
     GetUserResponseDto findByUserid(UUID id);
     boolean findByUserEmail(String email);
+    boolean findByUserNickname(String nickname);
 
 
     default User createUserRequest(UserCreateRequestDto userCreateRequestDto) {

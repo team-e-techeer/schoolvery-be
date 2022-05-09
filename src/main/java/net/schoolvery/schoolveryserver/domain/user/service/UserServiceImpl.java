@@ -79,6 +79,17 @@ public class UserServiceImpl implements UserService {
         return true;
     }
 
+    @Override
+    public boolean findByUserNickname(String nickname) {
+        Optional<User> user = userRepository.findByNickname(nickname);
+
+        if (user.isPresent()) {
+            return false;
+        }
+
+        return false;
+    }
+
 
     // User modify ( Update )
     @Override
