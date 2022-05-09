@@ -16,4 +16,6 @@ public interface UserRepository extends JpaRepository<User, UUID>, QuerydslPredi
     Optional<User> findByPassword(String password);
 
     Optional<User> findByEmail(String email);
+
+    Optional<User> findByNickname(String nickname);
 }
