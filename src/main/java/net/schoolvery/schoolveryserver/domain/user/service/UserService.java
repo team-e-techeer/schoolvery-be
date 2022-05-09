@@ -19,6 +19,7 @@ public interface UserService {
     void deleteUser(UUID id);
     String login(UserLoginRequestDto userLoginRequestDto);
     GetUserResponseDto findByUserid(UUID id);
+    boolean findByUserEmail(String email);
 
 
     default User createUserRequest(UserCreateRequestDto userCreateRequestDto) {
