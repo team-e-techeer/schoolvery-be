@@ -104,4 +104,12 @@ public class UserController {
         return ResponseEntity.ok()
                 .body(result);
     }
+
+    @PostMapping("/check/email")
+    public ResponseEntity<String> emailConfirm(@RequestBody UserCreateRequestDto userCreateRequestDto) throws Exception {
+        String confirm = userService.sendimpleMessage(userCreateRequestDto.getEmail());
+
+        return ResponseEntity.ok()
+                .body(confirm);
+    }
 }
