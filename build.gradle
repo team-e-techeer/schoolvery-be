@@ -37,6 +37,9 @@ dependencies {
 	//Jwt token
 	implementation 'io.jsonwebtoken:jjwt:0.9.1'
 
+	// email 인증
+	implementation 'org.springframework.boot:spring-boot-starter-mail'
+
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation('org.slf4j:jcl-over-slf4j')
 	implementation('ch.qos.logback:logback-classic')
