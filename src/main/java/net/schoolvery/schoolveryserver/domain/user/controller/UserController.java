@@ -4,6 +4,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import net.schoolvery.schoolveryserver.domain.board.dto.response.PostResponseDto;
 import net.schoolvery.schoolveryserver.domain.user.dto.request.UserCreateRequestDto;
 import net.schoolvery.schoolveryserver.domain.user.dto.request.UserLoginRequestDto;
 import net.schoolvery.schoolveryserver.domain.user.dto.request.UserUpdateRequestDto;
@@ -45,7 +46,6 @@ public class UserController {
         return ResponseEntity.ok()
                 .body(user);
     }
-
 
     // Create Users
     @PostMapping("/signup")

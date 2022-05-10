@@ -10,11 +10,6 @@ import lombok.*;
 public class UserUpdateRequestDto {
 
     private String nickname;
-    private int phoneNum;
-//    private String school_id;
-    private int schoolNum;
-    private String school;
-    private String email;
-    private String password;
+    private String phoneNum;
 
 }
