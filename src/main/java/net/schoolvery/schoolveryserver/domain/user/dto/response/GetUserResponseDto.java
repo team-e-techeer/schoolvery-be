@@ -11,6 +11,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @Data
+@Builder
 public class GetUserResponseDto {
 
     private UUID id;

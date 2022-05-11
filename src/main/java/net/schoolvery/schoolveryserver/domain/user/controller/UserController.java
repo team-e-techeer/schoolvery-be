@@ -8,6 +8,7 @@ import net.schoolvery.schoolveryserver.domain.board.dto.response.PostResponseDto
 import net.schoolvery.schoolveryserver.domain.user.dto.request.UserCreateRequestDto;
 import net.schoolvery.schoolveryserver.domain.user.dto.request.UserLoginRequestDto;
 import net.schoolvery.schoolveryserver.domain.user.dto.request.UserUpdateRequestDto;
+import net.schoolvery.schoolveryserver.domain.user.dto.response.GetUserResponseDto;
 import net.schoolvery.schoolveryserver.domain.user.dto.response.UserCreateResponseDto;
 import net.schoolvery.schoolveryserver.domain.user.dto.response.UserLoginResponseDto;
 import net.schoolvery.schoolveryserver.domain.user.dto.response.UserUpdateResponseDto;
@@ -36,13 +37,14 @@ public class UserController {
                 .body(userService.getAllUsers());
     }
 
-    // getCategoryById
+    // find User by id
     @GetMapping("/{id}")
-    public ResponseEntity<UserCreateResponseDto> getUserById(@PathVariable UUID id) {
+    public ResponseEntity<GetUserResponseDto> getuserId(@PathVariable UUID id) {
 
-        UserCreateResponseDto dto = userService.getUserById(id);
+        GetUserResponseDto user = userService.findByUserid(id);
+
         return ResponseEntity.ok()
-            .body(dto);
+                .body(user);
     }
 
     // Create Users
@@ -58,7 +60,6 @@ public class UserController {
     }
 
     // Update Users
-
     @PatchMapping("/{id}")
     public ResponseEntity<UserUpdateResponseDto> updateUser(@PathVariable UUID id, @RequestBody UserUpdateRequestDto userUpdateRequestDto) {
         UserUpdateResponseDto update = userService.modifyUser(id, userUpdateRequestDto);
@@ -82,6 +83,26 @@ public class UserController {
         String token = userService.login(userLoginRequestDto);
 
         return ResponseEntity.ok()
-                .body(new UserLoginResponseDto(token,userLoginRequestDto.getEmail()));
+                .body(new UserLoginResponseDto(token, userLoginRequestDto.getEmail()));
     }
+
+    @GetMapping("/check/email")
+    public ResponseEntity<Boolean> checkUserEmail(@RequestBody UserCreateRequestDto userCreateRequestDto) {
+        String email = userCreateRequestDto.getEmail();
+
+        Boolean result = userService.findByUserEmail(email);
+
+        return ResponseEntity.ok()
+                .body(result);
+    }
+
+    @GetMapping("/check/nickname")
+    public ResponseEntity<Boolean> checkUserNickname(@RequestBody UserCreateRequestDto userCreateRequestDto) {
+        String nickname = userCreateRequestDto.getNickname();
+        Boolean result = userService.findByUserNickname(nickname);
+
+        return ResponseEntity.ok()
+                .body(result);
+    }
+
 }
