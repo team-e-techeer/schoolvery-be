@@ -8,6 +8,6 @@ import java.util.List;
 import java.util.UUID;
 
 public interface MessageRepository extends JpaRepository<Message, UUID> {
-    @Query("SELECT m FROM Message m WHERE m.id =:id")
-    List<Message> findAllByRoomId(@Param("id") UUID id);
+    @Query("SELECT m FROM Message m WHERE m.room_id =:room_id")
+    List<Message> findAllByRoomId(@Param("room_id") UUID room_id);
 }

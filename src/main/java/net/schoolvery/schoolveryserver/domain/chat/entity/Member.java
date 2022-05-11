@@ -11,7 +11,7 @@ import javax.persistence.*;
 import java.util.UUID;
 
 @Entity
-@Table(name = "message")
+@Table(name = "member")
 @Builder
 @Getter
 @AllArgsConstructor

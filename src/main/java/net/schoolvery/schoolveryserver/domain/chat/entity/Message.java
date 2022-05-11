@@ -22,13 +22,13 @@ public class Message extends BaseEntity {
     @GenericGenerator(name = "UUID", strategy = "uuid2")
     private UUID id;
 
-    @Column(name = "ROOM_ID", nullable = false)
+    @Column(name = "ROOM_ID", nullable = false, columnDefinition = "BINARY(16)")
     @GenericGenerator(name = "UUID", strategy = "uuid2")
     private UUID room_id;
 
-    @Column(name = "USER_ID", nullable = false)
+    @Column(name = "MEMBER_ID", nullable = false, columnDefinition = "BINARY(16)")
     @GenericGenerator(name = "UUID", strategy = "uuid2")
-    private UUID user_id;
+    private UUID member_id;
 
     @Column(name = "MESSAGE", columnDefinition = "TEXT", nullable = false)
     private String message;
