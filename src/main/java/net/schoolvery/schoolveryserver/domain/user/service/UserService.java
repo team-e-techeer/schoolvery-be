@@ -24,7 +24,6 @@ public interface UserService {
     GetUserResponseDto findByUserid(UUID id);
     boolean findByUserEmail(String email);
     boolean findByUserNickname(String nickname);
-    String sendimpleMessage(String to) throws Exception;
 
 
     default User createUserRequest(UserCreateRequestDto userCreateRequestDto) {
