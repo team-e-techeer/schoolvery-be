@@ -3,6 +3,7 @@ package net.schoolvery.schoolveryserver.domain.user.dto.response;
 import java.time.LocalDate;
 import java.util.UUID;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -19,6 +20,7 @@ public class GetUserResponseDto {
     private String name;
     private String nickname;
     private String phoneNum;
+    private String password;
     private Integer schoolNum;
     private String school;
     private String email;

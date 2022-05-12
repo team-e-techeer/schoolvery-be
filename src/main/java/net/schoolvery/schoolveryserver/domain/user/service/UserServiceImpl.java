@@ -16,13 +16,13 @@ import net.schoolvery.schoolveryserver.global.error.exception.ErrorCode;
 import net.schoolvery.schoolveryserver.global.utils.AES128;
 import net.schoolvery.schoolveryserver.global.utils.JwtTokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.MailException;
-import org.springframework.mail.javamail.JavaMailSender;
+//import org.springframework.mail.MailException;
+//import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
-import javax.mail.Message;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
+//import javax.mail.Message;
+//import javax.mail.internet.InternetAddress;
+//import javax.mail.internet.MimeMessage;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
@@ -148,21 +148,21 @@ public class UserServiceImpl implements UserService {
 
     }
 
-    @Override
-    public String sendimpleMessage(String to) throws Exception {
-
-        MimeMessage message = createMessage(to);
-
-        try {
-            emailSender.send(message);
-        } catch (MailException e) {
-            e.printStackTrace();
-            throw new IllegalAccessException();
-        }
-
-        return ePw;
-
-    }
+//    @Override
+//    public String sendimpleMessage(String to) throws Exception {
+//
+//        MimeMessage message = createMessage(to);
+//
+//        try {
+//            emailSender.send(message);
+//        } catch (MailException e) {
+//            e.printStackTrace();
+//            throw new IllegalAccessException();
+//        }
+//
+//        return ePw;
+//
+//    }
 
 
 }

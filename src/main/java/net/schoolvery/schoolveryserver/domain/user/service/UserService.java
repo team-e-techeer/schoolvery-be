@@ -30,6 +30,7 @@ public interface UserService {
         User user = User.builder()
                 .name(userCreateRequestDto.getName())
                 .nickname(userCreateRequestDto.getNickname())
+                .password(userCreateRequestDto.getPassword())
                 .email(userCreateRequestDto.getEmail())
                 .schoolNum(userCreateRequestDto.getSchoolNum())
                 .phoneNum(userCreateRequestDto.getPhoneNum())
@@ -57,22 +58,26 @@ public interface UserService {
 
     default GetUserResponseDto findUserResponse(User user) {
         GetUserResponseDto dto = GetUserResponseDto.builder()
-                .id(user.getId())
-                .name(user.getName())
-                .nickname(user.getNickname())
-                .email(user.getEmail())
-                .password(user.getPassword())
-                .schoolNum(user.getSchoolNum())
-                .phoneNum(user.getPhoneNum())
-                .school(user.getSchool())
+            .id(user.getId())
+            .name(user.getName())
+            .nickname(user.getNickname())
+            .password(user.getPassword())
+            .email(user.getEmail())
+            .schoolNum(user.getSchoolNum())
+            .phoneNum(user.getPhoneNum())
+            .school(user.getSchool())
+            .build();
+
+        return dto;
+    }
           
-    default User updateUser(UUID id, UserUpdateRequestDto userUpdateRequestDto) {
+    default User updateUser(UserUpdateRequestDto userUpdateRequestDto) {
         User user = User.builder()
                 .nickname(userUpdateRequestDto.getNickname())
                 .phoneNum(userUpdateRequestDto.getPhoneNum())
                 .build();
 
-        return dto;
+        return user;
     }
 
 
