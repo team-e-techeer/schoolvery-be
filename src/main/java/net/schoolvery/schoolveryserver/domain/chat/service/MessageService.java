@@ -11,7 +11,7 @@ public interface MessageService {
     default Message dtoToEntity (MessageCreateRequestDto dto) {
         Message entity = Message.builder()
                 .room_id(dto.getRoom_id())
-                .member_id(dto.getUser_id())
+                .member_id(dto.getMember_id())
                 .message(dto.getMessage())
                 .build();
         return entity;

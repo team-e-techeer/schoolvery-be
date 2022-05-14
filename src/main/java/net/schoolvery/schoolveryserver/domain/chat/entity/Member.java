@@ -23,13 +23,10 @@ public class Member extends BaseEntity {
     private UUID id;
 
     @ManyToOne
-    @JoinColumn(name = "room_id")
+    @JoinColumn(name = "ROOM_ID")
     private Room room;
 
-    @Column(name = "user_id")
+    @Column(name = "MEMBER_ID", nullable = false, columnDefinition = "BINARY(16)")
     @GenericGenerator(name = "UUID", strategy = "uuid2")
-    private UUID user_id;
-
-    @Column(name = "nickname", nullable = false)
-    private String nickname;
+    private UUID member_id;
 }

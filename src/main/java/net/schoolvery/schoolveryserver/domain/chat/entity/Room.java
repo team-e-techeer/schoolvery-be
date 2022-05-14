@@ -32,5 +32,5 @@ public class Room extends BaseEntity {
     private Long post_id;
 
     @OneToMany(mappedBy = "room")
-    private List<Member> members = new ArrayList<Member>();
+    private List<Member> member = new ArrayList<Member>();
 }
