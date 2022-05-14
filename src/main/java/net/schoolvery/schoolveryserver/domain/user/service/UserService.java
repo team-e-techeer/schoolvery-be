@@ -18,8 +18,13 @@ public interface UserService {
     List<User> getAllUsers();
     UserUpdateResponseDto modifyUser(UUID id, UserUpdateRequestDto userUpdateRequestDto);
     void deleteUser(UUID id);
+
     UserCreateResponseDto getUserById(UUID id);
     String login(UserLoginRequestDto userLoginRequestDto);
+    GetUserResponseDto findByUserid(UUID id);
+    boolean findByUserEmail(String email);
+    boolean findByUserNickname(String nickname);
+
 
     default User createUserRequest(UserCreateRequestDto userCreateRequestDto) {
         User user = User.builder()
@@ -50,13 +55,25 @@ public interface UserService {
 
     }
 
+    default GetUserResponseDto findUserResponse(User user) {
+        GetUserResponseDto dto = GetUserResponseDto.builder()
+                .id(user.getId())
+                .name(user.getName())
+                .nickname(user.getNickname())
+                .email(user.getEmail())
+                .password(user.getPassword())
+                .schoolNum(user.getSchoolNum())
+                .phoneNum(user.getPhoneNum())
+                .school(user.getSchool())
+          
     default User updateUser(UUID id, UserUpdateRequestDto userUpdateRequestDto) {
         User user = User.builder()
                 .nickname(userUpdateRequestDto.getNickname())
                 .phoneNum(userUpdateRequestDto.getPhoneNum())
                 .build();
 
-        return user;
+        return dto;
     }
+
 
 }
