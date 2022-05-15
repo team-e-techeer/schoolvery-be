@@ -4,7 +4,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
-import net.schoolvery.schoolveryserver.domain.board.entity.Post;
 import net.schoolvery.schoolveryserver.global.common.BaseEntity;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.GenericGenerator;

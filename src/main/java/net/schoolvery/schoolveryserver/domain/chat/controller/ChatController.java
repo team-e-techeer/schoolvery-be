@@ -70,9 +70,8 @@ public class ChatController {
         messageService.sendMessage(messageCreateRequestDto);
     }
 
-    // 특정 채팅방 입장
     @GetMapping("/room")
-    public ResponseEntity <List<MessageResponseDto>> getChatMessages (@RequestBody MessageGetRequestDto messageGetRequestDto) {
+    public ResponseEntity <List<MessageResponseDto>> enterChatRoom (@RequestBody MessageGetRequestDto messageGetRequestDto) {
         // 1. 채팅방 멤버 추가
         memberService.addMembers(messageGetRequestDto.getRoom_id(),messageGetRequestDto.getMember_id());
 

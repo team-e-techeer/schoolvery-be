@@ -3,6 +3,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import net.schoolvery.schoolveryserver.domain.chat.entity.Member;
 import net.schoolvery.schoolveryserver.domain.chat.entity.Room;
+import net.schoolvery.schoolveryserver.domain.chat.exception.ChatException;
 import net.schoolvery.schoolveryserver.domain.chat.repository.MemberRepository;
 import net.schoolvery.schoolveryserver.domain.chat.repository.RoomRepository;
 import org.springframework.stereotype.Service;
@@ -16,22 +17,30 @@ public class MemberServiceImpl implements MemberService{
     private final RoomRepository roomRepository;
     @Override
     public void addMembers(UUID room_id, UUID member_id){
-        log.info("Start Searching Members");
-        Room r = roomRepository.getByRoomId(room_id);
-        if (r.getMember().isEmpty()){
-            addMember(r,member_id);
-        }
-        else{
-            boolean flag = false;
-            for (Member a : r.getMember()) {
-                if (a.getMember_id().equals(member_id)){
-                    flag = true;
-                    break;
+        try {
+            Room r = roomRepository.getByRoomId(room_id);
+            if (r==null){
+                throw new ChatException();
+            }
+
+            if (r.getMember().isEmpty()) {
+                addMember(r, member_id);
+            } else {
+                boolean flag = false;
+                for (Member a : r.getMember()) {
+                    if (a.getMember_id().equals(member_id)) {
+                        flag = true;
+                        break;
+                    }
+                }
+                if (flag == false) {
+                    addMember(r, room_id);
                 }
             }
-            if (flag == false){
-                addMember(r,room_id);
-            }
+        }catch (ChatException e){
+            System.out.println("오호 예외가 발생했지요~?");
+            System.out.println(e.RoomNotFoundException());
+            e.RoomNotFoundException();
         }
     }
 
@@ -43,5 +52,4 @@ public class MemberServiceImpl implements MemberService{
         memberRepository.save(member);
         r.getMember().add(member);
     }
-
 }
