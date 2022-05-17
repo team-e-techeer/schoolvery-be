@@ -1,5 +1,5 @@
 package net.schoolvery.schoolveryserver.domain.chat.entity;
-
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,6 +22,7 @@ public class Room extends BaseEntity {
     @Id
     @GeneratedValue(generator = "UUID", strategy = GenerationType.IDENTITY)
     @GenericGenerator(name = "UUID", strategy = "uuid2")
+    @Column(name = "ROOM_ID")
     private UUID id;
 
     @Column(name = "NAME", nullable = false)
@@ -32,4 +33,8 @@ public class Room extends BaseEntity {
 
     @OneToMany(mappedBy = "room")
     private List<Member> member = new ArrayList<Member>();
+
+    @OneToMany(mappedBy = "room")
+    @JsonManagedReference
+    private List<Message> message = new ArrayList<Message>();
 }

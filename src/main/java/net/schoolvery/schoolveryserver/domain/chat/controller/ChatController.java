@@ -4,13 +4,12 @@ import net.schoolvery.schoolveryserver.domain.chat.dto.request.MessageCreateRequ
 import net.schoolvery.schoolveryserver.domain.chat.dto.request.RoomCreateRequestDto;
 import net.schoolvery.schoolveryserver.domain.chat.dto.request.MessageGetRequestDto;
 import net.schoolvery.schoolveryserver.domain.chat.dto.request.RoomUpdateRequestDto;
-import net.schoolvery.schoolveryserver.domain.chat.dto.response.MessageResponseDto;
 import net.schoolvery.schoolveryserver.domain.chat.dto.response.RoomResponseDto;
+import net.schoolvery.schoolveryserver.domain.chat.entity.Message;
 import net.schoolvery.schoolveryserver.domain.chat.service.MemberService;
 import net.schoolvery.schoolveryserver.domain.chat.service.MessageService;
 import net.schoolvery.schoolveryserver.domain.chat.service.RoomService;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.RequestEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.http.ResponseEntity;
@@ -71,13 +70,12 @@ public class ChatController {
     }
 
     @GetMapping("/room")
-    public ResponseEntity <List<MessageResponseDto>> enterChatRoom (@RequestBody MessageGetRequestDto messageGetRequestDto) {
+    public ResponseEntity <List<Message>> enterChatRoom (@RequestBody MessageGetRequestDto messageGetRequestDto) {
         // 1. 채팅방 멤버 추가
         memberService.addMembers(messageGetRequestDto.getRoom_id(),messageGetRequestDto.getMember_id());
 
         // 2. 채팅방 모든 메세지 띄우기(가져오기)
-        List<MessageResponseDto> dto = messageService.getMessages(messageGetRequestDto);
-        return ResponseEntity.ok()
-                .body(dto);
+        List<Message> messages = messageService.getMessages(messageGetRequestDto.getRoom_id());
+        return ResponseEntity.ok().body(messages);
     }
 }

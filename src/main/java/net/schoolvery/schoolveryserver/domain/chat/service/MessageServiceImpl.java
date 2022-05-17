@@ -1,18 +1,17 @@
 package net.schoolvery.schoolveryserver.domain.chat.service;
-
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import net.schoolvery.schoolveryserver.domain.chat.dto.request.MessageCreateRequestDto;
-import net.schoolvery.schoolveryserver.domain.chat.dto.request.MessageGetRequestDto;
-import net.schoolvery.schoolveryserver.domain.chat.dto.response.MessageResponseDto;
 import net.schoolvery.schoolveryserver.domain.chat.entity.Message;
+import net.schoolvery.schoolveryserver.domain.chat.entity.Room;
+import net.schoolvery.schoolveryserver.domain.chat.exception.ChatException;
 import net.schoolvery.schoolveryserver.domain.chat.repository.MessageRepository;
 import net.schoolvery.schoolveryserver.domain.chat.repository.RoomRepository;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
+import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @Log4j2
@@ -22,22 +21,38 @@ public class MessageServiceImpl implements MessageService{
     private final MessageRepository messageRepository;
     private final RoomRepository roomRepository;
 
-    @Override
-    public List<MessageResponseDto> getMessages(MessageGetRequestDto messageGetRequestDto){
-        Message entity = getDtoToEntity(messageGetRequestDto);
-        List <Message> dto =  messageRepository.findAllByRoomId(entity.getRoom_id());
-        List <MessageResponseDto> result = new ArrayList<>();
-        for (Message mm : dto) {
-            result.add(entityToDto(mm));
-            log.info(mm);
+    private Room findRoom(UUID room_id){
+        try {
+            Room r =  roomRepository.getByRoomId(room_id);
+            return r;
         }
-        return result;
+        catch(ChatException e){
+            System.out.println("오호 예외가 발생했지요~?");
+            System.out.println(e.RoomNotFoundException());
+            e.RoomNotFoundException();
+        }
+        return null;
     }
 
     @Override
+    public List<Message> getMessages(UUID room_id){
+        Room r = findRoom(room_id);
+        return r.getMessage();
+    }
+
+    @Override
+    @Transactional
     public void sendMessage(MessageCreateRequestDto dto){
-        Message message = dtoToEntity(dto);
+        log.info("SEND MESSAGE");
+        UUID room_id = dto.getRoom_id();
+        Room r = findRoom(room_id);
+        Message message = Message.builder()
+                .room(r)
+                .member_id(dto.getMember_id())
+                .message(dto.getMessage())
+                .build();
         messageRepository.save(message);
+        r.getMessage().add(message);
         //template.convertAndSend("/topic/chat/room/"+ message.getRoom_id(), message);
     }
 }

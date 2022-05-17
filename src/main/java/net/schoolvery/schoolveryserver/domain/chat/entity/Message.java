@@ -1,5 +1,5 @@
 package net.schoolvery.schoolveryserver.domain.chat.entity;
-
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -22,9 +22,10 @@ public class Message extends BaseEntity {
     @GenericGenerator(name = "UUID", strategy = "uuid2")
     private UUID id;
 
-    @Column(name = "ROOM_ID", nullable = false, columnDefinition = "BINARY(16)")
-    @GenericGenerator(name = "UUID", strategy = "uuid2")
-    private UUID room_id;
+    @ManyToOne
+    @JsonBackReference
+    @JoinColumn(name = "ROOM_ID")
+    private Room room;
 
     @Column(name = "MEMBER_ID", nullable = false, columnDefinition = "BINARY(16)")
     @GenericGenerator(name = "UUID", strategy = "uuid2")
