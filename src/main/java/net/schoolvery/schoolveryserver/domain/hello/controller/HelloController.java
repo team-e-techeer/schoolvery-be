@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @Controller
-@RequestMapping("/api/v1/hellos")
+@RequestMapping("/api/v1/hello")
 @Log4j2
 @RequiredArgsConstructor
 public class HelloController {
