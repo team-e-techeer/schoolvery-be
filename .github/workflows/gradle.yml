@@ -10,8 +10,6 @@ name: Java CI with Gradle
 on:
   push:
     branches: [ master ]
-  pull_request:
-    branches: [ master ]
 
 permissions:
   contents: read
@@ -29,4 +27,6 @@ jobs:
         port: ${{ secrets.REMOTE_SSH_PORT }}
         script: |
           cd dev/schoolvery-be
+          git pull origin master
           sh build.sh
+          sh restart_springboot.sh 
