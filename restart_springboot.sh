@@ -1,1 +1,1 @@
-docker compose build springboot && docker compose restart springboot
+docker compose up -d --build springboot
