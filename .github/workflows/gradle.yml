@@ -18,11 +18,10 @@ permissions:
 
 jobs:
   build:
-    name: Build
     runs-on: ubuntu-latest
     steps:
     - name: executing remote ssh commands using key
-    - uses: appleboy/ssh-action@master
+      uses: appleboy/ssh-action@master
       with:
         host: ${{ secrets.REMOTE_IP }}
         username: ${{ secrets.REMOTE_SSH_ID }}
