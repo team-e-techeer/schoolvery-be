@@ -21,8 +21,7 @@ public class GetUserResponseDto {
     private String nickname;
     private String phoneNum;
     private String password;
-    private Integer schoolNum;
-    private String school;
+    private UUID schoolId;
     private String email;
     private LocalDate modDate;
     private LocalDate regDate;
