@@ -4,7 +4,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import net.schoolvery.schoolveryserver.domain.school.Dto.request.SchoolRequestDto;
 import net.schoolvery.schoolveryserver.domain.school.Dto.response.SchoolResponseDto;
-import net.schoolvery.schoolveryserver.domain.school.SchoolService;
+import net.schoolvery.schoolveryserver.domain.school.service.SchoolService;
 import net.schoolvery.schoolveryserver.domain.school.entity.School;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
