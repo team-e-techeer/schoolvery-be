@@ -1,4 +1,4 @@
-package net.schoolvery.schoolveryserver.domain.school;
+package net.schoolvery.schoolveryserver.domain.school.service;
 
 
 import lombok.RequiredArgsConstructor;
@@ -7,7 +7,6 @@ import net.schoolvery.schoolveryserver.domain.school.Dto.request.SchoolRequestDt
 import net.schoolvery.schoolveryserver.domain.school.Dto.response.SchoolResponseDto;
 import net.schoolvery.schoolveryserver.domain.school.entity.School;
 import net.schoolvery.schoolveryserver.domain.school.repository.SchoolRepository;
-import net.schoolvery.schoolveryserver.global.common.dto.PageRequestDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

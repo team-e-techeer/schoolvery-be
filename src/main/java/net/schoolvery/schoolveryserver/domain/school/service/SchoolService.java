@@ -1,4 +1,4 @@
-package net.schoolvery.schoolveryserver.domain.school;
+package net.schoolvery.schoolveryserver.domain.school.service;
 
 import net.schoolvery.schoolveryserver.domain.school.Dto.request.SchoolRequestDto;
 import net.schoolvery.schoolveryserver.domain.school.Dto.response.SchoolResponseDto;
