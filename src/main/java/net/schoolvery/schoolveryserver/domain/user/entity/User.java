@@ -1,6 +1,7 @@
 package net.schoolvery.schoolveryserver.domain.user.entity;
 
 import lombok.*;
+import net.schoolvery.schoolveryserver.domain.school.entity.School;
 import net.schoolvery.schoolveryserver.global.common.BaseEntity;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -25,16 +26,16 @@ public class User extends BaseEntity {
     private UUID id;
 
     private String name;
-    private String school;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private School school;
+
     private String nickname;
     private String email;
     private String password;
 
     @Column(name = "profile_image_url")
     private String profileImageUrl;
-
-    @Column(name ="school_num")
-    private Integer schoolNum;
 
     @Column(name = "phone_num")
     private String phoneNum;
