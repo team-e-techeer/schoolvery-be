@@ -2,7 +2,6 @@ package net.schoolvery.schoolveryserver.domain.user.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import net.schoolvery.schoolveryserver.domain.board.entity.Post;
 import net.schoolvery.schoolveryserver.domain.user.dto.request.UserCreateRequestDto;
 import net.schoolvery.schoolveryserver.domain.user.dto.request.UserLoginRequestDto;
 import net.schoolvery.schoolveryserver.domain.user.dto.request.UserUpdateRequestDto;
@@ -12,7 +11,6 @@ import net.schoolvery.schoolveryserver.domain.user.dto.response.UserUpdateRespon
 import net.schoolvery.schoolveryserver.domain.user.entity.User;
 import net.schoolvery.schoolveryserver.domain.user.repository.UserRepository;
 import net.schoolvery.schoolveryserver.global.error.exception.BusinessException;
-import net.schoolvery.schoolveryserver.global.error.exception.ErrorCode;
 import net.schoolvery.schoolveryserver.global.utils.AES128;
 import net.schoolvery.schoolveryserver.global.utils.JwtTokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;

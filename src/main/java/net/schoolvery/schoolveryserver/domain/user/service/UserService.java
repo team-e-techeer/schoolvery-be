@@ -2,6 +2,7 @@ package net.schoolvery.schoolveryserver.domain.user.service;
 
 import java.util.UUID;
 import net.schoolvery.schoolveryserver.domain.board.dto.response.CategoryResponseDto;
+import net.schoolvery.schoolveryserver.domain.school.entity.School;
 import net.schoolvery.schoolveryserver.domain.user.dto.request.UserCreateRequestDto;
 import net.schoolvery.schoolveryserver.domain.user.dto.request.UserLoginRequestDto;
 import net.schoolvery.schoolveryserver.domain.user.dto.request.UserUpdateRequestDto;
@@ -32,9 +33,8 @@ public interface UserService {
                 .nickname(userCreateRequestDto.getNickname())
                 .password(userCreateRequestDto.getPassword())
                 .email(userCreateRequestDto.getEmail())
-                .schoolNum(userCreateRequestDto.getSchoolNum())
                 .phoneNum(userCreateRequestDto.getPhoneNum())
-                .school(userCreateRequestDto.getSchool())
+                .school(School.builder().id(userCreateRequestDto.getSchoolId()).build())
                 .build();
 
         return user;
@@ -47,9 +47,8 @@ public interface UserService {
                 .nickname(user.getNickname())
                 .email(user.getEmail())
                 .password(user.getPassword())
-                .schoolNum(user.getSchoolNum())
                 .phoneNum(user.getPhoneNum())
-                .school(user.getSchool())
+                .schoolId(user.getSchool().getId())
                 .build();
 
         return userDto;
@@ -63,9 +62,8 @@ public interface UserService {
             .nickname(user.getNickname())
             .password(user.getPassword())
             .email(user.getEmail())
-            .schoolNum(user.getSchoolNum())
+            .schoolId(user.getSchool().getId())
             .phoneNum(user.getPhoneNum())
-            .school(user.getSchool())
             .build();
 
         return dto;
