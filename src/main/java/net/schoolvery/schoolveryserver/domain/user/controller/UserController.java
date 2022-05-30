@@ -1,17 +1,17 @@
 package net.schoolvery.schoolveryserver.domain.user.controller;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
+
+import java.util.Optional;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import net.schoolvery.schoolveryserver.domain.board.dto.response.PostResponseDto;
 import net.schoolvery.schoolveryserver.domain.user.dto.request.UserCreateRequestDto;
 import net.schoolvery.schoolveryserver.domain.user.dto.request.UserLoginRequestDto;
 import net.schoolvery.schoolveryserver.domain.user.dto.request.UserUpdateRequestDto;
 import net.schoolvery.schoolveryserver.domain.user.dto.response.GetUserResponseDto;
 import net.schoolvery.schoolveryserver.domain.user.dto.response.UserCreateResponseDto;
 import net.schoolvery.schoolveryserver.domain.user.dto.response.UserLoginResponseDto;
-import net.schoolvery.schoolveryserver.domain.user.dto.response.UserUpdateResponseDto;
 import net.schoolvery.schoolveryserver.domain.user.entity.User;
 import net.schoolvery.schoolveryserver.domain.user.service.UserService;
 import org.springframework.http.HttpStatus;
@@ -61,8 +61,8 @@ public class UserController {
 
     // Update Users
     @PatchMapping("/{id}")
-    public ResponseEntity<UserUpdateResponseDto> updateUser(@PathVariable UUID id, @RequestBody UserUpdateRequestDto userUpdateRequestDto) {
-        UserUpdateResponseDto update = userService.modifyUser(id, userUpdateRequestDto);
+    public ResponseEntity<Optional<User>> updateUser(@PathVariable UUID id, @RequestBody UserUpdateRequestDto userUpdateRequestDto) {
+        Optional<User> update = userService.modifyUser(id, userUpdateRequestDto);
 
         return ResponseEntity.ok()
                 .body(update);
