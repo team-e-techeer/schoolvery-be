@@ -70,10 +70,10 @@ public class UserController {
 
     // delete Users
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteUser(@PathVariable UUID id) {
+    public ResponseEntity<String> deleteUser(@PathVariable UUID id) {
         userService.deleteUser(id);
         return ResponseEntity.ok()
-                .body(null);
+                .body("유저 정보가 삭제되었습니다.");
     }
 
 
