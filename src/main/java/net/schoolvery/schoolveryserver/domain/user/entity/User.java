@@ -28,6 +28,7 @@ public class User extends BaseEntity {
     private String name;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "schoolId")
     private School school;
 
     private String nickname;

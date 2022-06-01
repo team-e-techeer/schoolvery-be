@@ -21,7 +21,7 @@ public class School {
             name = "UUID",
             strategy = "uuid2"
     )
-    private UUID id;
+    private UUID schoolId;
 
     @Column(name = "school_name")
     private String schoolName;
