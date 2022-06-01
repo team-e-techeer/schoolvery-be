@@ -7,7 +7,6 @@ import net.schoolvery.schoolveryserver.domain.user.dto.request.UserLoginRequestD
 import net.schoolvery.schoolveryserver.domain.user.dto.request.UserUpdateRequestDto;
 import net.schoolvery.schoolveryserver.domain.user.dto.response.GetUserResponseDto;
 import net.schoolvery.schoolveryserver.domain.user.dto.response.UserCreateResponseDto;
-import net.schoolvery.schoolveryserver.domain.user.dto.response.UserUpdateResponseDto;
 import net.schoolvery.schoolveryserver.domain.user.entity.User;
 import net.schoolvery.schoolveryserver.domain.user.repository.UserRepository;
 import net.schoolvery.schoolveryserver.global.error.exception.BusinessException;
@@ -24,7 +23,6 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
-import java.util.Random;
 import java.util.UUID;
 
 import static net.schoolvery.schoolveryserver.global.error.exception.ErrorCode.*;
@@ -97,19 +95,26 @@ public class UserServiceImpl implements UserService {
 
     // User modify ( Update )
     @Override
-    public UserUpdateResponseDto modifyUser(UUID id, UserUpdateRequestDto userUpdateRequestDto) {
+    public Optional<User> modifyUser(UUID id, UserUpdateRequestDto userUpdateRequestDto) {
         Optional<User> user_result = userRepository.findById(id);
+        try {
+            String password = new AES128("${spring.security.user.password}").encrypt(userUpdateRequestDto.getPassword());
+            userUpdateRequestDto.setPassword(password);
+
+        } catch (Exception e) {
+            throw new BusinessException(PASSWORD_ENCRYPTION_ERROR);
+        }
 
         if (user_result.isPresent()) {
             User user = user_result.get();
             user.modifyUser(
                     userUpdateRequestDto.getNickname(),
-                    userUpdateRequestDto.getPassword(),
-                    userUpdateRequestDto.getPhoneNum()
+                    userUpdateRequestDto.getPhoneNum(),
+                    userUpdateRequestDto.getPassword()
             );
             userRepository.save(user);
         }
-        return null;
+        return user_result;
     }
 
 
