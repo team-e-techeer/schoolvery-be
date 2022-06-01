@@ -43,9 +43,10 @@ public class User extends BaseEntity {
 
     private String address;
 
-    public void modifyUser(String nickname, String password) {
+    public void modifyUser(String nickname, String password, String phoneNum) {
         this.nickname = nickname;
         this.password = password;
+        this.phoneNum = phoneNum;
     }
 
 }
