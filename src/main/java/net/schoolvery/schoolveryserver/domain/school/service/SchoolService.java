@@ -3,8 +3,7 @@ package net.schoolvery.schoolveryserver.domain.school.service;
 import net.schoolvery.schoolveryserver.domain.school.Dto.request.SchoolRequestDto;
 import net.schoolvery.schoolveryserver.domain.school.Dto.response.SchoolResponseDto;
 import net.schoolvery.schoolveryserver.domain.school.entity.School;
-import net.schoolvery.schoolveryserver.global.common.dto.PageRequestDto;
-import net.schoolvery.schoolveryserver.global.common.dto.PageResultDto;
+
 
 import java.util.List;
 import java.util.UUID;
@@ -18,7 +17,7 @@ public interface SchoolService {
 
     default School createSchoolRequest(SchoolRequestDto schoolRequestDto) {
         School school = School.builder()
-                .id(schoolRequestDto.getId())
+                .schoolId(schoolRequestDto.getSchoolId())
                 .schoolName(schoolRequestDto.getSchoolName())
                 .build();
 
@@ -28,7 +27,7 @@ public interface SchoolService {
     default SchoolResponseDto createSchoolResponse(School school) {
 
         return SchoolResponseDto.builder()
-                .id(school.getId())
+                .id(school.getSchoolId())
                 .schoolName(school.getSchoolName())
                 .build();
     }

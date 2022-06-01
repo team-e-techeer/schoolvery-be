@@ -34,7 +34,7 @@ public interface UserService {
                 .password(userCreateRequestDto.getPassword())
                 .email(userCreateRequestDto.getEmail())
                 .phoneNum(userCreateRequestDto.getPhoneNum())
-                .school(School.builder().id(userCreateRequestDto.getSchoolId()).build())
+                .school(School.builder().schoolId(userCreateRequestDto.getSchoolId()).build())
                 .build();
 
         return user;
@@ -48,7 +48,7 @@ public interface UserService {
                 .email(user.getEmail())
                 .password(user.getPassword())
                 .phoneNum(user.getPhoneNum())
-                .schoolId(user.getSchool().getId())
+                .schoolId(user.getSchool().getSchoolId())
                 .build();
 
         return userDto;
@@ -62,7 +62,7 @@ public interface UserService {
             .nickname(user.getNickname())
             .password(user.getPassword())
             .email(user.getEmail())
-            .schoolId(user.getSchool().getId())
+            .schoolId(user.getSchool().getSchoolId())
             .phoneNum(user.getPhoneNum())
             .build();
 
