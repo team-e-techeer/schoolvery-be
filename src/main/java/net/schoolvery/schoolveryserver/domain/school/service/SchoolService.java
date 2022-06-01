@@ -17,7 +17,6 @@ public interface SchoolService {
 
     default School createSchoolRequest(SchoolRequestDto schoolRequestDto) {
         School school = School.builder()
-                .schoolId(schoolRequestDto.getSchoolId())
                 .schoolName(schoolRequestDto.getSchoolName())
                 .build();
 
