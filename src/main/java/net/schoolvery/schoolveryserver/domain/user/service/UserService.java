@@ -1,14 +1,14 @@
 package net.schoolvery.schoolveryserver.domain.user.service;
 
+import java.util.Optional;
 import java.util.UUID;
-import net.schoolvery.schoolveryserver.domain.board.dto.response.CategoryResponseDto;
+
 import net.schoolvery.schoolveryserver.domain.school.entity.School;
 import net.schoolvery.schoolveryserver.domain.user.dto.request.UserCreateRequestDto;
 import net.schoolvery.schoolveryserver.domain.user.dto.request.UserLoginRequestDto;
 import net.schoolvery.schoolveryserver.domain.user.dto.request.UserUpdateRequestDto;
 import net.schoolvery.schoolveryserver.domain.user.dto.response.GetUserResponseDto;
 import net.schoolvery.schoolveryserver.domain.user.dto.response.UserCreateResponseDto;
-import net.schoolvery.schoolveryserver.domain.user.dto.response.UserUpdateResponseDto;
 import net.schoolvery.schoolveryserver.domain.user.entity.User;
 
 import java.util.List;
@@ -17,7 +17,7 @@ public interface UserService {
 
     UserCreateResponseDto createUser(UserCreateRequestDto userCreateRequestDto);
     List<User> getAllUsers();
-    UserUpdateResponseDto modifyUser(UUID id, UserUpdateRequestDto userUpdateRequestDto);
+    Optional<User> modifyUser(UUID id, UserUpdateRequestDto userUpdateRequestDto);
     void deleteUser(UUID id);
 
     UserCreateResponseDto getUserById(UUID id);

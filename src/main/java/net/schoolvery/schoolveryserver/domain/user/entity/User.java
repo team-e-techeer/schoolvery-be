@@ -1,6 +1,11 @@
 package net.schoolvery.schoolveryserver.domain.user.entity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.ObjectIdGenerator;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
+import net.minidev.json.annotate.JsonIgnore;
 import net.schoolvery.schoolveryserver.domain.school.entity.School;
 import net.schoolvery.schoolveryserver.global.common.BaseEntity;
 import org.hibernate.annotations.GenericGenerator;
@@ -28,6 +33,7 @@ public class User extends BaseEntity {
     private String name;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private School school;
 
     private String nickname;
