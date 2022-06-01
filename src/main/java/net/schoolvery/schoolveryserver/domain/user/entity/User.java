@@ -1,5 +1,6 @@
 package net.schoolvery.schoolveryserver.domain.user.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 import net.schoolvery.schoolveryserver.domain.school.entity.School;
 import net.schoolvery.schoolveryserver.global.common.BaseEntity;
@@ -29,6 +30,7 @@ public class User extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "schoolId")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private School school;
 
     private String nickname;
