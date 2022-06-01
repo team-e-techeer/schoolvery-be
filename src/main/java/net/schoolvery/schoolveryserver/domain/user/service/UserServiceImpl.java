@@ -104,6 +104,7 @@ public class UserServiceImpl implements UserService {
             User user = user_result.get();
             user.modifyUser(
                     userUpdateRequestDto.getNickname(),
+                    userUpdateRequestDto.getPassword(),
                     userUpdateRequestDto.getPhoneNum()
             );
             userRepository.save(user);
