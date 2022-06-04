@@ -1,5 +1,6 @@
 package net.schoolvery.schoolveryserver.domain.user.entity;
 
+
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerator;
@@ -49,9 +50,10 @@ public class User extends BaseEntity {
 
     private String address;
 
-    public void modifyUser(String nickname, String password) {
+    public void modifyUser(String nickname, String password, String phoneNum) {
         this.nickname = nickname;
         this.password = password;
+        this.phoneNum = phoneNum;
     }
 
 }

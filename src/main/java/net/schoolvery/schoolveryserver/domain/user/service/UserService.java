@@ -73,6 +73,7 @@ public interface UserService {
         User user = User.builder()
                 .nickname(userUpdateRequestDto.getNickname())
                 .phoneNum(userUpdateRequestDto.getPhoneNum())
+                .password(userUpdateRequestDto.getPassword())
                 .build();
 
         return user;

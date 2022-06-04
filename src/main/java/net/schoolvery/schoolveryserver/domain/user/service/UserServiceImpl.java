@@ -97,12 +97,20 @@ public class UserServiceImpl implements UserService {
     @Override
     public Optional<User> modifyUser(UUID id, UserUpdateRequestDto userUpdateRequestDto) {
         Optional<User> user_result = userRepository.findById(id);
+        try {
+            String password = new AES128("${spring.security.user.password}").encrypt(userUpdateRequestDto.getPassword());
+            userUpdateRequestDto.setPassword(password);
+
+        } catch (Exception e) {
+            throw new BusinessException(PASSWORD_ENCRYPTION_ERROR);
+        }
 
         if (user_result.isPresent()) {
             User user = user_result.get();
             user.modifyUser(
                     userUpdateRequestDto.getNickname(),
-                    userUpdateRequestDto.getPhoneNum()
+                    userUpdateRequestDto.getPhoneNum(),
+                    userUpdateRequestDto.getPassword()
             );
             userRepository.save(user);
         }
