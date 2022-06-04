@@ -33,6 +33,7 @@ public class User extends BaseEntity {
     private String name;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "schoolId")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private School school;
 
