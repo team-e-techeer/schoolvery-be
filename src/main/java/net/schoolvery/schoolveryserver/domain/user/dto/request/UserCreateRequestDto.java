@@ -16,6 +16,7 @@ public class UserCreateRequestDto {
     private String name;
     private String nickname;
     private String phoneNum;
+    private String profileImageUrl;
     private UUID schoolId;
     private String email;
     private String password;

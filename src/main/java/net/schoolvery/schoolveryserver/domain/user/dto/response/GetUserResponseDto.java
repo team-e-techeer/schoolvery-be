@@ -19,6 +19,7 @@ public class GetUserResponseDto {
 
     private String name;
     private String nickname;
+    private String profileImageUrl;
     private String phoneNum;
     private String password;
     private UUID schoolId;
