@@ -50,10 +50,11 @@ public class User extends BaseEntity {
 
     private String address;
 
-    public void modifyUser(String nickname, String password, String phoneNum) {
+    public void modifyUser(String nickname, String password, String phoneNum, String profileImageUrl) {
         this.nickname = nickname;
         this.password = password;
         this.phoneNum = phoneNum;
+        this.profileImageUrl = profileImageUrl;
     }
 
 }

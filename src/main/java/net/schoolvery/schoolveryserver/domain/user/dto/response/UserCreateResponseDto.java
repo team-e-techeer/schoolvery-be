@@ -18,6 +18,7 @@ public class UserCreateResponseDto {
 
     private String name;
     private String nickname;
+    private String profileImageUrl;
     private String phoneNum;
     private UUID schoolId;
     private String email;
