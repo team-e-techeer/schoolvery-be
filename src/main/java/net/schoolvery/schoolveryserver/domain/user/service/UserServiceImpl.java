@@ -10,11 +10,11 @@ import net.schoolvery.schoolveryserver.domain.user.dto.response.UserCreateRespon
 import net.schoolvery.schoolveryserver.domain.user.entity.User;
 import net.schoolvery.schoolveryserver.domain.user.repository.UserRepository;
 import net.schoolvery.schoolveryserver.global.error.exception.BusinessException;
-import net.schoolvery.schoolveryserver.global.utils.AES128;
 import net.schoolvery.schoolveryserver.global.utils.JwtTokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.mail.MailException;
 //import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 //import javax.mail.Message;
@@ -40,12 +40,15 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private final JwtTokenProvider jwtTokenProvider;
 
+    @Autowired
+    private final PasswordEncoder passwordEncoder;
+
 
     // User Create
     @Override
     public UserCreateResponseDto createUser(UserCreateRequestDto userCreateRequestDto) {
         try {
-            String password = new AES128("${spring.security.user.password}").encrypt(userCreateRequestDto.getPassword());
+            String password = passwordEncoder.encode(userCreateRequestDto.getPassword());
             userCreateRequestDto.setPassword(password);
 
         } catch (Exception e) {
@@ -98,7 +101,7 @@ public class UserServiceImpl implements UserService {
     public Optional<User> modifyUser(UUID id, UserUpdateRequestDto userUpdateRequestDto) {
         Optional<User> user_result = userRepository.findById(id);
         try {
-            String password = new AES128("${spring.security.user.password}").encrypt(userUpdateRequestDto.getPassword());
+            String password = passwordEncoder.encode(userUpdateRequestDto.getPassword());
             userUpdateRequestDto.setPassword(password);
 
         } catch (Exception e) {
@@ -135,15 +138,11 @@ public class UserServiceImpl implements UserService {
     public String login(UserLoginRequestDto userLoginRequestDto) {
         // 로그인 시도시, login_pw 암호화
         try {
-            String password = new AES128("${spring.security.user.password}").encrypt(userLoginRequestDto.getPassword());
-            userLoginRequestDto.setPassword(password);
+            User user = userRepository.findByEmail(userLoginRequestDto.getEmail()).get();
 
-        } catch (Exception e) {
-            throw new BusinessException(PASSWORD_ENCRYPTION_ERROR);
-        }
+            if (!passwordEncoder.matches(userLoginRequestDto.getPassword(), user.getPassword()))
+                throw new BusinessException(PASSWORD_WRONG_ERROR);
 
-        try {
-            User user = userRepository.findByPassword(userLoginRequestDto.getPassword()).get();
             return jwtTokenProvider.createToken(user.getEmail());
 
         } catch (Exception e) {
