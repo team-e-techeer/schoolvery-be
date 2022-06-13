@@ -53,7 +53,7 @@ public class EmailServiceImpl implements EmailService {
         MimeMessage  message = javaMailSender.createMimeMessage();
 
         message.addRecipients(MimeMessage.RecipientType.TO, to);//보내는 대상
-        message.setSubject("Babble회원가입 이메일 인증");//제목
+        message.setSubject("Scoolvery회원가입 이메일 인증");//제목
 
         String msgg="";
         msgg+= "<div style='margin:100px;'>";
@@ -70,7 +70,7 @@ public class EmailServiceImpl implements EmailService {
         msgg+= ePw+"</strong><div><br/> ";
         msgg+= "</div>";
         message.setText(msgg, "utf-8", "html");//내용
-        message.setFrom(new InternetAddress("at365@naver.com","schoolvery"));//보내는 사람
+        message.setFrom(new InternetAddress("보내는사람 이메일 적어주시면됩니당","schoolvery"));//보내는 사람
 
         return message;
     }
