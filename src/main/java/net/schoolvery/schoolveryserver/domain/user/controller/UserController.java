@@ -13,7 +13,9 @@ import net.schoolvery.schoolveryserver.domain.user.dto.response.GetUserResponseD
 import net.schoolvery.schoolveryserver.domain.user.dto.response.UserCreateResponseDto;
 import net.schoolvery.schoolveryserver.domain.user.dto.response.UserLoginResponseDto;
 import net.schoolvery.schoolveryserver.domain.user.entity.User;
+import net.schoolvery.schoolveryserver.domain.user.exception.EmailDuplicateException;
 import net.schoolvery.schoolveryserver.domain.user.service.UserService;
+import net.schoolvery.schoolveryserver.global.error.exception.User.UserNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -41,10 +43,15 @@ public class UserController {
     @GetMapping("/{id}")
     public ResponseEntity<GetUserResponseDto> getuserId(@PathVariable UUID id) {
 
-        GetUserResponseDto user = userService.findByUserid(id);
+        try {
+            GetUserResponseDto user = userService.findByUserid(id);
 
-        return ResponseEntity.ok()
-                .body(user);
+            return ResponseEntity.ok()
+                    .body(user);
+
+        } catch (Exception e) {
+            throw new UserNotFoundException("유저를 찾을 수 없습니다.");
+        }
     }
 
     // Create Users
@@ -87,10 +94,13 @@ public class UserController {
     }
 
     @GetMapping("/check/email")
-    public ResponseEntity<Boolean> checkUserEmail(@RequestBody UserCreateRequestDto userCreateRequestDto) {
+    public ResponseEntity<Boolean> checkUserEmail(@RequestBody UserCreateRequestDto userCreateRequestDto) throws EmailDuplicateException {
         String email = userCreateRequestDto.getEmail();
 
         Boolean result = userService.findByUserEmail(email);
+
+        if (!result)
+            throw new EmailDuplicateException("이메일이 중복입니다.");
 
         return ResponseEntity.ok()
                 .body(result);
