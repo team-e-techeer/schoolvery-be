@@ -14,6 +14,7 @@ import net.schoolvery.schoolveryserver.domain.user.dto.response.UserCreateRespon
 import net.schoolvery.schoolveryserver.domain.user.dto.response.UserLoginResponseDto;
 import net.schoolvery.schoolveryserver.domain.user.entity.User;
 import net.schoolvery.schoolveryserver.domain.user.exception.EmailDuplicateException;
+import net.schoolvery.schoolveryserver.domain.user.service.EmailService;
 import net.schoolvery.schoolveryserver.domain.user.service.UserService;
 import net.schoolvery.schoolveryserver.global.error.exception.User.UserNotFoundException;
 import org.springframework.http.HttpStatus;
@@ -31,6 +32,8 @@ import java.util.List;
 public class UserController {
 
     private final UserService userService;
+
+    private final EmailService emailService;
 
     // All Users find
     @GetMapping("")
@@ -113,6 +116,14 @@ public class UserController {
 
         return ResponseEntity.ok()
                 .body(result);
+    }
+
+    @PostMapping("emailConfirm")
+    public ResponseEntity<String> emailConfirm(@RequestBody String email) throws Exception {
+        String confirm = emailService.sendEmailMessage(email);
+
+        return ResponseEntity.ok()
+                .body(confirm);
     }
 
 }
