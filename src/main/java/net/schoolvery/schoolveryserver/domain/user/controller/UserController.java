@@ -96,6 +96,14 @@ public class UserController {
                 .body(new UserLoginResponseDto(token, userLoginRequestDto.getEmail()));
     }
 
+    @PostMapping("/send/email")
+    public ResponseEntity<String> emailConfirm(@RequestBody String email) throws Exception {
+        String confirm = emailService.sendEmailMessage(email);
+
+        return ResponseEntity.ok()
+                .body(confirm);
+    }
+
     @GetMapping("/check/email")
     public ResponseEntity<Boolean> checkUserEmail(@RequestBody UserCreateRequestDto userCreateRequestDto) throws EmailDuplicateException {
         String email = userCreateRequestDto.getEmail();
@@ -116,14 +124,6 @@ public class UserController {
 
         return ResponseEntity.ok()
                 .body(result);
-    }
-
-    @PostMapping("emailConfirm")
-    public ResponseEntity<String> emailConfirm(@RequestBody String email) throws Exception {
-        String confirm = emailService.sendEmailMessage(email);
-
-        return ResponseEntity.ok()
-                .body(confirm);
     }
 
 }
