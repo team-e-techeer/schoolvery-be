@@ -22,6 +22,7 @@ import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.regex.Pattern;
 
 import static net.schoolvery.schoolveryserver.global.error.exception.ErrorCode.*;
 
@@ -75,9 +76,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean findByUserEmail(String email) {
-        Optional<User> user = userRepository.findByEmail(email);
+        if(Pattern.matches("\"^[a-z0-9A-Z._-]*@[a-z0-9A-Z]*.[a-zA-Z.]" , email));
+             Optional<User> user = userRepository.findByEmail(email);
 
-        if (user.isPresent()) {
+        if (user.isEmpty()) {
             return false;
         }
         return true;
