@@ -12,6 +12,7 @@ import net.schoolvery.schoolveryserver.domain.user.dto.response.UserCreateRespon
 import net.schoolvery.schoolveryserver.domain.user.dto.response.UserLoginResponseDto;
 import net.schoolvery.schoolveryserver.domain.user.entity.User;
 import net.schoolvery.schoolveryserver.domain.user.exception.EmailDuplicateException;
+import net.schoolvery.schoolveryserver.domain.user.exception.NicknameDuplicateException;
 import net.schoolvery.schoolveryserver.domain.user.service.EmailService;
 import net.schoolvery.schoolveryserver.domain.user.service.UserService;
 import net.schoolvery.schoolveryserver.global.error.exception.User.UserNotFoundException;
@@ -120,9 +121,12 @@ public class UserController {
     }
 
     @GetMapping("/duplicate/nickname")
-    public ResponseEntity<Boolean> checkUserNickname(@RequestBody DuplicateNicknameRequestDto requestDto) {
+    public ResponseEntity<Boolean> checkUserNickname(@RequestBody DuplicateNicknameRequestDto requestDto) throws NicknameDuplicateException {
         String nickname = requestDto.getNickname();
         Boolean result = userService.findByUserNickname(nickname);
+
+        if (!result)
+            throw new NicknameDuplicateException("중복된 닉네임입니다.");
 
         return ResponseEntity.ok()
                 .body(result);
