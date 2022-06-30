@@ -13,7 +13,10 @@ import net.schoolvery.schoolveryserver.domain.user.dto.response.GetUserResponseD
 import net.schoolvery.schoolveryserver.domain.user.dto.response.UserCreateResponseDto;
 import net.schoolvery.schoolveryserver.domain.user.dto.response.UserLoginResponseDto;
 import net.schoolvery.schoolveryserver.domain.user.entity.User;
+import net.schoolvery.schoolveryserver.domain.user.exception.EmailDuplicateException;
+import net.schoolvery.schoolveryserver.domain.user.service.EmailService;
 import net.schoolvery.schoolveryserver.domain.user.service.UserService;
+import net.schoolvery.schoolveryserver.global.error.exception.User.UserNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -30,6 +33,8 @@ public class UserController {
 
     private final UserService userService;
 
+    private final EmailService emailService;
+
     // All Users find
     @GetMapping("")
     public ResponseEntity<List<User>> getUser() {
@@ -41,10 +46,15 @@ public class UserController {
     @GetMapping("/{id}")
     public ResponseEntity<GetUserResponseDto> getuserId(@PathVariable UUID id) {
 
-        GetUserResponseDto user = userService.findByUserid(id);
+        try {
+            GetUserResponseDto user = userService.findByUserid(id);
 
-        return ResponseEntity.ok()
-                .body(user);
+            return ResponseEntity.ok()
+                    .body(user);
+
+        } catch (Exception e) {
+            throw new UserNotFoundException("유저를 찾을 수 없습니다.");
+        }
     }
 
     // Create Users
@@ -86,11 +96,22 @@ public class UserController {
                 .body(new UserLoginResponseDto(token, userLoginRequestDto.getEmail()));
     }
 
+    @PostMapping("/send/email")
+    public ResponseEntity<String> emailConfirm(@RequestBody String email) throws Exception {
+        String confirm = emailService.sendEmailMessage(email);
+
+        return ResponseEntity.ok()
+                .body(confirm);
+    }
+
     @GetMapping("/check/email")
-    public ResponseEntity<Boolean> checkUserEmail(@RequestBody UserCreateRequestDto userCreateRequestDto) {
+    public ResponseEntity<Boolean> checkUserEmail(@RequestBody UserCreateRequestDto userCreateRequestDto) throws EmailDuplicateException {
         String email = userCreateRequestDto.getEmail();
 
         Boolean result = userService.findByUserEmail(email);
+
+        if (!result)
+            throw new EmailDuplicateException("이메일이 중복입니다.");
 
         return ResponseEntity.ok()
                 .body(result);

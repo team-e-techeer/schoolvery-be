@@ -13,8 +13,6 @@ public interface UserRepository extends JpaRepository<User, UUID>, QuerydslPredi
 
     void deleteAllById(UUID id);
 
-    Optional<User> findByPassword(String password);
-
     Optional<User> findByEmail(String email);
 
     Optional<User> findByNickname(String nickname);
