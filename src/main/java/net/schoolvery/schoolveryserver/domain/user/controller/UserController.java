@@ -6,9 +6,7 @@ import java.util.Optional;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import net.schoolvery.schoolveryserver.domain.user.dto.request.UserCreateRequestDto;
-import net.schoolvery.schoolveryserver.domain.user.dto.request.UserLoginRequestDto;
-import net.schoolvery.schoolveryserver.domain.user.dto.request.UserUpdateRequestDto;
+import net.schoolvery.schoolveryserver.domain.user.dto.request.*;
 import net.schoolvery.schoolveryserver.domain.user.dto.response.GetUserResponseDto;
 import net.schoolvery.schoolveryserver.domain.user.dto.response.UserCreateResponseDto;
 import net.schoolvery.schoolveryserver.domain.user.dto.response.UserLoginResponseDto;
@@ -35,14 +33,12 @@ public class UserController {
 
     private final EmailService emailService;
 
-    // All Users find
     @GetMapping("")
     public ResponseEntity<List<User>> getUser() {
         return ResponseEntity.ok()
                 .body(userService.getAllUsers());
     }
 
-    // find User by id
     @GetMapping("/{id}")
     public ResponseEntity<GetUserResponseDto> getuserId(@PathVariable UUID id) {
 
@@ -57,7 +53,6 @@ public class UserController {
         }
     }
 
-    // Create Users
     @PostMapping("/signup")
     @ResponseStatus(HttpStatus.CREATED)
     @ResponseBody
@@ -69,7 +64,6 @@ public class UserController {
                 .body(create);
     }
 
-    // Update Users
     @PatchMapping("/{id}")
     public ResponseEntity<Optional<User>> updateUser(@PathVariable UUID id, @RequestBody UserUpdateRequestDto userUpdateRequestDto) {
         Optional<User> update = userService.modifyUser(id, userUpdateRequestDto);
@@ -78,7 +72,6 @@ public class UserController {
                 .body(update);
     }
 
-    // delete Users
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteUser(@PathVariable UUID id) {
         userService.deleteUser(id);
@@ -97,14 +90,23 @@ public class UserController {
     }
 
     @PostMapping("/send/email")
-    public ResponseEntity<String> emailConfirm(@RequestBody String email) throws Exception {
-        String confirm = emailService.sendEmailMessage(email);
+    public ResponseEntity<String> emailConfirm(@RequestBody ConfirmEmailRequestDto email) throws Exception {
+        String confirm = emailService.sendEmailMessage(email.getEmail());
 
         return ResponseEntity.ok()
                 .body(confirm);
     }
 
-    @GetMapping("/check/email")
+    @PostMapping("/verifycode")
+    public ResponseEntity<Boolean> verifyCode(@RequestBody VerifyCodeRequestDto code) {
+        boolean vertifycode = emailService.vertifyCode(code.getCode());
+
+        return ResponseEntity.ok()
+                .body(vertifycode);
+    }
+
+
+    @GetMapping("/duplicate/email")
     public ResponseEntity<Boolean> checkUserEmail(@RequestBody UserCreateRequestDto userCreateRequestDto) throws EmailDuplicateException {
         String email = userCreateRequestDto.getEmail();
 
@@ -117,7 +119,7 @@ public class UserController {
                 .body(result);
     }
 
-    @GetMapping("/check/nickname")
+    @GetMapping("/duplicate/nickname")
     public ResponseEntity<Boolean> checkUserNickname(@RequestBody UserCreateRequestDto userCreateRequestDto) {
         String nickname = userCreateRequestDto.getNickname();
         Boolean result = userService.findByUserNickname(nickname);
