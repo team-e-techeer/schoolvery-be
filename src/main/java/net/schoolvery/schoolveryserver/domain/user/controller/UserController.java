@@ -107,8 +107,8 @@ public class UserController {
 
 
     @GetMapping("/duplicate/email")
-    public ResponseEntity<Boolean> checkUserEmail(@RequestBody UserCreateRequestDto userCreateRequestDto) throws EmailDuplicateException {
-        String email = userCreateRequestDto.getEmail();
+    public ResponseEntity<Boolean> checkUserEmail(@RequestBody DuplicateEmailRequestDto requestDto) throws EmailDuplicateException {
+        String email = requestDto.getEmail();
 
         Boolean result = userService.findByUserEmail(email);
 
@@ -120,8 +120,8 @@ public class UserController {
     }
 
     @GetMapping("/duplicate/nickname")
-    public ResponseEntity<Boolean> checkUserNickname(@RequestBody UserCreateRequestDto userCreateRequestDto) {
-        String nickname = userCreateRequestDto.getNickname();
+    public ResponseEntity<Boolean> checkUserNickname(@RequestBody DuplicateNicknameRequestDto requestDto) {
+        String nickname = requestDto.getNickname();
         Boolean result = userService.findByUserNickname(nickname);
 
         return ResponseEntity.ok()
