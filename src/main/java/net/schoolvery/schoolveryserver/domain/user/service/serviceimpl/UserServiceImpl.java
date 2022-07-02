@@ -80,19 +80,18 @@ public class UserServiceImpl implements UserService {
              Optional<User> user = userRepository.findByEmail(email);
 
         if (user.isEmpty()) {
-            return false;
+            return true;
         }
-        return true;
+        return false;
     }
 
     @Override
     public boolean findByUserNickname(String nickname) {
         Optional<User> user = userRepository.findByNickname(nickname);
 
-        if (user.isPresent()) {
-            return false;
+        if (user.isEmpty()) {
+            return true;
         }
-
         return false;
     }
 
