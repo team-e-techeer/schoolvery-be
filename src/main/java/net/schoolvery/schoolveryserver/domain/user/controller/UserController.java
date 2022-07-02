@@ -113,9 +113,6 @@ public class UserController {
 
         Boolean result = userService.findByUserEmail(email);
 
-        if (!result)
-            throw new EmailDuplicateException("이메일이 중복입니다.");
-
         return ResponseEntity.ok()
                 .body(result);
     }
@@ -124,9 +121,6 @@ public class UserController {
     public ResponseEntity<Boolean> checkUserNickname(@RequestBody DuplicateNicknameRequestDto requestDto) throws NicknameDuplicateException {
         String nickname = requestDto.getNickname();
         Boolean result = userService.findByUserNickname(nickname);
-
-        if (!result)
-            throw new NicknameDuplicateException("중복된 닉네임입니다.");
 
         return ResponseEntity.ok()
                 .body(result);
