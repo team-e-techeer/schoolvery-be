@@ -67,6 +67,8 @@ public interface UserService {
             .schoolId(user.getSchool().getSchoolId())
             .phoneNum(user.getPhoneNum())
             .profileImageUrl(user.getProfileImageUrl())
+                .modDate(user.getModDate())
+                .regDate(user.getRegDate())
                 .build();
 
         return dto;

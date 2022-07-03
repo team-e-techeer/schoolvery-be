@@ -103,6 +103,7 @@ public class UserServiceImpl implements UserService {
         try {
             String password = passwordEncoder.encode(userUpdateRequestDto.getPassword());
             userUpdateRequestDto.setPassword(password);
+            System.err.println(password);
 
         } catch (Exception e) {
             throw new BusinessException(PASSWORD_ENCRYPTION_ERROR);
@@ -112,8 +113,8 @@ public class UserServiceImpl implements UserService {
             User user = user_result.get();
             user.modifyUser(
                     userUpdateRequestDto.getNickname(),
-                    userUpdateRequestDto.getPhoneNum(),
                     userUpdateRequestDto.getPassword(),
+                    userUpdateRequestDto.getPhoneNum(),
                     userUpdateRequestDto.getProfileImageUrl()
             );
             userRepository.save(user);
