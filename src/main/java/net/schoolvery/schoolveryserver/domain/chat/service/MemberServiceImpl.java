@@ -1,6 +1,8 @@
 package net.schoolvery.schoolveryserver.domain.chat.service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import net.schoolvery.schoolveryserver.domain.chat.dto.request.RoomJoinRequestDto;
+import net.schoolvery.schoolveryserver.domain.chat.dto.response.RoomJoinResponseDto;
 import net.schoolvery.schoolveryserver.domain.chat.entity.Member;
 import net.schoolvery.schoolveryserver.domain.chat.entity.Room;
 import net.schoolvery.schoolveryserver.domain.chat.exception.ChatException;
@@ -43,6 +45,15 @@ public class MemberServiceImpl implements MemberService{
             e.RoomNotFoundException();
         }
     }
+
+    @Override
+    public RoomJoinResponseDto joinMemebers(RoomJoinRequestDto requestDto) {
+        Member member = dtoToEntity(requestDto);
+        memberRepository.save(member);
+
+        return EntityToDto(member);
+    }
+
 
     public void addMember(Room r, UUID member_id){
         Member member = Member.builder()
