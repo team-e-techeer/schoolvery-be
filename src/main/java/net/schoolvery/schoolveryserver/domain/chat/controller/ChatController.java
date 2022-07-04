@@ -84,4 +84,12 @@ public class ChatController {
         return ResponseEntity.ok()
                 .body(responseDto);
     }
+
+    @PutMapping("/member")
+    public ResponseEntity<Boolean> exitChatRoom(@RequestBody RoomJoinRequestDto requestDto) {
+        Boolean result = memberService.exitMembers(requestDto);
+
+        return ResponseEntity.ok()
+                .body(result);
+    }
 }
