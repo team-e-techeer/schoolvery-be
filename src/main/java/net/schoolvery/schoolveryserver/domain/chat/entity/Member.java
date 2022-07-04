@@ -28,5 +28,5 @@ public class Member extends BaseEntity {
 
     @Column(name = "MEMBER_ID", nullable = false, columnDefinition = "BINARY(50)")
     @GenericGenerator(name = "UUID", strategy = "uuid2")
-    private UUID member_id;
+    private UUID memberId;
 }
