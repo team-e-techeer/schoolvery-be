@@ -10,11 +10,13 @@ import java.util.UUID;
 public interface MemberService {
     void addMembers(UUID room_id, UUID member_id);
     RoomJoinResponseDto joinMemebers(RoomJoinRequestDto requestDto);
+    boolean exitMembers(RoomJoinRequestDto requestDto);
+
 
     default Member dtoToEntity(RoomJoinRequestDto dto) {
 
         return Member.builder()
-                .member_id(dto.getMember_id())
+                .memberId(dto.getMember_id())
                 .room(Room.builder().id(dto.getRoom_id()).build())
                 .build();
     }

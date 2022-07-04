@@ -9,6 +9,9 @@ import net.schoolvery.schoolveryserver.domain.chat.exception.ChatException;
 import net.schoolvery.schoolveryserver.domain.chat.repository.MemberRepository;
 import net.schoolvery.schoolveryserver.domain.chat.repository.RoomRepository;
 import org.springframework.stereotype.Service;
+
+import java.util.Collections;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -30,7 +33,7 @@ public class MemberServiceImpl implements MemberService{
             } else {
                 boolean flag = false;
                 for (Member a : r.getMember()) {
-                    if (a.getMember_id().equals(member_id)) {
+                    if (a.getMemberId().equals(member_id)) {
                         flag = true;
                         break;
                     }
@@ -54,11 +57,23 @@ public class MemberServiceImpl implements MemberService{
         return EntityToDto(member);
     }
 
+    @Override
+    public boolean exitMembers(RoomJoinRequestDto requestDto) {
+        Optional<Member> member = memberRepository.findByMemberId(requestDto.getMember_id());
+
+        if (member.isPresent()) {
+            Member entity = member.get();
+            memberRepository.deleteAllById(Collections.singleton(entity.getId()));
+            return true;
+        }
+        return false;
+    }
+
 
     public void addMember(Room r, UUID member_id){
         Member member = Member.builder()
                 .room(r)
-                .member_id(member_id)
+                .memberId(member_id)
                 .build();
         memberRepository.save(member);
         r.getMember().add(member);
