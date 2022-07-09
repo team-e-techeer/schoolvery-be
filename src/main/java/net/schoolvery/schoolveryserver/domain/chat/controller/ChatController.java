@@ -9,7 +9,6 @@ import net.schoolvery.schoolveryserver.domain.chat.entity.Message;
 import net.schoolvery.schoolveryserver.domain.chat.service.MemberService;
 import net.schoolvery.schoolveryserver.domain.chat.service.MessageService;
 import net.schoolvery.schoolveryserver.domain.chat.service.RoomService;
-import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.messaging.handler.annotation.MessageMapping;

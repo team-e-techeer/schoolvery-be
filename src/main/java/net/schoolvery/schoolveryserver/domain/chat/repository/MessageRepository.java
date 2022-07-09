@@ -1,5 +1,4 @@
 package net.schoolvery.schoolveryserver.domain.chat.repository;
-import net.schoolvery.schoolveryserver.domain.chat.entity.Member;
 import net.schoolvery.schoolveryserver.domain.chat.entity.Message;
 import org.springframework.data.jpa.repository.JpaRepository;
 

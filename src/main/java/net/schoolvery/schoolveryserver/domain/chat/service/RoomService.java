@@ -2,7 +2,6 @@ package net.schoolvery.schoolveryserver.domain.chat.service;
 
 import net.schoolvery.schoolveryserver.domain.chat.dto.request.RoomCreateRequestDto;
 import net.schoolvery.schoolveryserver.domain.chat.dto.request.RoomUpdateRequestDto;
-import net.schoolvery.schoolveryserver.domain.chat.dto.response.ChatMessageResponseDto;
 import net.schoolvery.schoolveryserver.domain.chat.dto.response.RoomResponseDto;
 import net.schoolvery.schoolveryserver.domain.chat.entity.Room;
 

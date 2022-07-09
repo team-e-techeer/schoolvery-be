@@ -2,7 +2,6 @@ package net.schoolvery.schoolveryserver.domain.chat.dto.response;
 
 import lombok.*;
 
-import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Getter
