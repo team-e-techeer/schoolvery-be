@@ -111,4 +111,12 @@ public class ChatController {
                 .body(object);
     }
 
+    @GetMapping("/room2/{id}")
+    public ResponseEntity<JSONObject> findMessageV2(@PathVariable UUID id, @RequestBody MessageFindRequestDto dto) {
+        JSONObject object = messageService.findMessageV2(id, dto);
+
+        return ResponseEntity.ok()
+                .body(object);
+    }
+
 }
