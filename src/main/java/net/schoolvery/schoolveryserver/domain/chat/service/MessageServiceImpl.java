@@ -1,7 +1,10 @@
 package net.schoolvery.schoolveryserver.domain.chat.service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import net.minidev.json.JSONArray;
+import net.minidev.json.JSONObject;
 import net.schoolvery.schoolveryserver.domain.chat.dto.request.MessageCreateRequestDto;
+import net.schoolvery.schoolveryserver.domain.chat.dto.response.ChatMessageResponseDto;
 import net.schoolvery.schoolveryserver.domain.chat.entity.Message;
 import net.schoolvery.schoolveryserver.domain.chat.entity.Room;
 import net.schoolvery.schoolveryserver.domain.chat.exception.ChatException;
@@ -12,6 +15,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 @Log4j2
@@ -41,6 +46,36 @@ public class MessageServiceImpl implements MessageService{
     }
 
     @Override
+    public JSONObject findMessageV1(UUID id) {
+        JSONObject obj = new JSONObject();
+        JSONArray arr = new JSONArray();
+        List<ChatMessageResponseDto> dtos = Stream.of(messageRepository.findByRoomId(id))
+                .findAny()
+                .orElseThrow(ChatException::new)
+                .stream()
+                .map(this::EntityToDto)
+                .collect(Collectors.toList());
+
+        for (int i = 0; i < dtos.size(); i++) {
+            JSONObject sObject = new JSONObject();
+            sObject.put("member_id", dtos.get(i).getMember_id());
+            sObject.put("message", dtos.get(i).getMessage());
+            sObject.put("regDate", dtos.get(i).getRegDate());
+
+            arr.add(sObject);
+
+        }
+        for (int j = 0; j < arr.size(); j++) {
+            System.out.println(arr.get(j));
+        }
+        obj.put("room_id", id);
+        obj.put("room_message", arr);
+
+        return obj;
+
+    }
+
+    @Override
     @Transactional
     public void sendMessage(MessageCreateRequestDto dto){
         log.info("SEND MESSAGE");
@@ -48,7 +83,7 @@ public class MessageServiceImpl implements MessageService{
         Room r = findRoom(room_id);
         Message message = Message.builder()
                 .room(r)
-                .member_id(dto.getMember_id())
+                .memberId(dto.getMember_id())
                 .message(dto.getMessage())
                 .build();
         messageRepository.save(message);
