@@ -38,6 +38,8 @@ dependencies {
 	//Jwt token
 	implementation 'io.jsonwebtoken:jjwt:0.9.1'
 
+	implementation group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
+
 	implementation 'com.squareup.okhttp3:okhttp:4.9.3'
 	implementation 'com.slack.api:bolt-servlet:1.20.2'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
