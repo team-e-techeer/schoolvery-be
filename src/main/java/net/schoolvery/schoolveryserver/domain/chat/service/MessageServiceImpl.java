@@ -69,7 +69,7 @@ public class MessageServiceImpl implements MessageService{
             System.out.println(arr.get(j));
         }
         obj.put("room_id", id);
-        obj.put("room_message", arr);
+        obj.put("room_messages", arr);
 
         return obj;
 
