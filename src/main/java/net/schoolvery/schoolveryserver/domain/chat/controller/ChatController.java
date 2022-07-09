@@ -1,5 +1,6 @@
 package net.schoolvery.schoolveryserver.domain.chat.controller;
 import lombok.extern.log4j.Log4j2;
+import net.minidev.json.JSONObject;
 import net.schoolvery.schoolveryserver.domain.chat.dto.request.*;
 import net.schoolvery.schoolveryserver.domain.chat.dto.response.RoomFindResponseDto;
 import net.schoolvery.schoolveryserver.domain.chat.dto.response.RoomJoinResponseDto;
@@ -101,6 +102,14 @@ public class ChatController {
 
         return ResponseEntity.ok()
                 .body(roomFindResponseDtoList);
+    }
+
+    @GetMapping("/room/{id}")
+    public ResponseEntity<JSONObject> findMessageV1(@PathVariable UUID id) {
+        JSONObject object = messageService.findMessageV1(id);
+
+        return ResponseEntity.ok()
+                .body(object);
     }
 
 }
