@@ -1,12 +1,14 @@
 package net.schoolvery.schoolveryserver.domain.chat.controller;
 import lombok.extern.log4j.Log4j2;
 import net.schoolvery.schoolveryserver.domain.chat.dto.request.*;
+import net.schoolvery.schoolveryserver.domain.chat.dto.response.RoomFindResponseDto;
 import net.schoolvery.schoolveryserver.domain.chat.dto.response.RoomJoinResponseDto;
 import net.schoolvery.schoolveryserver.domain.chat.dto.response.RoomResponseDto;
 import net.schoolvery.schoolveryserver.domain.chat.entity.Message;
 import net.schoolvery.schoolveryserver.domain.chat.service.MemberService;
 import net.schoolvery.schoolveryserver.domain.chat.service.MessageService;
 import net.schoolvery.schoolveryserver.domain.chat.service.RoomService;
+import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -92,4 +94,13 @@ public class ChatController {
         return ResponseEntity.ok()
                 .body(result);
     }
+
+    @GetMapping("/find/{id}")
+    public ResponseEntity<List<RoomFindResponseDto>> findChatRoom(@PathVariable UUID id) {
+        List<RoomFindResponseDto> roomFindResponseDtoList = memberService.findMember(id);
+
+        return ResponseEntity.ok()
+                .body(roomFindResponseDtoList);
+    }
+
 }
