@@ -8,5 +8,6 @@ import java.util.UUID;
 public interface MessageRepository extends JpaRepository<Message, UUID> {
 
     List<Message> findByRoomId(UUID id);
+    List<Message> findByMemberId(UUID id);
 
 }
