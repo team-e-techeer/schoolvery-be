@@ -5,11 +5,15 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
+import java.util.UUID;
+
 @Data
-public class RoomUpdateRequestDto {
-    private String name;
-    private Long post_id;
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class RoomJoinRequestDto {
+
+    private UUID member_id;
+    private UUID room_id;
+
 }

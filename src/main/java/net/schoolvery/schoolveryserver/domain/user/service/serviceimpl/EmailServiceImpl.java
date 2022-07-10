@@ -70,7 +70,7 @@ public class EmailServiceImpl implements EmailService {
         msgg+= ePw+"</strong><div><br/> ";
         msgg+= "</div>";
         message.setText(msgg, "utf-8", "html");//내용
-        message.setFrom(new InternetAddress("보내는사람 이메일 적어주시면됩니당","schoolvery"));//보내는 사람
+        message.setFrom(new InternetAddress("at365@naver.com","schoolvery"));//보내는 사람
 
         return message;
     }
@@ -88,6 +88,17 @@ public class EmailServiceImpl implements EmailService {
             throw new IllegalArgumentException();
         }
         return ePw;
+    }
+
+    @Override
+    public boolean vertifyCode(String code) {
+        if (ePw.equals(code)) {
+            return true;
+        }
+
+        else{
+            return false;
+        }
     }
 }
 

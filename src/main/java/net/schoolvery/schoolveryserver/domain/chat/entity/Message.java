@@ -9,6 +9,7 @@ import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import java.util.UUID;
+
 @Entity
 @Table(name = "message")
 @Builder
@@ -29,7 +30,7 @@ public class Message extends BaseEntity {
 
     @Column(name = "MEMBER_ID", nullable = false, columnDefinition = "BINARY(16)")
     @GenericGenerator(name = "UUID", strategy = "uuid2")
-    private UUID member_id;
+    private UUID memberId;
 
     @Column(name = "MESSAGE", columnDefinition = "TEXT", nullable = false)
     private String message;

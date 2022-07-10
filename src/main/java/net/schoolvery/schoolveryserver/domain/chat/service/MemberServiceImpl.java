@@ -1,13 +1,22 @@
 package net.schoolvery.schoolveryserver.domain.chat.service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import net.schoolvery.schoolveryserver.domain.chat.dto.request.RoomJoinRequestDto;
+import net.schoolvery.schoolveryserver.domain.chat.dto.response.RoomFindResponseDto;
+import net.schoolvery.schoolveryserver.domain.chat.dto.response.RoomJoinResponseDto;
 import net.schoolvery.schoolveryserver.domain.chat.entity.Member;
 import net.schoolvery.schoolveryserver.domain.chat.entity.Room;
 import net.schoolvery.schoolveryserver.domain.chat.exception.ChatException;
 import net.schoolvery.schoolveryserver.domain.chat.repository.MemberRepository;
 import net.schoolvery.schoolveryserver.domain.chat.repository.RoomRepository;
 import org.springframework.stereotype.Service;
+
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 @Log4j2
@@ -28,7 +37,7 @@ public class MemberServiceImpl implements MemberService{
             } else {
                 boolean flag = false;
                 for (Member a : r.getMember()) {
-                    if (a.getMember_id().equals(member_id)) {
+                    if (a.getMemberId().equals(member_id)) {
                         flag = true;
                         break;
                     }
@@ -44,10 +53,42 @@ public class MemberServiceImpl implements MemberService{
         }
     }
 
+    @Override
+    public RoomJoinResponseDto joinMemebers(RoomJoinRequestDto requestDto) {
+        Member member = dtoToEntity(requestDto);
+        memberRepository.save(member);
+
+        return EntityToDto(member);
+    }
+
+    @Override
+    public boolean exitMembers(RoomJoinRequestDto requestDto) {
+        Optional<Member> member = memberRepository.findByMemberId(requestDto.getMember_id());
+
+        if (member.isPresent()) {
+            Member entity = member.get();
+            memberRepository.deleteAllById(Collections.singleton(entity.getId()));
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public List<RoomFindResponseDto> findMember(UUID id) {
+        List<RoomFindResponseDto> dtos = Stream.of(memberRepository.findMByMemberId(id))
+                .findAny()
+                .orElseThrow(ChatException::new)
+                .stream()
+                .map(this::EntityToFindResponseDto)
+                .collect(Collectors.toList());
+
+        return dtos;
+    }
+
     public void addMember(Room r, UUID member_id){
         Member member = Member.builder()
                 .room(r)
-                .member_id(member_id)
+                .memberId(member_id)
                 .build();
         memberRepository.save(member);
         r.getMember().add(member);

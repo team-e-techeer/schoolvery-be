@@ -1,9 +1,9 @@
 package net.schoolvery.schoolveryserver.domain.chat.controller;
 import lombok.extern.log4j.Log4j2;
-import net.schoolvery.schoolveryserver.domain.chat.dto.request.MessageCreateRequestDto;
-import net.schoolvery.schoolveryserver.domain.chat.dto.request.RoomCreateRequestDto;
-import net.schoolvery.schoolveryserver.domain.chat.dto.request.MessageGetRequestDto;
-import net.schoolvery.schoolveryserver.domain.chat.dto.request.RoomUpdateRequestDto;
+import net.minidev.json.JSONObject;
+import net.schoolvery.schoolveryserver.domain.chat.dto.request.*;
+import net.schoolvery.schoolveryserver.domain.chat.dto.response.RoomFindResponseDto;
+import net.schoolvery.schoolveryserver.domain.chat.dto.response.RoomJoinResponseDto;
 import net.schoolvery.schoolveryserver.domain.chat.dto.response.RoomResponseDto;
 import net.schoolvery.schoolveryserver.domain.chat.entity.Message;
 import net.schoolvery.schoolveryserver.domain.chat.service.MemberService;
@@ -78,4 +78,45 @@ public class ChatController {
         List<Message> messages = messageService.getMessages(messageGetRequestDto.getRoom_id());
         return ResponseEntity.ok().body(messages);
     }
+
+    @PostMapping("/member")
+    public ResponseEntity<RoomJoinResponseDto> joinChatRoom(@RequestBody RoomJoinRequestDto requestDto) {
+        RoomJoinResponseDto responseDto = memberService.joinMemebers(requestDto);
+
+        return ResponseEntity.ok()
+                .body(responseDto);
+    }
+
+    @PutMapping("/member")
+    public ResponseEntity<Boolean> exitChatRoom(@RequestBody RoomJoinRequestDto requestDto) {
+        Boolean result = memberService.exitMembers(requestDto);
+
+        return ResponseEntity.ok()
+                .body(result);
+    }
+
+    @GetMapping("/find/{id}")
+    public ResponseEntity<List<RoomFindResponseDto>> findChatRoom(@PathVariable UUID id) {
+        List<RoomFindResponseDto> roomFindResponseDtoList = memberService.findMember(id);
+
+        return ResponseEntity.ok()
+                .body(roomFindResponseDtoList);
+    }
+
+    @GetMapping("/room/{id}")
+    public ResponseEntity<JSONObject> findMessageV1(@PathVariable UUID id) {
+        JSONObject object = messageService.findMessageV1(id);
+
+        return ResponseEntity.ok()
+                .body(object);
+    }
+
+    @GetMapping("/room2/{id}")
+    public ResponseEntity<JSONObject> findMessageV2(@PathVariable UUID id, @RequestBody MessageFindRequestDto dto) {
+        JSONObject object = messageService.findMessageV2(id, dto);
+
+        return ResponseEntity.ok()
+                .body(object);
+    }
+
 }

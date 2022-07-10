@@ -33,6 +33,5 @@ public interface RoomService {
     RoomResponseDto createChatRoom(RoomCreateRequestDto dto);
     void deleteChatRoom(UUID room_id);
     RoomResponseDto updateChatRoom(UUID room_id, RoomUpdateRequestDto dto);
-
     RoomResponseDto getRoomById(UUID id);
 }

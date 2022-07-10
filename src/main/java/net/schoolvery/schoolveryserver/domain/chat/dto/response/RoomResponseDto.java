@@ -1,6 +1,7 @@
 package net.schoolvery.schoolveryserver.domain.chat.dto.response;
 import java.util.UUID;
 import lombok.*;
+
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
