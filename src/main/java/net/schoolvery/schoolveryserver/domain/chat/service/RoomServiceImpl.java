@@ -20,6 +20,7 @@ public class RoomServiceImpl implements RoomService {
     @Override
     public RoomResponseDto createChatRoom(RoomCreateRequestDto dto){
         Room entity = dtoToEntity(dto);
+        roomRepository.save(entity);
         return entityToDto(roomRepository.save(entity));
     }
 

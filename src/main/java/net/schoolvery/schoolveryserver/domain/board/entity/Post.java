@@ -22,6 +22,7 @@ import net.schoolvery.schoolveryserver.domain.user.entity.User;
 import net.schoolvery.schoolveryserver.global.common.BaseEntity;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "post")
@@ -42,8 +43,9 @@ public class Post extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
 
-    @Column(name = "school_id", length = 150, nullable = false)
-    private Integer schoolId;
+    @Column(name = "school_id", nullable = false, columnDefinition = "BINARY(50)")
+    @GenericGenerator(name = "UUID", strategy = "uuid2")
+    private UUID schoolId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Category category;
