@@ -34,7 +34,6 @@ public class PostServiceImpl implements PostService {
     @Override
     public PostResponseDto create(PostCreateRequestDto dto) {
         Post entity = createDtoToEntity(dto);
-//        entity.builder().build()
         postRepository.save(entity);
         RoomCreateRequestDto room = RoomCreateRequestDto.builder()
             .post_id(entity.getId())
