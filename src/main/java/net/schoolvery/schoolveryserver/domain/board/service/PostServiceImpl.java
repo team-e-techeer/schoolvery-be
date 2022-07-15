@@ -12,6 +12,10 @@ import net.schoolvery.schoolveryserver.domain.board.dto.response.PostResponseDto
 import net.schoolvery.schoolveryserver.domain.board.entity.Post;
 import net.schoolvery.schoolveryserver.domain.board.entity.QPost;
 import net.schoolvery.schoolveryserver.domain.board.repository.PostRepository;
+import net.schoolvery.schoolveryserver.domain.chat.dto.request.RoomCreateRequestDto;
+import net.schoolvery.schoolveryserver.domain.chat.entity.Room;
+import net.schoolvery.schoolveryserver.domain.chat.repository.RoomRepository;
+import net.schoolvery.schoolveryserver.domain.chat.service.RoomService;
 import net.schoolvery.schoolveryserver.global.common.dto.PageRequestDto;
 import net.schoolvery.schoolveryserver.global.common.dto.PageResultDto;
 import org.springframework.data.domain.Page;
@@ -25,11 +29,17 @@ import org.springframework.stereotype.Service;
 public class PostServiceImpl implements PostService {
 
     private final PostRepository postRepository;
+    private final RoomService roomService;
 
     @Override
     public PostResponseDto create(PostCreateRequestDto dto) {
         Post entity = createDtoToEntity(dto);
         postRepository.save(entity);
+        RoomCreateRequestDto room = RoomCreateRequestDto.builder()
+            .post_id(entity.getId())
+            .name(entity.getTitle())
+            .build();
+        roomService.createChatRoom(room);
         return entityToDto(entity);
     }
 
