@@ -59,6 +59,7 @@ public interface PostService {
         .deliveryFee(entity.getDeliveryFee())
         .content(entity.getContent())
         .store(entity.getStore())
+        .deadline(entity.getDeadline())
         .build();
     return dto;
   }
