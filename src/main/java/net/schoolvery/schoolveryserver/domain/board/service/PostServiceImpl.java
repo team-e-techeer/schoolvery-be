@@ -84,6 +84,17 @@ public class PostServiceImpl implements PostService {
         postRepository.deleteById(id);
     }
 
+    @Override
+    public PageResultDto<PostResponseDto, Post> getPostsByUserId(UUID userId, PageRequestDto requestDto) {
+
+        Pageable pageable = requestDto.getPageable(Sort.by("deadline"));
+        Page<Post> result = postRepository.findByUserId(userId, pageable);
+
+        Function<Post, PostResponseDto> fn = (entity -> entityToDto(entity));
+        return new PageResultDto<>(result, fn);
+    }
+
+
     // Todo : getSearch : at title -> o, store, location
     // Todo : booleanexpresstion
 

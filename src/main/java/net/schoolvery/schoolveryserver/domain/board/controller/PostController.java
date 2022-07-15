@@ -101,4 +101,12 @@ public class PostController {
         return ResponseEntity.ok()
             .body(null);
     }
+
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<PageResultDto> getPostByUserId(@PathVariable UUID userId, PageRequestDto pageRequestDto) {
+
+        PageResultDto dto = postService.getPostsByUserId(userId, pageRequestDto);
+        return ResponseEntity.ok()
+            .body(dto);
+    }
 }

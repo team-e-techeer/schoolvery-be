@@ -15,4 +15,6 @@ public interface PostRepository extends JpaRepository<Post, Long>, QuerydslPredi
 
     @Query("SELECT CASE WHEN COUNT(s) > 0 THEN TRUE ELSE FALSE END FROM Post s WHERE s.id = ?1")
     Boolean isPostExitsById(Integer id);
+
+    Page<Post> findByUserId(UUID userId, Pageable pageable);
 }

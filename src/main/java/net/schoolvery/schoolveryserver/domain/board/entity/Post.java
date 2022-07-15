@@ -40,8 +40,9 @@ public class Post extends BaseEntity {
     @Column(length = 100, nullable = false)
     private String title;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private User user;
+    @Column(name = "user_id", nullable = false, columnDefinition = "BINARY(50)")
+    @GenericGenerator(name = "UUID", strategy = "uuid2")
+    private UUID userId;
 
     @Column(name = "school_id", nullable = false, columnDefinition = "BINARY(50)")
     @GenericGenerator(name = "UUID", strategy = "uuid2")
