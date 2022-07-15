@@ -52,7 +52,7 @@ public class PostController {
     }
 
     @GetMapping("/school/{schoolId}")
-    public ResponseEntity<PageResultDto> getPostBySchoolId(@PathVariable Integer schoolId, PageRequestDto pageRequestDto) {
+    public ResponseEntity<PageResultDto> getPostBySchoolId(@PathVariable UUID schoolId, PageRequestDto pageRequestDto) {
 
         pageRequestDto.setSchoolId(schoolId);
         PageResultDto dto = postService.getPosts(pageRequestDto);
@@ -61,7 +61,7 @@ public class PostController {
     }
 
     @GetMapping("/school/{schoolId}/category/{categoryId}")
-    public ResponseEntity<PageResultDto> getPostBySchoolIdAndCategoryId(@PathVariable Integer schoolId, @PathVariable Integer categoryId, PageRequestDto pageRequestDto) {
+    public ResponseEntity<PageResultDto> getPostBySchoolIdAndCategoryId(@PathVariable UUID schoolId, @PathVariable Integer categoryId, PageRequestDto pageRequestDto) {
 
         pageRequestDto.setSchoolId(schoolId);
         pageRequestDto.setCategoryId(categoryId);
