@@ -17,10 +17,12 @@ public interface PostService {
   void modify(Long id, PostUpdateRequestDto dto);
   void remove(Long id);
 
+  PageResultDto<PostResponseDto, Post> getPostsByUserId(UUID userId, PageRequestDto requestDto);
+
   default Post createDtoToEntity(PostCreateRequestDto dto){
 
     Post entity = Post.builder()
-        .user(User.builder().id(dto.getUserId()).build())
+        .userId(dto.getUserId())
         .title(dto.getTitle())
         .location(dto.getLocation())
         .schoolId(dto.getSchoolId())
