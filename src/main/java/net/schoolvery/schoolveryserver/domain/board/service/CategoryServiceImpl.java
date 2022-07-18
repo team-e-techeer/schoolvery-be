@@ -17,6 +17,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+
+import java.util.UUID;
 import java.util.function.Function;
 import java.util.Optional;
 @Service
@@ -33,12 +35,12 @@ public class CategoryServiceImpl implements CategoryService{
     }
 
     @Override
-    public void deleteCategory(Integer id) {
+    public void deleteCategory(UUID id) {
         categoryRepository.deleteById(id);
     }
 
     @Override
-    public CategoryResponseDto updateCategory(Integer id, CategoryUpdateRequestDto dto){
+    public CategoryResponseDto updateCategory(UUID id, CategoryUpdateRequestDto dto){
         Optional<Category> result = categoryRepository.findById(id);
         Category entity = result.get();
         entity.update(
@@ -50,7 +52,7 @@ public class CategoryServiceImpl implements CategoryService{
     }
 
     @Override
-    public CategoryResponseDto getCategoryById(Integer id) {
+    public CategoryResponseDto getCategoryById(UUID id) {
         Optional<Category> result = categoryRepository.findById(id);
         return result.isPresent()? entityToDto(result.get()): null;
     }
@@ -79,7 +81,7 @@ public class CategoryServiceImpl implements CategoryService{
 
         QCategory qCategory = QCategory.category;
         String keyword = requestDto.getKeyword();
-        BooleanExpression expression = qCategory.id.gt(0L);
+        BooleanExpression expression = qCategory.id.isNotNull();
         booleanBuilder.and(expression);
 
         if (keyword == null || keyword.trim().length() == 0) {

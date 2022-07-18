@@ -1,6 +1,8 @@
 package net.schoolvery.schoolveryserver.domain.board.dto.response;
 import lombok.*;
 
+import java.util.UUID;
+
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -8,7 +10,7 @@ import lombok.*;
 public class CategoryResponseDto {
 
     //private UUID id;
-    private Integer id;
+    private UUID id;
     private String name;
     private String description;
 }

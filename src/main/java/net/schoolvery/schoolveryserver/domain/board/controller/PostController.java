@@ -61,7 +61,7 @@ public class PostController {
     }
 
     @GetMapping("/school/{schoolId}/category/{categoryId}")
-    public ResponseEntity<PageResultDto> getPostBySchoolIdAndCategoryId(@PathVariable UUID schoolId, @PathVariable Integer categoryId, PageRequestDto pageRequestDto) {
+    public ResponseEntity<PageResultDto> getPostBySchoolIdAndCategoryId(@PathVariable UUID schoolId, @PathVariable UUID categoryId, PageRequestDto pageRequestDto) {
 
         pageRequestDto.setSchoolId(schoolId);
         pageRequestDto.setCategoryId(categoryId);

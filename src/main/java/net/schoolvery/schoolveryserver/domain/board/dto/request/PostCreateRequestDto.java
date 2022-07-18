@@ -18,7 +18,7 @@ public class PostCreateRequestDto {
   private UUID schoolId;
   private UUID userId;
 //  private String categoryName;
-  private Integer categoryId;
+  private UUID categoryId;
   private String location;
   private Integer peopleNum;
   private Integer deliveryFee;

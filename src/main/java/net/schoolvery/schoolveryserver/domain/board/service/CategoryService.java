@@ -1,6 +1,8 @@
 package net.schoolvery.schoolveryserver.domain.board.service;
 
 import java.util.List;
+import java.util.UUID;
+
 import net.schoolvery.schoolveryserver.domain.board.dto.request.CategoryUpdateRequestDto;
 import net.schoolvery.schoolveryserver.domain.board.entity.Category;
 import net.schoolvery.schoolveryserver.domain.board.dto.request.CategoryCreateRequestDto;
@@ -26,9 +28,9 @@ public interface CategoryService {
     }
 
     CategoryResponseDto createCategory(CategoryCreateRequestDto dto);
-    void deleteCategory(Integer id);
-    CategoryResponseDto updateCategory(Integer id, CategoryUpdateRequestDto dto);
-    CategoryResponseDto getCategoryById(Integer id);
+    void deleteCategory(UUID id);
+    CategoryResponseDto updateCategory(UUID id, CategoryUpdateRequestDto dto);
+    CategoryResponseDto getCategoryById(UUID id);
     PageResultDto<CategoryResponseDto, Category> getAllCategory(PageRequestDto requestDto);
 
     // for test
