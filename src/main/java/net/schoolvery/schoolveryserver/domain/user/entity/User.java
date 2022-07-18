@@ -9,6 +9,7 @@ import net.schoolvery.schoolveryserver.global.common.BaseEntity;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.Set;
 import java.util.UUID;
 
 @Getter
@@ -29,6 +30,7 @@ public class User extends BaseEntity {
     @Column(columnDefinition = "BINARY(16)")
     private UUID id;
 
+    @Column(name = "name", length = 10)
     private String name;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -36,17 +38,28 @@ public class User extends BaseEntity {
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private School school;
 
+    @Column(name = "nick_name", length = 10)
     private String nickname;
+
+    @Column(name = "email", length = 20)
     private String email;
+
+    @Column(name = "password", length = 50)
     private String password;
 
-    @Column(name = "profile_image_url")
+    @Column(name = "profile_image_url", length = 30)
     private String profileImageUrl;
 
-    @Column(name = "phone_num")
+    @Column(name = "phone_num", length = 25)
     private String phoneNum;
 
-    private String address;
+    @ManyToMany
+    @JoinTable(
+            name = "user_authority",
+            joinColumns = {@JoinColumn(name = "id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "authority_name", referencedColumnName = "authority_name")}
+    )
+    private Set<Authority> authorities;
 
     public void modifyUser(String nickname, String password, String phoneNum, String profileImageUrl) {
         this.nickname = nickname;
