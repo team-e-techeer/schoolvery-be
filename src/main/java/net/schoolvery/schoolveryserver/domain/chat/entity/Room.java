@@ -23,7 +23,7 @@ public class Room extends BaseEntity {
     @Id
     @GeneratedValue(generator = "UUID", strategy = GenerationType.IDENTITY)
     @GenericGenerator(name = "UUID", strategy = "uuid2")
-    @Column(name = "ROOM_ID")
+    @Column(name = "ROOM_ID", columnDefinition = "BINARY(16)")
     private UUID id;
 
     @Column(name = "NAME", nullable = false)

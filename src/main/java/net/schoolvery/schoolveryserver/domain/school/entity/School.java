@@ -21,6 +21,7 @@ public class School {
             name = "UUID",
             strategy = "uuid2"
     )
+    @Column(columnDefinition = "BINARY(16)")
     private UUID schoolId;
 
     @Column(name = "school_name")

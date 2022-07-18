@@ -26,6 +26,7 @@ public class User extends BaseEntity {
             name = "UUID",
             strategy = "uuid2"
     )
+    @Column(columnDefinition = "BINARY(16)")
     private UUID id;
 
     private String name;

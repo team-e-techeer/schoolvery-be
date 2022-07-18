@@ -5,7 +5,10 @@ import net.schoolvery.schoolveryserver.global.common.BaseEntity;
 import lombok.Getter;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
+import java.util.UUID;
 
 @Entity
 @Table(name = "category")
@@ -22,8 +25,13 @@ public class Category extends BaseEntity{
      */
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) //@GeneratedValue -> PK 설정, GenerationType.IDENTITY -> AutoIncrement
-    private Integer id;
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(
+            name = "UUID",
+            strategy = "uuid2"
+    )
+    @Column(columnDefinition = "BINARY(16)")
+    private UUID id;
 
     @Column(name = "NAME" ,nullable = false)
     private String name;

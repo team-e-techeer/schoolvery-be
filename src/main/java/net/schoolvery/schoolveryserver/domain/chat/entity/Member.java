@@ -20,6 +20,7 @@ public class Member extends BaseEntity {
     @Id
     @GeneratedValue(generator = "UUID",strategy = GenerationType.IDENTITY)
     @GenericGenerator(name = "UUID", strategy = "uuid2")
+    @Column(columnDefinition = "BINARY(16)")
     private UUID id;
 
     @ManyToOne
