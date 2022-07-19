@@ -42,7 +42,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) {
         web.ignoring()
-                .antMatchers("/api/v1/users/**", "/api/v1/school", "/api/v1/categories/**"); // /api/v1/users에 관한 요청은 인증없이 접근 허용
+                .antMatchers("/api/v1/users/**", "/api/v1/school/**", "/api/v1/categories/**"); // 관한 요청은 인증없이 접근 허용
 
     }
 

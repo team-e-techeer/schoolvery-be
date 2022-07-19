@@ -16,7 +16,9 @@ import net.schoolvery.schoolveryserver.domain.user.exception.NicknameDuplicateEx
 import net.schoolvery.schoolveryserver.domain.user.service.EmailService;
 import net.schoolvery.schoolveryserver.domain.user.service.UserService;
 import net.schoolvery.schoolveryserver.global.error.exception.User.UserNotFoundException;
+import net.schoolvery.schoolveryserver.global.utils.jwt.JwtFilter;
 import net.schoolvery.schoolveryserver.global.utils.jwt.TokenProvider;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -88,8 +90,10 @@ public class UserController {
 
         UserLoginResponseDto token = userService.login(userLoginRequestDto);
 
-        return ResponseEntity.ok()
-                .body(token);
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.add(JwtFilter.AUTHORIZATION_HEADER, "Bearer" + token.getAccessToken());
+
+        return new ResponseEntity<>(token, httpHeaders, HttpStatus.OK);
     }
 
     @PostMapping("/send/email")

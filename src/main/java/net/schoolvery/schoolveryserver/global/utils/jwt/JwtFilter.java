@@ -32,9 +32,11 @@ public class JwtFilter extends GenericFilter {
         if (StringUtils.hasText(jwt) && tokenProvider.validateToken(jwt)) {
             Authentication authentication = tokenProvider.getAuthentication(jwt);
             SecurityContextHolder.getContext().setAuthentication(authentication);
-            log.debug("Security Context에 '{}' 인증정보 저장, uri : {}",authentication.getName(), requestURI);
+            log.info("Security Context에 '{}' 인증정보 저장, uri : {}",authentication.getName(), requestURI);
         } else
-            log.debug("유효한 JWT 토A큰 존재하지않음, uri : {}", requestURI);
+            log.info("유효한 JWT 토큰 존재하지않음, uri : {}", requestURI);
+
+        chain.doFilter(request, response);
     }
 
     // Request Header에서 토큰정보를 꺼내오기 위한 메서드

@@ -46,10 +46,8 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private final PasswordEncoder passwordEncoder;
 
-    @Autowired
     private final TokenProvider tokenProvider;
 
-    @Autowired
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
 
 
@@ -160,14 +158,9 @@ public class UserServiceImpl implements UserService {
             Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
             SecurityContextHolder.getContext().setAuthentication(authentication);
 
-            String jwt = "Bearer" + tokenProvider.createToken(authentication);
+            String jwt = tokenProvider.createToken(authentication);
 
-            HttpHeaders httpHeaders = new HttpHeaders();
-            httpHeaders.add(JwtFilter.AUTHORIZATION_HEADER, jwt);
-
-            UserLoginResponseDto responseDto = new UserLoginResponseDto(jwt, userLoginRequestDto.getEmail());
-
-            return responseDto;
+            return new UserLoginResponseDto(jwt, userLoginRequestDto.getEmail());
 
         } catch (Exception e) {
             System.out.println(e);
