@@ -7,13 +7,20 @@ import net.schoolvery.schoolveryserver.domain.user.dto.request.UserLoginRequestD
 import net.schoolvery.schoolveryserver.domain.user.dto.request.UserUpdateRequestDto;
 import net.schoolvery.schoolveryserver.domain.user.dto.response.GetUserResponseDto;
 import net.schoolvery.schoolveryserver.domain.user.dto.response.UserCreateResponseDto;
+import net.schoolvery.schoolveryserver.domain.user.dto.response.UserLoginResponseDto;
 import net.schoolvery.schoolveryserver.domain.user.entity.User;
 import net.schoolvery.schoolveryserver.domain.user.repository.UserRepository;
 import net.schoolvery.schoolveryserver.domain.user.service.UserService;
 import net.schoolvery.schoolveryserver.global.error.exception.BusinessException;
-import net.schoolvery.schoolveryserver.global.utils.JwtTokenProvider;
+import net.schoolvery.schoolveryserver.global.utils.jwt.JwtFilter;
+import net.schoolvery.schoolveryserver.global.utils.jwt.TokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.http.HttpHeaders;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -37,10 +44,13 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
 
     @Autowired
-    private final JwtTokenProvider jwtTokenProvider;
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    private final PasswordEncoder passwordEncoder;
+    private final TokenProvider tokenProvider;
+
+    @Autowired
+    private final AuthenticationManagerBuilder authenticationManagerBuilder;
 
 
     // User Create
@@ -136,20 +146,32 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public String login(UserLoginRequestDto userLoginRequestDto) {
+    public UserLoginResponseDto login(UserLoginRequestDto userLoginRequestDto) {
         // 로그인 시도시, login_pw 암호화
         try {
-            User user = userRepository.findByEmail(userLoginRequestDto.getEmail()).get();
+          User user = userRepository.findByEmail(userLoginRequestDto.getEmail()).get();
 
             if (!passwordEncoder.matches(userLoginRequestDto.getPassword(), user.getPassword()))
                 throw new BusinessException(PASSWORD_WRONG_ERROR);
 
-            return jwtTokenProvider.createToken(user.getEmail());
+            UsernamePasswordAuthenticationToken authenticationToken =
+                    new UsernamePasswordAuthenticationToken(userLoginRequestDto.getEmail(), userLoginRequestDto.getPassword());
+
+            Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+
+            String jwt = "Bearer" + tokenProvider.createToken(authentication);
+
+            HttpHeaders httpHeaders = new HttpHeaders();
+            httpHeaders.add(JwtFilter.AUTHORIZATION_HEADER, jwt);
+
+            UserLoginResponseDto responseDto = new UserLoginResponseDto(jwt, userLoginRequestDto.getEmail());
+
+            return responseDto;
 
         } catch (Exception e) {
             System.out.println(e);
             throw new BusinessException(LOGIN_FAILED);
         }
-
     }
 }

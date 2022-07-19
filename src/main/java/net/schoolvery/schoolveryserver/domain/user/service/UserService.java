@@ -9,7 +9,9 @@ import net.schoolvery.schoolveryserver.domain.user.dto.request.UserLoginRequestD
 import net.schoolvery.schoolveryserver.domain.user.dto.request.UserUpdateRequestDto;
 import net.schoolvery.schoolveryserver.domain.user.dto.response.GetUserResponseDto;
 import net.schoolvery.schoolveryserver.domain.user.dto.response.UserCreateResponseDto;
+import net.schoolvery.schoolveryserver.domain.user.dto.response.UserLoginResponseDto;
 import net.schoolvery.schoolveryserver.domain.user.entity.User;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.List;
 
@@ -21,11 +23,10 @@ public interface UserService {
     void deleteUser(UUID id);
 
     UserCreateResponseDto getUserById(UUID id);
-    String login(UserLoginRequestDto userLoginRequestDto);
+    UserLoginResponseDto login(UserLoginRequestDto userLoginRequestDto);
     GetUserResponseDto findByUserid(UUID id);
     boolean findByUserEmail(String email);
     boolean findByUserNickname(String nickname);
-
 
     default User createUserRequest(UserCreateRequestDto userCreateRequestDto) {
         User user = User.builder()
