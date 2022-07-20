@@ -4,8 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import net.schoolvery.schoolveryserver.domain.user.dto.request.AuthorityRequestDto;
 
-import java.time.LocalDate;
+import java.util.Set;
 import java.util.UUID;
 
 @Getter
@@ -23,7 +24,5 @@ public class UserCreateResponseDto {
     private UUID schoolId;
     private String email;
     private String password;
-//    private LocalDate modDate;
-//    private LocalDate regDate;
-
+    private Set<AuthorityRequestDto> userAuthority;
 }

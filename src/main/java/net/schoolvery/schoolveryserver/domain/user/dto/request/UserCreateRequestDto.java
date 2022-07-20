@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Set;
 import java.util.UUID;
 
 @Getter
@@ -20,4 +21,6 @@ public class UserCreateRequestDto {
     private UUID schoolId;
     private String email;
     private String password;
+    private Set<AuthorityRequestDto> userAuthority;
+
 }
