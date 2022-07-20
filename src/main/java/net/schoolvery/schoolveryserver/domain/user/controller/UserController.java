@@ -21,9 +21,11 @@ import net.schoolvery.schoolveryserver.global.utils.jwt.TokenProvider;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -39,13 +41,14 @@ public class UserController {
     private final EmailService emailService;
 
     @GetMapping("")
-    public ResponseEntity<List<User>> getUser() {
+    public ResponseEntity<List<User>> getUser(HttpServletRequest request) {
+
         return ResponseEntity.ok()
                 .body(userService.getAllUsers());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<GetUserResponseDto> getuserId(@PathVariable UUID id) {
+    public ResponseEntity<GetUserResponseDto> getuserId(@PathVariable UUID id, HttpServletRequest request) {
 
         try {
             GetUserResponseDto user = userService.findByUserid(id);
@@ -60,8 +63,8 @@ public class UserController {
 
     @PostMapping("/signup")
     @ResponseStatus(HttpStatus.CREATED)
-    @ResponseBody
-    public ResponseEntity<UserCreateResponseDto> CreateUsers(@Valid @RequestBody UserCreateRequestDto userCreateRequestDto) {
+    public ResponseEntity<UserCreateResponseDto> CreateUsers(@Valid @RequestBody UserCreateRequestDto userCreateRequestDto
+            , HttpServletRequest request) {
 
         UserCreateResponseDto create = userService.createUser(userCreateRequestDto);
 

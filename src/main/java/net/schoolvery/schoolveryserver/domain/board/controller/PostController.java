@@ -2,6 +2,7 @@ package net.schoolvery.schoolveryserver.domain.board.controller;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.UUID;
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -14,6 +15,7 @@ import net.schoolvery.schoolveryserver.global.common.dto.PageResultDto;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,7 +38,8 @@ public class PostController {
     private final PostService postService;
 
     @GetMapping
-    public ResponseEntity<PageResultDto> list(PageRequestDto pageRequestDto) {
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
+    public ResponseEntity<PageResultDto> list(PageRequestDto pageRequestDto, HttpServletRequest request) {
 
         PageResultDto result = postService.getPosts(pageRequestDto);
         return ResponseEntity.ok()
@@ -44,7 +47,8 @@ public class PostController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<PostResponseDto> getPostById(@PathVariable Long id) {
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
+    public ResponseEntity<PostResponseDto> getPostById(@PathVariable Long id, HttpServletRequest request) {
 
         PostResponseDto dto = postService.getPostById(id);
         return ResponseEntity.ok()
@@ -52,7 +56,8 @@ public class PostController {
     }
 
     @GetMapping("/school/{schoolId}")
-    public ResponseEntity<PageResultDto> getPostBySchoolId(@PathVariable UUID schoolId, PageRequestDto pageRequestDto) {
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
+    public ResponseEntity<PageResultDto> getPostBySchoolId(@PathVariable UUID schoolId, PageRequestDto pageRequestDto, HttpServletRequest request) {
 
         pageRequestDto.setSchoolId(schoolId);
         PageResultDto dto = postService.getPosts(pageRequestDto);
@@ -61,7 +66,9 @@ public class PostController {
     }
 
     @GetMapping("/school/{schoolId}/category/{categoryId}")
-    public ResponseEntity<PageResultDto> getPostBySchoolIdAndCategoryId(@PathVariable UUID schoolId, @PathVariable UUID categoryId, PageRequestDto pageRequestDto) {
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
+    public ResponseEntity<PageResultDto> getPostBySchoolIdAndCategoryId(@PathVariable UUID schoolId, @PathVariable UUID categoryId
+            , PageRequestDto pageRequestDto, HttpServletRequest request) {
 
         pageRequestDto.setSchoolId(schoolId);
         pageRequestDto.setCategoryId(categoryId);
@@ -74,7 +81,8 @@ public class PostController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     @ResponseBody
-    public ResponseEntity<PostResponseDto> create (@Valid @RequestBody PostCreateRequestDto dto) {
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
+    public ResponseEntity<PostResponseDto> create (@Valid @RequestBody PostCreateRequestDto dto, HttpServletRequest request) {
 
         PostResponseDto result = postService.create(dto);
         return ResponseEntity.created(
@@ -87,7 +95,8 @@ public class PostController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletePost(@PathVariable Long id) {
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
+    public ResponseEntity<Void> deletePost(@PathVariable Long id, HttpServletRequest request) {
 
         postService.remove(id);
         return ResponseEntity.ok()
@@ -95,7 +104,8 @@ public class PostController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<PostResponseDto> updatePost(@PathVariable Long id, @RequestBody PostUpdateRequestDto dto) {
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
+    public ResponseEntity<PostResponseDto> updatePost(@PathVariable Long id, @RequestBody PostUpdateRequestDto dto, HttpServletRequest request) {
 
         postService.modify(id, dto);
         return ResponseEntity.ok()
@@ -103,7 +113,8 @@ public class PostController {
     }
 
     @GetMapping("/user/{userId}")
-    public ResponseEntity<PageResultDto> getPostByUserId(@PathVariable UUID userId, PageRequestDto pageRequestDto) {
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
+    public ResponseEntity<PageResultDto> getPostByUserId(@PathVariable UUID userId, PageRequestDto pageRequestDto, HttpServletRequest request) {
 
         PageResultDto dto = postService.getPostsByUserId(userId, pageRequestDto);
         return ResponseEntity.ok()
