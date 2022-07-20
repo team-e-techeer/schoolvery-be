@@ -16,10 +16,16 @@ import net.schoolvery.schoolveryserver.domain.user.exception.NicknameDuplicateEx
 import net.schoolvery.schoolveryserver.domain.user.service.EmailService;
 import net.schoolvery.schoolveryserver.domain.user.service.UserService;
 import net.schoolvery.schoolveryserver.global.error.exception.User.UserNotFoundException;
+import net.schoolvery.schoolveryserver.global.utils.jwt.JwtFilter;
+import net.schoolvery.schoolveryserver.global.utils.jwt.TokenProvider;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -35,13 +41,14 @@ public class UserController {
     private final EmailService emailService;
 
     @GetMapping("")
-    public ResponseEntity<List<User>> getUser() {
+    public ResponseEntity<List<User>> getUser(HttpServletRequest request) {
+
         return ResponseEntity.ok()
                 .body(userService.getAllUsers());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<GetUserResponseDto> getuserId(@PathVariable UUID id) {
+    public ResponseEntity<GetUserResponseDto> getuserId(@PathVariable UUID id, HttpServletRequest request) {
 
         try {
             GetUserResponseDto user = userService.findByUserid(id);
@@ -56,8 +63,8 @@ public class UserController {
 
     @PostMapping("/signup")
     @ResponseStatus(HttpStatus.CREATED)
-    @ResponseBody
-    public ResponseEntity<UserCreateResponseDto> CreateUsers(@Valid @RequestBody UserCreateRequestDto userCreateRequestDto) {
+    public ResponseEntity<UserCreateResponseDto> CreateUsers(@Valid @RequestBody UserCreateRequestDto userCreateRequestDto
+            , HttpServletRequest request) {
 
         UserCreateResponseDto create = userService.createUser(userCreateRequestDto);
 
@@ -84,10 +91,12 @@ public class UserController {
     @PostMapping("/login")
     public ResponseEntity<UserLoginResponseDto> login(@RequestBody UserLoginRequestDto userLoginRequestDto) {
 
-        String token = userService.login(userLoginRequestDto);
+        UserLoginResponseDto token = userService.login(userLoginRequestDto);
 
-        return ResponseEntity.ok()
-                .body(new UserLoginResponseDto(token, userLoginRequestDto.getEmail()));
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.add(JwtFilter.AUTHORIZATION_HEADER, "Bearer" + token.getAccessToken());
+
+        return new ResponseEntity<>(token, httpHeaders, HttpStatus.OK);
     }
 
     @PostMapping("/send/email")

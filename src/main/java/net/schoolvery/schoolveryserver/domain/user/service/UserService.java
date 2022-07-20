@@ -1,17 +1,23 @@
 package net.schoolvery.schoolveryserver.domain.user.service;
 
+import java.util.Collections;
 import java.util.Optional;
 import java.util.UUID;
 
 import net.schoolvery.schoolveryserver.domain.school.entity.School;
+import net.schoolvery.schoolveryserver.domain.user.dto.request.AuthorityRequestDto;
 import net.schoolvery.schoolveryserver.domain.user.dto.request.UserCreateRequestDto;
 import net.schoolvery.schoolveryserver.domain.user.dto.request.UserLoginRequestDto;
 import net.schoolvery.schoolveryserver.domain.user.dto.request.UserUpdateRequestDto;
 import net.schoolvery.schoolveryserver.domain.user.dto.response.GetUserResponseDto;
 import net.schoolvery.schoolveryserver.domain.user.dto.response.UserCreateResponseDto;
+import net.schoolvery.schoolveryserver.domain.user.dto.response.UserLoginResponseDto;
+import net.schoolvery.schoolveryserver.domain.user.entity.Authority;
 import net.schoolvery.schoolveryserver.domain.user.entity.User;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public interface UserService {
 
@@ -21,11 +27,10 @@ public interface UserService {
     void deleteUser(UUID id);
 
     UserCreateResponseDto getUserById(UUID id);
-    String login(UserLoginRequestDto userLoginRequestDto);
+    UserLoginResponseDto login(UserLoginRequestDto userLoginRequestDto);
     GetUserResponseDto findByUserid(UUID id);
     boolean findByUserEmail(String email);
     boolean findByUserNickname(String nickname);
-
 
     default User createUserRequest(UserCreateRequestDto userCreateRequestDto) {
         User user = User.builder()
@@ -36,6 +41,7 @@ public interface UserService {
                 .email(userCreateRequestDto.getEmail())
                 .phoneNum(userCreateRequestDto.getPhoneNum())
                 .school(School.builder().schoolId(userCreateRequestDto.getSchoolId()).build())
+                .authorities(Collections.singleton(Authority.builder().authorityName("ROLE_USER").build()))
                 .build();
 
         return user;
@@ -51,6 +57,9 @@ public interface UserService {
                 .password(user.getPassword())
                 .phoneNum(user.getPhoneNum())
                 .schoolId(user.getSchool().getSchoolId())
+                .userAuthority(user.getAuthorities().stream()
+                        .map(authority -> AuthorityRequestDto.builder().authorityName(authority.getAuthorityName()).build())
+                        .collect(Collectors.toSet()))
                 .build();
 
         return userDto;

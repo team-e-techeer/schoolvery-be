@@ -107,7 +107,7 @@ public class PostServiceImpl implements PostService {
         String type = requestDto.getType();
         String keyword = requestDto.getKeyword();
         UUID schoolId = requestDto.getSchoolId();
-        Integer categoryId = requestDto.getCategoryId();
+        UUID categoryId = requestDto.getCategoryId();
 
         if (schoolId != null) {
             booleanBuilder.and(qPost.schoolId.eq(schoolId));

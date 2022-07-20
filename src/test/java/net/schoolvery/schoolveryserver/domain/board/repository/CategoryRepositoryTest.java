@@ -8,6 +8,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.UUID;
+
 @SpringBootTest
 class CategoryRepositoryTest {
 
@@ -16,9 +18,10 @@ class CategoryRepositoryTest {
 
     @Test
     void 존재하는_카테고리인지_확인() {
-        Category category = new Category(5, "일식", "알삭압나더 .");
+        UUID id = UUID.randomUUID();
+        Category category = new Category(id, "일식", "일식 입니다.");
         categoryRepository.save(category);
-        Boolean actualResult = categoryRepository.isCategoryExitsById(5);
+        Boolean actualResult = categoryRepository.isCategoryExitsById(id);
         assertThat(actualResult).isFalse();
     }
 

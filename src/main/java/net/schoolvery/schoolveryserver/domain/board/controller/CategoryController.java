@@ -15,6 +15,8 @@ import net.schoolvery.schoolveryserver.global.common.dto.PageRequestDto;
 import net.schoolvery.schoolveryserver.global.common.dto.PageResultDto;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
+import java.util.UUID;
+
 @RestController
 @RequestMapping(value = "/api/v1/categories")
 @RequiredArgsConstructor
@@ -32,21 +34,21 @@ public class CategoryController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteCategory(@PathVariable Integer id) {
+    public ResponseEntity<Void> deleteCategory(@PathVariable UUID id) {
         categoryService.deleteCategory(id);
         return ResponseEntity.ok()
                 .body(null);
     }
     
     @PutMapping("/{id}")
-    public ResponseEntity<CategoryResponseDto> updateCategory(@PathVariable Integer id, @RequestBody CategoryUpdateRequestDto  categoryUpdateRequestDto) {
+    public ResponseEntity<CategoryResponseDto> updateCategory(@PathVariable UUID id, @RequestBody CategoryUpdateRequestDto  categoryUpdateRequestDto) {
         CategoryResponseDto updatedDto = categoryService.updateCategory(id, categoryUpdateRequestDto);
         return ResponseEntity.ok()
                 .body(updatedDto);
     }
    
     @GetMapping("/{id}")
-    public ResponseEntity<CategoryResponseDto> getCategoryById(@PathVariable Integer id) {
+    public ResponseEntity<CategoryResponseDto> getCategoryById(@PathVariable UUID id) {
         CategoryResponseDto dto = categoryService.getCategoryById(id);
         return ResponseEntity.ok()
                 .body(dto);
