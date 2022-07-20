@@ -4,7 +4,6 @@ import net.schoolvery.schoolveryserver.global.utils.jwt.JwtSecurityConfig;
 import net.schoolvery.schoolveryserver.global.utils.jwt.TokenProvider;
 import net.schoolvery.schoolveryserver.global.utils.jwt.error.JwtAccessDeniedHandler;
 import net.schoolvery.schoolveryserver.global.utils.jwt.error.JwtAuthenticationEntryPoint;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.web.filter.CorsFilter;
 import org.springframework.context.annotation.Bean;
@@ -42,7 +41,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) {
         web.ignoring()
-                .antMatchers("/api/v1/users/**", "/api/v1/school/**", "/api/v1/categories/**"); // 관한 요청은 인증없이 접근 허용
+                .antMatchers("/api/v1/users/**",
+                        "/api/v1/school/**", "/api/v1/categories/**","/api/v1/categories")
+                .antMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger/**", "/error");// 관한 요청은 인증없이 접근 허용
 
     }
 
@@ -67,6 +68,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
 
                 .authorizeRequests() // HttpServletRequest를 사용하는 요청들에대한 접근 제한 설정
+                .antMatchers("/v3/api-docs/","/swagger*/**").permitAll()
                 .anyRequest().authenticated() // 나머지 요청들은 전부 인증을 받아야한다.
 
                 .and()

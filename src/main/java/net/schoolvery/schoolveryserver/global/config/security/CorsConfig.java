@@ -18,6 +18,7 @@ public class CorsConfig {
         config.addAllowedHeader("*");
         config.addAllowedMethod("*");
 
+        source.registerCorsConfiguration("/swagger-ui/**", config);
         source.registerCorsConfiguration("/api/v1/**", config);
         return new CorsFilter(source);
     }
