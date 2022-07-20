@@ -12,11 +12,9 @@ import net.schoolvery.schoolveryserver.domain.user.entity.User;
 import net.schoolvery.schoolveryserver.domain.user.repository.UserRepository;
 import net.schoolvery.schoolveryserver.domain.user.service.UserService;
 import net.schoolvery.schoolveryserver.global.error.exception.BusinessException;
-import net.schoolvery.schoolveryserver.global.utils.jwt.JwtFilter;
 import net.schoolvery.schoolveryserver.global.utils.jwt.TokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
@@ -103,8 +101,6 @@ public class UserServiceImpl implements UserService {
         return false;
     }
 
-
-    // User modify ( Update )
     @Override
     public Optional<User> modifyUser(UUID id, UserUpdateRequestDto userUpdateRequestDto) {
         Optional<User> user_result = userRepository.findById(id);
