@@ -37,6 +37,21 @@ public class UserController {
 
     private final EmailService emailService;
 
+    @GetMapping("/authorization")
+    public ResponseEntity<GetUserResponseDto> getUserByToken(HttpServletRequest request) {
+        String Token = (String) request.getAttribute("name");
+        try {
+            GetUserResponseDto responseDto = userService.findByUserToken(Token);
+
+            return ResponseEntity.ok()
+                    .body(responseDto);
+
+        } catch (Exception e) {
+            throw new UserNotFoundException("유저를 찾을 수 없습니다.");
+        }
+    }
+
+
     @GetMapping("")
     public ResponseEntity<List<User>> getUser(HttpServletRequest request) {
 
