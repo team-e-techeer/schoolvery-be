@@ -4,9 +4,10 @@ import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import lombok.extern.slf4j.Slf4j;
+import net.schoolvery.schoolveryserver.domain.user.repository.UserRepository;
 import net.schoolvery.schoolveryserver.global.error.exception.BusinessException;
-import net.schoolvery.schoolveryserver.global.error.exception.ErrorCode;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -21,6 +22,7 @@ import java.security.Key;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static net.schoolvery.schoolveryserver.global.error.exception.ErrorCode.*;
@@ -29,7 +31,14 @@ import static net.schoolvery.schoolveryserver.global.error.exception.ErrorCode.*
 @Slf4j
 public class TokenProvider implements InitializingBean {
 
+    @Autowired
+    private UserRepository userRepository;
+
     private static final String AUTHORITIES_KEY = "auth";
+    private static final String USER_ID = "user_id";
+    private static final String SCHOOL_ID = "school_id";
+
+
 
     private final String secret;
     private final long tokenValidityInMilliseconds;
@@ -38,9 +47,11 @@ public class TokenProvider implements InitializingBean {
 
     public TokenProvider(
             @Value("${JWT_SECRET_KEY}") String secret,
-            @Value("${JWT_EXPIRE_TIME}") long tokenValidityInMilliseconds) {
+            @Value("${JWT_EXPIRE_TIME}") long tokenValidityInMilliseconds,
+            UserRepository userRepository) {
         this.secret = secret;
         this.tokenValidityInMilliseconds = tokenValidityInMilliseconds * 1000;
+        this.userRepository = userRepository;
     }
 
     @Override
@@ -58,9 +69,14 @@ public class TokenProvider implements InitializingBean {
         long now = (new Date()).getTime();
         Date validity = new Date(now + this.tokenValidityInMilliseconds);
 
+        Optional<net.schoolvery.schoolveryserver.domain.user.entity.User>
+                user = userRepository.findByEmail(authentication.getName());
+
         return Jwts.builder()
                 .setSubject(authentication.getName())
                 .claim(AUTHORITIES_KEY, authorities)
+                .claim(USER_ID, user.get().getId())
+                .claim(SCHOOL_ID, user.get().getSchool().getSchoolId())
                 .signWith(key, SignatureAlgorithm.HS512)
                 .setExpiration(validity)
                 .compact();
