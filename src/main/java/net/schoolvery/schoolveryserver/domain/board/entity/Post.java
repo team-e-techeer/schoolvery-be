@@ -40,11 +40,11 @@ public class Post extends BaseEntity {
     @Column(length = 100, nullable = false)
     private String title;
 
-    @Column(name = "user_id", nullable = false, columnDefinition = "BINARY(50)")
+    @Column(name = "user_id", nullable = false, columnDefinition = "BINARY(16)")
     @GenericGenerator(name = "UUID", strategy = "uuid2")
     private UUID userId;
 
-    @Column(name = "school_id", nullable = false, columnDefinition = "BINARY(50)")
+    @Column(name = "school_id", nullable = false, columnDefinition = "BINARY(16)")
     @GenericGenerator(name = "UUID", strategy = "uuid2")
     private UUID schoolId;
 

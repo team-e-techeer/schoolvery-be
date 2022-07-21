@@ -17,12 +17,9 @@ import net.schoolvery.schoolveryserver.domain.user.service.EmailService;
 import net.schoolvery.schoolveryserver.domain.user.service.UserService;
 import net.schoolvery.schoolveryserver.global.error.exception.User.UserNotFoundException;
 import net.schoolvery.schoolveryserver.global.utils.jwt.JwtFilter;
-import net.schoolvery.schoolveryserver.global.utils.jwt.TokenProvider;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -39,6 +36,21 @@ public class UserController {
     private final UserService userService;
 
     private final EmailService emailService;
+
+    @GetMapping("/authorization")
+    public ResponseEntity<GetUserResponseDto> getUserByToken(HttpServletRequest request) {
+        String Token = (String) request.getAttribute("name");
+        try {
+            GetUserResponseDto responseDto = userService.findByUserToken(Token);
+
+            return ResponseEntity.ok()
+                    .body(responseDto);
+
+        } catch (Exception e) {
+            throw new UserNotFoundException("유저를 찾을 수 없습니다.");
+        }
+    }
+
 
     @GetMapping("")
     public ResponseEntity<List<User>> getUser(HttpServletRequest request) {

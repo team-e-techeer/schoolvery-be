@@ -57,7 +57,7 @@ public class PostController {
 
     @GetMapping("/school/{schoolId}")
     @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
-    public ResponseEntity<PageResultDto> getPostBySchoolId(@PathVariable UUID schoolId, PageRequestDto pageRequestDto, HttpServletRequest request) {
+    public ResponseEntity<PageResultDto> getPostBySchoolId(@PathVariable UUID schoolId, PageRequestDto pageRequestDto) {
 
         pageRequestDto.setSchoolId(schoolId);
         PageResultDto dto = postService.getPosts(pageRequestDto);

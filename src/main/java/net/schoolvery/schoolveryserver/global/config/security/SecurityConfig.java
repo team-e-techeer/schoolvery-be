@@ -26,6 +26,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     public SecurityConfig(TokenProvider tokenProvider, JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint,
                           JwtAccessDeniedHandler jwtAccessDeniedHandler, CorsFilter corsFilter) {
+
         this.tokenProvider = tokenProvider;
         this.jwtAuthenticationEntryPoint = jwtAuthenticationEntryPoint;
         this.jwtAccessDeniedHandler = jwtAccessDeniedHandler;
@@ -68,7 +69,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
 
                 .authorizeRequests() // HttpServletRequest를 사용하는 요청들에대한 접근 제한 설정
-                .antMatchers("/v3/api-docs/","/swagger*/**").permitAll()
                 .anyRequest().authenticated() // 나머지 요청들은 전부 인증을 받아야한다.
 
                 .and()

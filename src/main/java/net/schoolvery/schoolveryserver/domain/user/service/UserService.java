@@ -26,7 +26,7 @@ public interface UserService {
     Optional<User> modifyUser(UUID id, UserUpdateRequestDto userUpdateRequestDto);
     void deleteUser(UUID id);
 
-    UserCreateResponseDto getUserById(UUID id);
+    GetUserResponseDto findByUserToken(String token);
     UserLoginResponseDto login(UserLoginRequestDto userLoginRequestDto);
     GetUserResponseDto findByUserid(UUID id);
     boolean findByUserEmail(String email);
