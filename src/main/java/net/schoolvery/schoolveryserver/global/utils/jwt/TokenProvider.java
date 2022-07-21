@@ -75,8 +75,6 @@ public class TokenProvider implements InitializingBean {
         return Jwts.builder()
                 .setSubject(authentication.getName())
                 .claim(AUTHORITIES_KEY, authorities)
-                .claim(USER_ID, user.get().getId())
-                .claim(SCHOOL_ID, user.get().getSchool().getSchoolId())
                 .signWith(key, SignatureAlgorithm.HS512)
                 .setExpiration(validity)
                 .compact();
@@ -116,6 +114,11 @@ public class TokenProvider implements InitializingBean {
         } catch (IllegalArgumentException e) {
             throw new BusinessException(Illegal_JWT);
         }
+    }
+
+    //토큰에서 값 추출
+    public String getSubject(String token) {
+        return Jwts.parser().setSigningKey(key).parseClaimsJws(token).getBody().getSubject();
     }
 
 }
