@@ -14,8 +14,6 @@ import net.schoolvery.schoolveryserver.domain.board.entity.Post;
 import net.schoolvery.schoolveryserver.domain.board.entity.QPost;
 import net.schoolvery.schoolveryserver.domain.board.repository.PostRepository;
 import net.schoolvery.schoolveryserver.domain.chat.dto.request.RoomCreateRequestDto;
-import net.schoolvery.schoolveryserver.domain.chat.entity.Room;
-import net.schoolvery.schoolveryserver.domain.chat.repository.RoomRepository;
 import net.schoolvery.schoolveryserver.domain.chat.service.RoomService;
 import net.schoolvery.schoolveryserver.global.common.dto.PageRequestDto;
 import net.schoolvery.schoolveryserver.global.common.dto.PageResultDto;
