@@ -17,12 +17,9 @@ import net.schoolvery.schoolveryserver.domain.user.service.EmailService;
 import net.schoolvery.schoolveryserver.domain.user.service.UserService;
 import net.schoolvery.schoolveryserver.global.error.exception.User.UserNotFoundException;
 import net.schoolvery.schoolveryserver.global.utils.jwt.JwtFilter;
-import net.schoolvery.schoolveryserver.global.utils.jwt.TokenProvider;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
