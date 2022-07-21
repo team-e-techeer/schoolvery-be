@@ -12,6 +12,7 @@ import net.schoolvery.schoolveryserver.domain.user.entity.User;
 import net.schoolvery.schoolveryserver.domain.user.repository.UserRepository;
 import net.schoolvery.schoolveryserver.domain.user.service.UserService;
 import net.schoolvery.schoolveryserver.global.error.exception.BusinessException;
+import net.schoolvery.schoolveryserver.global.error.exception.User.UserNotFoundException;
 import net.schoolvery.schoolveryserver.global.utils.jwt.TokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -77,7 +78,7 @@ public class UserServiceImpl implements UserService {
     public GetUserResponseDto findByUserid(UUID id) {
 
         Optional<User> result = userRepository.findById(id);
-        return result.isPresent() ? findUserResponse(result.get()) : null;
+        return result.map(this::findUserResponse).orElse(null);
     }
 
     @Override
@@ -134,10 +135,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserCreateResponseDto getUserById(UUID id) {
-        Optional<User> result = userRepository.findById(id);
-        return result.isPresent() ? createUserResponse(result.get()) : null;
-    }
+    public GetUserResponseDto findByUserToken(String token) {
+        Optional<User> user = userRepository.findByEmail(token);
+
+            return user.map(this::findUserResponse).orElse(null);
+        }
 
     @Override
     public UserLoginResponseDto login(UserLoginRequestDto userLoginRequestDto) {
