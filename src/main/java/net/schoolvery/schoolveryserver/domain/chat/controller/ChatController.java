@@ -9,6 +9,8 @@ import net.schoolvery.schoolveryserver.domain.chat.entity.Message;
 import net.schoolvery.schoolveryserver.domain.chat.service.MemberService;
 import net.schoolvery.schoolveryserver.domain.chat.service.MessageService;
 import net.schoolvery.schoolveryserver.domain.chat.service.RoomService;
+import net.schoolvery.schoolveryserver.global.common.dto.PageRequestDto;
+import net.schoolvery.schoolveryserver.global.common.dto.PageResultDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -58,12 +60,12 @@ public class ChatController {
                 .body(result);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping
     @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
-    public ResponseEntity<RoomResponseDto> getChatRoom(@PathVariable UUID id, HttpServletRequest request) {
-        RoomResponseDto dto = roomService.getRoomById(id);
+    public ResponseEntity<PageResultDto> list(PageRequestDto pageRequestDto, HttpServletRequest request) {
+        PageResultDto result = roomService.getRooms(pageRequestDto);
         return ResponseEntity.ok()
-                .body(dto);
+                .body(result);
     }
 
     // [실전용] 웹 소캣 버전

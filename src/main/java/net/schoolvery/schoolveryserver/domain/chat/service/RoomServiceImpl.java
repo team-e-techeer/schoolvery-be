@@ -1,15 +1,26 @@
 package net.schoolvery.schoolveryserver.domain.chat.service;
 
+import com.querydsl.core.BooleanBuilder;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import net.schoolvery.schoolveryserver.domain.board.dto.response.PostResponseDto;
+import net.schoolvery.schoolveryserver.domain.board.entity.Post;
+import net.schoolvery.schoolveryserver.domain.board.entity.QPost;
 import net.schoolvery.schoolveryserver.domain.chat.dto.request.RoomCreateRequestDto;
 import net.schoolvery.schoolveryserver.domain.chat.dto.request.RoomUpdateRequestDto;
 import net.schoolvery.schoolveryserver.domain.chat.dto.response.RoomResponseDto;
+import net.schoolvery.schoolveryserver.domain.chat.entity.QRoom;
 import net.schoolvery.schoolveryserver.domain.chat.entity.Room;
 import net.schoolvery.schoolveryserver.domain.chat.repository.RoomRepository;
+import net.schoolvery.schoolveryserver.global.common.dto.PageRequestDto;
+import net.schoolvery.schoolveryserver.global.common.dto.PageResultDto;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.UUID;
+import java.util.function.Function;
 
 @Service
 @Log4j2
@@ -40,8 +51,10 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
-    public RoomResponseDto getRoomById(UUID id){
-        Room entity = roomRepository.getByRoomId(id);
-        return entityToDto(entity);
+    public PageResultDto<RoomResponseDto, Room> getRooms(PageRequestDto requestDto){
+        Pageable pageable = requestDto.getPageable(Sort.by("id"));
+        Page<Room> result = roomRepository.findAll(pageable);
+        Function<Room, RoomResponseDto> fn = (entity -> entityToDto(entity));
+        return new PageResultDto<>(result, fn);
     }
 }
