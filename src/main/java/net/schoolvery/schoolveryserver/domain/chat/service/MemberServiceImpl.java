@@ -11,6 +11,7 @@ import net.schoolvery.schoolveryserver.domain.chat.repository.MemberRepository;
 import net.schoolvery.schoolveryserver.domain.chat.repository.RoomRepository;
 import org.springframework.stereotype.Service;
 
+import javax.swing.text.html.Option;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -55,10 +56,13 @@ public class MemberServiceImpl implements MemberService{
 
     @Override
     public RoomJoinResponseDto joinMemebers(RoomJoinRequestDto requestDto) {
-        Member member = dtoToEntity(requestDto);
-        memberRepository.save(member);
-
-        return EntityToDto(member);
+        Optional <Member> findMember = memberRepository.findByMemberId(requestDto.getMember_id());
+        if (findMember.isEmpty()) {
+            Member member = dtoToEntity(requestDto);
+            memberRepository.save(member);
+            return EntityToDto(member);
+        }
+        return EntityToDto(findMember.get());
     }
 
     @Override
