@@ -5,8 +5,6 @@ import net.schoolvery.schoolveryserver.domain.chat.dto.request.*;
 import net.schoolvery.schoolveryserver.domain.chat.dto.response.RoomFindResponseDto;
 import net.schoolvery.schoolveryserver.domain.chat.dto.response.RoomJoinResponseDto;
 import net.schoolvery.schoolveryserver.domain.chat.dto.response.RoomResponseDto;
-import net.schoolvery.schoolveryserver.domain.chat.entity.Message;
-import net.schoolvery.schoolveryserver.domain.chat.entity.Room;
 import net.schoolvery.schoolveryserver.domain.chat.service.MemberService;
 import net.schoolvery.schoolveryserver.domain.chat.service.MessageService;
 import net.schoolvery.schoolveryserver.domain.chat.service.RoomService;
@@ -116,6 +114,14 @@ public class ChatController {
     public ResponseEntity<Boolean> exitChatRoom(@RequestBody RoomJoinRequestDto requestDto) {
         Boolean result = memberService.exitMembers(requestDto);
 
+        return ResponseEntity.ok()
+                .body(result);
+    }
+
+    @GetMapping("/member/{roomId}")
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
+    public ResponseEntity<PageResultDto> whoseInChatRoom(@PathVariable UUID roomId, PageRequestDto pageRequestDto,HttpServletRequest request) {
+        PageResultDto result = memberService.checkMembers(roomId,pageRequestDto);
         return ResponseEntity.ok()
                 .body(result);
     }

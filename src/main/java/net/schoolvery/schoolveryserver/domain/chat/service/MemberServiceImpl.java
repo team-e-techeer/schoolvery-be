@@ -2,13 +2,20 @@ package net.schoolvery.schoolveryserver.domain.chat.service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import net.schoolvery.schoolveryserver.domain.chat.dto.request.RoomJoinRequestDto;
+import net.schoolvery.schoolveryserver.domain.chat.dto.response.MemberResponseDto;
 import net.schoolvery.schoolveryserver.domain.chat.dto.response.RoomFindResponseDto;
 import net.schoolvery.schoolveryserver.domain.chat.dto.response.RoomJoinResponseDto;
+import net.schoolvery.schoolveryserver.domain.chat.dto.response.RoomResponseDto;
 import net.schoolvery.schoolveryserver.domain.chat.entity.Member;
 import net.schoolvery.schoolveryserver.domain.chat.entity.Room;
 import net.schoolvery.schoolveryserver.domain.chat.exception.ChatException;
 import net.schoolvery.schoolveryserver.domain.chat.repository.MemberRepository;
 import net.schoolvery.schoolveryserver.domain.chat.repository.RoomRepository;
+import net.schoolvery.schoolveryserver.global.common.dto.PageRequestDto;
+import net.schoolvery.schoolveryserver.global.common.dto.PageResultDto;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.swing.text.html.Option;
@@ -16,6 +23,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -97,4 +105,13 @@ public class MemberServiceImpl implements MemberService{
         memberRepository.save(member);
         r.getMember().add(member);
     }
+
+    @Override
+    public PageResultDto<MemberResponseDto,Member> checkMembers(UUID roomId, PageRequestDto requestDto) {
+        Pageable pageable = requestDto.getPageable(Sort.by("id"));
+        Page <Member> result = memberRepository.findByRoomId(roomId,pageable);
+        Function<Member, MemberResponseDto> fn = (entity -> entityToMemberResponseDto(entity));
+        return new PageResultDto<>(result, fn);
+    }
+
 }

@@ -1,10 +1,14 @@
 package net.schoolvery.schoolveryserver.domain.chat.service;
 
 import net.schoolvery.schoolveryserver.domain.chat.dto.request.RoomJoinRequestDto;
+import net.schoolvery.schoolveryserver.domain.chat.dto.response.MemberResponseDto;
 import net.schoolvery.schoolveryserver.domain.chat.dto.response.RoomFindResponseDto;
 import net.schoolvery.schoolveryserver.domain.chat.dto.response.RoomJoinResponseDto;
+import net.schoolvery.schoolveryserver.domain.chat.dto.response.RoomResponseDto;
 import net.schoolvery.schoolveryserver.domain.chat.entity.Member;
 import net.schoolvery.schoolveryserver.domain.chat.entity.Room;
+import net.schoolvery.schoolveryserver.global.common.dto.PageRequestDto;
+import net.schoolvery.schoolveryserver.global.common.dto.PageResultDto;
 
 import java.util.List;
 import java.util.UUID;
@@ -32,12 +36,19 @@ public interface MemberService {
     }
 
     default RoomFindResponseDto EntityToFindResponseDto(Member member) {
-
         return RoomFindResponseDto.builder()
                 .id(member.getId())
                 .roomId(member.getRoom().getId())
                 .memberId(member.getMemberId())
                 .build();
     }
+
+    default MemberResponseDto entityToMemberResponseDto(Member member) {
+        return MemberResponseDto.builder()
+                .memberId(member.getMemberId())
+                .build();
+    }
+
+    PageResultDto<MemberResponseDto,Member> checkMembers(UUID roomId, PageRequestDto pageRequestDto);
 }
 
