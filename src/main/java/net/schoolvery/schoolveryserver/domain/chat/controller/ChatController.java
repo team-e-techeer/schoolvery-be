@@ -6,6 +6,7 @@ import net.schoolvery.schoolveryserver.domain.chat.dto.response.RoomFindResponse
 import net.schoolvery.schoolveryserver.domain.chat.dto.response.RoomJoinResponseDto;
 import net.schoolvery.schoolveryserver.domain.chat.dto.response.RoomResponseDto;
 import net.schoolvery.schoolveryserver.domain.chat.entity.Message;
+import net.schoolvery.schoolveryserver.domain.chat.entity.Room;
 import net.schoolvery.schoolveryserver.domain.chat.service.MemberService;
 import net.schoolvery.schoolveryserver.domain.chat.service.MessageService;
 import net.schoolvery.schoolveryserver.domain.chat.service.RoomService;
@@ -68,6 +69,14 @@ public class ChatController {
                 .body(result);
     }
 
+    @GetMapping("/find/{id}")
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
+    public ResponseEntity<List<RoomFindResponseDto>> getRoomsbyUserId(@PathVariable UUID id, HttpServletRequest request) {
+        List<RoomFindResponseDto> roomFindResponseDtoList = memberService.findMember(id);
+        return ResponseEntity.ok()
+                .body(roomFindResponseDtoList);
+    }
+
     // [실전용] 웹 소캣 버전
     @MessageMapping("/message")
     @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
@@ -82,16 +91,16 @@ public class ChatController {
         messageService.sendMessage(messageCreateRequestDto);
     }
 
-    @GetMapping("/room")
-    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
-    public ResponseEntity <List<Message>> enterChatRoom (@RequestBody MessageGetRequestDto messageGetRequestDto, HttpServletRequest request) {
-        // 1. 채팅방 멤버 추가
-        memberService.addMembers(messageGetRequestDto.getRoom_id(),messageGetRequestDto.getMember_id());
-
-        // 2. 채팅방 모든 메세지 띄우기(가져오기)
-        List<Message> messages = messageService.getMessages(messageGetRequestDto.getRoom_id());
-        return ResponseEntity.ok().body(messages);
-    }
+//    @GetMapping("/room")
+//    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
+//    public ResponseEntity <List<Message>> enterChatRoom (@RequestBody MessageGetRequestDto messageGetRequestDto, HttpServletRequest request) {
+//        // 1. 채팅방 멤버 추가
+//        memberService.addMembers(messageGetRequestDto.getRoom_id(),messageGetRequestDto.getMember_id());
+//
+//        // 2. 채팅방 모든 메세지 띄우기(가져오기)
+//        List<Message> messages = messageService.getMessages(messageGetRequestDto.getRoom_id());
+//        return ResponseEntity.ok().body(messages);
+//    }
 
     @PostMapping("/member")
     @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
@@ -109,15 +118,6 @@ public class ChatController {
 
         return ResponseEntity.ok()
                 .body(result);
-    }
-
-    @GetMapping("/find/{id}")
-    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
-    public ResponseEntity<List<RoomFindResponseDto>> findChatRoom(@PathVariable UUID id, HttpServletRequest request) {
-        List<RoomFindResponseDto> roomFindResponseDtoList = memberService.findMember(id);
-
-        return ResponseEntity.ok()
-                .body(roomFindResponseDtoList);
     }
 
     @GetMapping("/room/{id}")

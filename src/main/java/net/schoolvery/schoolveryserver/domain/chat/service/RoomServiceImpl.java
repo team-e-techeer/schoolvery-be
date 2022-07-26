@@ -1,15 +1,9 @@
 package net.schoolvery.schoolveryserver.domain.chat.service;
-
-import com.querydsl.core.BooleanBuilder;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import net.schoolvery.schoolveryserver.domain.board.dto.response.PostResponseDto;
-import net.schoolvery.schoolveryserver.domain.board.entity.Post;
-import net.schoolvery.schoolveryserver.domain.board.entity.QPost;
 import net.schoolvery.schoolveryserver.domain.chat.dto.request.RoomCreateRequestDto;
 import net.schoolvery.schoolveryserver.domain.chat.dto.request.RoomUpdateRequestDto;
 import net.schoolvery.schoolveryserver.domain.chat.dto.response.RoomResponseDto;
-import net.schoolvery.schoolveryserver.domain.chat.entity.QRoom;
 import net.schoolvery.schoolveryserver.domain.chat.entity.Room;
 import net.schoolvery.schoolveryserver.domain.chat.repository.RoomRepository;
 import net.schoolvery.schoolveryserver.global.common.dto.PageRequestDto;
@@ -57,4 +51,5 @@ public class RoomServiceImpl implements RoomService {
         Function<Room, RoomResponseDto> fn = (entity -> entityToDto(entity));
         return new PageResultDto<>(result, fn);
     }
+
 }
