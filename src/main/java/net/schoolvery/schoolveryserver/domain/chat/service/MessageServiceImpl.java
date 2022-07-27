@@ -59,19 +59,14 @@ public class MessageServiceImpl implements MessageService{
 
         for (int i = 0; i < dtos.size(); i++) {
             JSONObject sObject = new JSONObject();
-            sObject.put("member_id", dtos.get(i).getUser_id());
+            sObject.put("user_id", dtos.get(i).getUser_id());
             sObject.put("message", dtos.get(i).getMessage());
             sObject.put("regDate", dtos.get(i).getRegDate());
-
             arr.add(sObject);
-
         }
-
         obj.put("room_id", id);
         obj.put("room_messages", arr);
-
         return obj;
-
     }
 
     @Override
@@ -89,12 +84,10 @@ public class MessageServiceImpl implements MessageService{
 
         for (int i = 0; i < dtos.size(); i++) {
             JSONObject sObject = new JSONObject();
-            sObject.put("member_id", dtos.get(i).getUser_id());
+            sObject.put("user_id", dtos.get(i).getUser_id());
             sObject.put("message", dtos.get(i).getMessage());
             sObject.put("regDate", dtos.get(i).getRegDate());
-
             all_messages.add(sObject);
-
         }
 
         List<ChatMessageResponseDto> users = Stream.of(messageRepository.findByUserId(dto.getUser_id()))
@@ -106,20 +99,15 @@ public class MessageServiceImpl implements MessageService{
 
         for (int i = 0; i < users.size(); i++) {
             JSONObject sObject = new JSONObject();
-            sObject.put("member_id", dtos.get(i).getUser_id());
+            sObject.put("user_id", dtos.get(i).getUser_id());
             sObject.put("message", dtos.get(i).getMessage());
             sObject.put("regDate", dtos.get(i).getRegDate());
-
             user_messages.add(sObject);
-
         }
-
         obj.put("room_id", id);
         obj.put("room_messages", all_messages);
         obj.put("my_messages", user_messages);
-
         return obj;
-
     }
 
     @Override
