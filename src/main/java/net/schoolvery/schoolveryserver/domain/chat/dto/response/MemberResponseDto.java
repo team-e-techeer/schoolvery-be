@@ -12,5 +12,5 @@ import java.util.UUID;
 @NoArgsConstructor
 @Data
 public class MemberResponseDto {
-    private UUID memberId;
+    private UUID user_id;
 }

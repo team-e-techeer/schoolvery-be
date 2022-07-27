@@ -11,6 +11,6 @@ import java.util.UUID;
 @Data
 public class MessageCreateRequestDto {
     private UUID room_id;
-    private UUID member_id;
+    private UUID user_id;
     private String message;
 }

@@ -12,7 +12,6 @@ import java.util.UUID;
 @AllArgsConstructor
 @Builder
 public class RoomJoinResponseDto {
-
     private UUID room_id;
 
 }

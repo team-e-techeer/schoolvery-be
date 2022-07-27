@@ -29,9 +29,9 @@ public class Message extends BaseEntity {
     @JoinColumn(name = "ROOM_ID")
     private Room room;
 
-    @Column(name = "MEMBER_ID", nullable = false, columnDefinition = "BINARY(16)")
+    @Column(name = "USER_ID", nullable = false, columnDefinition = "BINARY(16)")
     @GenericGenerator(name = "UUID", strategy = "uuid2")
-    private UUID memberId;
+    private UUID userId;
 
     @Column(name = "MESSAGE", columnDefinition = "TEXT", nullable = false)
     private String message;

@@ -23,13 +23,12 @@ public interface MemberService {
     default Member dtoToEntity(RoomJoinRequestDto dto) {
 
         return Member.builder()
-                .memberId(dto.getMember_id())
+                .userId(dto.getUser_id())
                 .room(Room.builder().id(dto.getRoom_id()).build())
                 .build();
     }
 
     default RoomJoinResponseDto EntityToDto(Member member) {
-
         return RoomJoinResponseDto.builder()
                 .room_id(member.getRoom().getId())
                 .build();
@@ -38,14 +37,14 @@ public interface MemberService {
     default RoomFindResponseDto EntityToFindResponseDto(Member member) {
         return RoomFindResponseDto.builder()
                 .id(member.getId())
-                .roomId(member.getRoom().getId())
-                .memberId(member.getMemberId())
+                .room_id(member.getRoom().getId())
+                .user_id(member.getUserId())
                 .build();
     }
 
     default MemberResponseDto entityToMemberResponseDto(Member member) {
         return MemberResponseDto.builder()
-                .memberId(member.getMemberId())
+                .user_id(member.getUserId())
                 .build();
     }
 

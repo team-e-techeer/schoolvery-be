@@ -46,7 +46,7 @@ public class MemberServiceImpl implements MemberService{
             } else {
                 boolean flag = false;
                 for (Member a : r.getMember()) {
-                    if (a.getMemberId().equals(member_id)) {
+                    if (a.getUserId().equals(member_id)) {
                         flag = true;
                         break;
                     }
@@ -64,7 +64,7 @@ public class MemberServiceImpl implements MemberService{
 
     @Override
     public RoomJoinResponseDto joinMemebers(RoomJoinRequestDto requestDto) {
-        Optional <Member> findMember = memberRepository.findByMemberId(requestDto.getMember_id());
+        Optional <Member> findMember = memberRepository.findByUserId(requestDto.getUser_id());
         if (findMember.isEmpty()) {
             Member member = dtoToEntity(requestDto);
             memberRepository.save(member);
@@ -75,7 +75,7 @@ public class MemberServiceImpl implements MemberService{
 
     @Override
     public boolean exitMembers(RoomJoinRequestDto requestDto) {
-        Optional<Member> member = memberRepository.findByMemberId(requestDto.getMember_id());
+        Optional<Member> member = memberRepository.findByUserId(requestDto.getUser_id());
 
         if (member.isPresent()) {
             Member entity = member.get();
@@ -87,7 +87,7 @@ public class MemberServiceImpl implements MemberService{
 
     @Override
     public List<RoomFindResponseDto> findMember(UUID id) {
-        List<RoomFindResponseDto> dtos = Stream.of(memberRepository.findMByMemberId(id))
+        List<RoomFindResponseDto> dtos = Stream.of(memberRepository.findMByUserId(id))
                 .findAny()
                 .orElseThrow(ChatException::new)
                 .stream()
@@ -100,7 +100,7 @@ public class MemberServiceImpl implements MemberService{
     public void addMember(Room r, UUID member_id){
         Member member = Member.builder()
                 .room(r)
-                .memberId(member_id)
+                .userId(member_id)
                 .build();
         memberRepository.save(member);
         r.getMember().add(member);

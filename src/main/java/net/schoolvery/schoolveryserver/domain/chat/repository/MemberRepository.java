@@ -11,9 +11,9 @@ import java.util.UUID;
 
 public interface MemberRepository extends JpaRepository<Member, UUID> {
 
-    Optional<Member> findByMemberId(UUID memberId);
+    Optional<Member> findByUserId(UUID user_id);
 
-    List<Member> findMByMemberId(UUID memberId);
+    List<Member> findMByUserId(UUID memberId);
 
     Page <Member> findByRoomId(UUID roomId,Pageable pageable);
 }

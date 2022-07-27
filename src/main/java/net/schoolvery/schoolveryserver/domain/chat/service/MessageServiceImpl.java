@@ -59,7 +59,7 @@ public class MessageServiceImpl implements MessageService{
 
         for (int i = 0; i < dtos.size(); i++) {
             JSONObject sObject = new JSONObject();
-            sObject.put("member_id", dtos.get(i).getMember_id());
+            sObject.put("member_id", dtos.get(i).getUser_id());
             sObject.put("message", dtos.get(i).getMessage());
             sObject.put("regDate", dtos.get(i).getRegDate());
 
@@ -89,7 +89,7 @@ public class MessageServiceImpl implements MessageService{
 
         for (int i = 0; i < dtos.size(); i++) {
             JSONObject sObject = new JSONObject();
-            sObject.put("member_id", dtos.get(i).getMember_id());
+            sObject.put("member_id", dtos.get(i).getUser_id());
             sObject.put("message", dtos.get(i).getMessage());
             sObject.put("regDate", dtos.get(i).getRegDate());
 
@@ -97,7 +97,7 @@ public class MessageServiceImpl implements MessageService{
 
         }
 
-        List<ChatMessageResponseDto> users = Stream.of(messageRepository.findByMemberId(dto.getMemberId()))
+        List<ChatMessageResponseDto> users = Stream.of(messageRepository.findByUserId(dto.getUser_id()))
                 .findAny()
                 .orElseThrow(ChatException::new)
                 .stream()
@@ -106,7 +106,7 @@ public class MessageServiceImpl implements MessageService{
 
         for (int i = 0; i < users.size(); i++) {
             JSONObject sObject = new JSONObject();
-            sObject.put("member_id", dtos.get(i).getMember_id());
+            sObject.put("member_id", dtos.get(i).getUser_id());
             sObject.put("message", dtos.get(i).getMessage());
             sObject.put("regDate", dtos.get(i).getRegDate());
 
@@ -130,7 +130,7 @@ public class MessageServiceImpl implements MessageService{
         Room r = findRoom(room_id);
         Message message = Message.builder()
                 .room(r)
-                .memberId(dto.getMember_id())
+                .userId(dto.getUser_id())
                 .message(dto.getMessage())
                 .build();
         messageRepository.save(message);
