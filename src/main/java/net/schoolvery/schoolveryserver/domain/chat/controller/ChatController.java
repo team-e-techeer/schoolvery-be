@@ -5,10 +5,11 @@ import net.schoolvery.schoolveryserver.domain.chat.dto.request.*;
 import net.schoolvery.schoolveryserver.domain.chat.dto.response.RoomFindResponseDto;
 import net.schoolvery.schoolveryserver.domain.chat.dto.response.RoomJoinResponseDto;
 import net.schoolvery.schoolveryserver.domain.chat.dto.response.RoomResponseDto;
-import net.schoolvery.schoolveryserver.domain.chat.entity.Message;
 import net.schoolvery.schoolveryserver.domain.chat.service.MemberService;
 import net.schoolvery.schoolveryserver.domain.chat.service.MessageService;
 import net.schoolvery.schoolveryserver.domain.chat.service.RoomService;
+import net.schoolvery.schoolveryserver.global.common.dto.PageRequestDto;
+import net.schoolvery.schoolveryserver.global.common.dto.PageResultDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -58,12 +59,20 @@ public class ChatController {
                 .body(result);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping
     @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
-    public ResponseEntity<RoomResponseDto> getChatRoom(@PathVariable UUID id, HttpServletRequest request) {
-        RoomResponseDto dto = roomService.getRoomById(id);
+    public ResponseEntity<PageResultDto> list(PageRequestDto pageRequestDto, HttpServletRequest request) {
+        PageResultDto result = roomService.getRooms(pageRequestDto);
         return ResponseEntity.ok()
-                .body(dto);
+                .body(result);
+    }
+
+    @GetMapping("/find/{id}")
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
+    public ResponseEntity<List<RoomFindResponseDto>> getRoomsbyUserId(@PathVariable UUID id, HttpServletRequest request) {
+        List<RoomFindResponseDto> roomFindResponseDtoList = memberService.findMember(id);
+        return ResponseEntity.ok()
+                .body(roomFindResponseDtoList);
     }
 
     // [실전용] 웹 소캣 버전
@@ -80,16 +89,16 @@ public class ChatController {
         messageService.sendMessage(messageCreateRequestDto);
     }
 
-    @GetMapping("/room")
-    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
-    public ResponseEntity <List<Message>> enterChatRoom (@RequestBody MessageGetRequestDto messageGetRequestDto, HttpServletRequest request) {
-        // 1. 채팅방 멤버 추가
-        memberService.addMembers(messageGetRequestDto.getRoom_id(),messageGetRequestDto.getMember_id());
-
-        // 2. 채팅방 모든 메세지 띄우기(가져오기)
-        List<Message> messages = messageService.getMessages(messageGetRequestDto.getRoom_id());
-        return ResponseEntity.ok().body(messages);
-    }
+//    @GetMapping("/room")
+//    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
+//    public ResponseEntity <List<Message>> enterChatRoom (@RequestBody MessageGetRequestDto messageGetRequestDto, HttpServletRequest request) {
+//        // 1. 채팅방 멤버 추가
+//        memberService.addMembers(messageGetRequestDto.getRoom_id(),messageGetRequestDto.getMember_id());
+//
+//        // 2. 채팅방 모든 메세지 띄우기(가져오기)
+//        List<Message> messages = messageService.getMessages(messageGetRequestDto.getRoom_id());
+//        return ResponseEntity.ok().body(messages);
+//    }
 
     @PostMapping("/member")
     @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
@@ -109,13 +118,12 @@ public class ChatController {
                 .body(result);
     }
 
-    @GetMapping("/find/{id}")
+    @GetMapping("/member/{roomId}")
     @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
-    public ResponseEntity<List<RoomFindResponseDto>> findChatRoom(@PathVariable UUID id, HttpServletRequest request) {
-        List<RoomFindResponseDto> roomFindResponseDtoList = memberService.findMember(id);
-
+    public ResponseEntity<PageResultDto> whoseInChatRoom(@PathVariable UUID roomId, PageRequestDto pageRequestDto,HttpServletRequest request) {
+        PageResultDto result = memberService.checkMembers(roomId,pageRequestDto);
         return ResponseEntity.ok()
-                .body(roomFindResponseDtoList);
+                .body(result);
     }
 
     @GetMapping("/room/{id}")

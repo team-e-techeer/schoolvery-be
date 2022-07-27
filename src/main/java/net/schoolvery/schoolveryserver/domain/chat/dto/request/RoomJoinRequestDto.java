@@ -12,8 +12,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @Builder
 public class RoomJoinRequestDto {
-
-    private UUID member_id;
+    private UUID user_id;
     private UUID room_id;
 
 }

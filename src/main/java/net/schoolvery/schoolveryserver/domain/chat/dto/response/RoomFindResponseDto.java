@@ -11,6 +11,6 @@ import java.util.UUID;
 @Builder
 public class RoomFindResponseDto {
     private UUID id;
-    private UUID roomId;
-    private UUID memberId;
+    private UUID room_id;
+    private UUID user_id;
 }

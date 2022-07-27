@@ -17,7 +17,7 @@ public interface MessageService {
     default ChatMessageResponseDto EntityToDto(Message message) {
         ChatMessageResponseDto dto = ChatMessageResponseDto.builder()
                 .room_id(message.getRoom().getId())
-                .member_id(message.getMemberId())
+                .user_id(message.getUserId())
                 .message(message.getMessage())
                 .regDate(message.getRegDate().toString())
                 .build();

@@ -11,7 +11,7 @@ import java.util.UUID;
 @Builder
 public class ChatMessageResponseDto {
     private UUID room_id;
-    private UUID member_id;
+    private UUID user_id;
     private String message;
     private String regDate;
 

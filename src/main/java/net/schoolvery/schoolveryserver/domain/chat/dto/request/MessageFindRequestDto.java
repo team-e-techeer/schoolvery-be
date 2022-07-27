@@ -12,6 +12,5 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MessageFindRequestDto {
-
-    private UUID memberId;
+    private UUID user_id;
 }
