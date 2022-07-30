@@ -50,17 +50,19 @@ public interface PostService {
 
   default PostResponseDto entityToDto(Post entity) {
     PostResponseDto dto = PostResponseDto.builder()
-        .id(entity.getId())
-        .title(entity.getTitle())
-        .location(entity.getLocation())
-        .schoolId(entity.getSchoolId())
-        .categoryId(entity.getCategory().getId())
-        .peopleNum(entity.getPeopleNum())
-        .deliveryFee(entity.getDeliveryFee())
-        .content(entity.getContent())
-        .store(entity.getStore())
-        .deadline(entity.getDeadline())
-        .build();
+            .id(entity.getId())
+            .title(entity.getTitle())
+            .location(entity.getLocation())
+            .schoolId(entity.getSchoolId())
+            .categoryId(entity.getCategory().getId())
+            .peopleNum(entity.getPeopleNum())
+            .deliveryFee(entity.getDeliveryFee())
+            .content(entity.getContent())
+            .store(entity.getStore())
+            .deadline(entity.getDeadline())
+            .regDate(entity.getRegDate())
+            .modDate(entity.getModDate())
+            .build();
     return dto;
   }
 }

@@ -12,7 +12,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PostResponseDto {
-
   private Long id;
   private String title;
   private String location;
@@ -23,5 +22,6 @@ public class PostResponseDto {
   private LocalDateTime deadline;
   private String content;
   private String store;
-
+  private LocalDateTime regDate;
+  private LocalDateTime modDate;
 }
