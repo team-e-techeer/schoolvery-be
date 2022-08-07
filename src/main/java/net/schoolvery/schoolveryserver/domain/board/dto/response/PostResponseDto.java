@@ -2,12 +2,11 @@ package net.schoolvery.schoolveryserver.domain.board.dto.response;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+
+import lombok.*;
 
 @Getter
+@Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -22,6 +21,7 @@ public class PostResponseDto {
   private LocalDateTime deadline;
   private String content;
   private String store;
+  private UUID roomId;
   private LocalDateTime regDate;
   private LocalDateTime modDate;
 }

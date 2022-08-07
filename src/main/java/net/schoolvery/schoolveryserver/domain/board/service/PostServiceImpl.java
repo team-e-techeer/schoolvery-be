@@ -14,6 +14,7 @@ import net.schoolvery.schoolveryserver.domain.board.entity.Post;
 import net.schoolvery.schoolveryserver.domain.board.entity.QPost;
 import net.schoolvery.schoolveryserver.domain.board.repository.PostRepository;
 import net.schoolvery.schoolveryserver.domain.chat.dto.request.RoomCreateRequestDto;
+import net.schoolvery.schoolveryserver.domain.chat.dto.response.RoomResponseDto;
 import net.schoolvery.schoolveryserver.domain.chat.service.RoomService;
 import net.schoolvery.schoolveryserver.global.common.dto.PageRequestDto;
 import net.schoolvery.schoolveryserver.global.common.dto.PageResultDto;
@@ -38,8 +39,13 @@ public class PostServiceImpl implements PostService {
             .post_id(entity.getId())
             .name(entity.getTitle())
             .build();
-        roomService.createChatRoom(room);
-        return entityToDto(entity);
+
+        RoomResponseDto roomResponse = roomService.createChatRoom(room);
+        PostResponseDto postResponse = entityToDto(entity);
+
+        postResponse.setRoomId(roomResponse.getId());
+
+        return postResponse;
     }
 
     @Override
