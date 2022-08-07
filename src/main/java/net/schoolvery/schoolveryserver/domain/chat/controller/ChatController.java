@@ -35,7 +35,6 @@ public class ChatController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     @ResponseBody
-    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     public ResponseEntity<RoomResponseDto> createChatRoom(@RequestBody RoomCreateRequestDto roomCreateRequestDto
     , HttpServletRequest request) {
         final RoomResponseDto result = roomService.createChatRoom(roomCreateRequestDto);
@@ -43,7 +42,6 @@ public class ChatController {
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     public ResponseEntity<Void> deleteChatRoom(@PathVariable UUID id, HttpServletRequest request) {
         roomService.deleteChatRoom(id);
         return ResponseEntity.ok()
@@ -51,7 +49,6 @@ public class ChatController {
     }
 
     @PutMapping("/{id}")
-    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     public ResponseEntity<RoomResponseDto> updateChatRoom(@PathVariable UUID id, @RequestBody RoomUpdateRequestDto roomUpdateRequestDto
             , HttpServletRequest request) {
         RoomResponseDto result = roomService.updateChatRoom(id, roomUpdateRequestDto);
@@ -60,7 +57,6 @@ public class ChatController {
     }
 
     @GetMapping
-    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     public ResponseEntity<PageResultDto> list(PageRequestDto pageRequestDto, HttpServletRequest request) {
         PageResultDto result = roomService.getRooms(pageRequestDto);
         return ResponseEntity.ok()
@@ -68,7 +64,6 @@ public class ChatController {
     }
 
     @GetMapping("/find/{id}")
-    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     public ResponseEntity<List<RoomFindResponseDto>> getRoomsbyUserId(@PathVariable UUID id, HttpServletRequest request) {
         List<RoomFindResponseDto> roomFindResponseDtoList = memberService.findMember(id);
         return ResponseEntity.ok()
@@ -77,14 +72,12 @@ public class ChatController {
 
     // [실전용] 웹 소캣 버전
     @MessageMapping("/message")
-    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     public void sendTextMessage(@RequestBody MessageCreateRequestDto messageCreateRequestDto, HttpServletRequest request) {
         messageService.sendMessage(messageCreateRequestDto);
     }
 
     // [테스트용] HTTP 버전
     @PostMapping("/message")
-    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     public void sendTextMessage2(@RequestBody MessageCreateRequestDto messageCreateRequestDto, HttpServletRequest request) {
         messageService.sendMessage(messageCreateRequestDto);
     }
@@ -101,7 +94,6 @@ public class ChatController {
 //    }
 
     @PostMapping("/member")
-    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     public ResponseEntity<RoomJoinResponseDto> joinChatRoom(@RequestBody RoomJoinRequestDto requestDto, HttpServletRequest request) {
         RoomJoinResponseDto responseDto = memberService.joinMemebers(requestDto);
 
@@ -110,7 +102,6 @@ public class ChatController {
     }
 
     @PutMapping("/member")
-    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     public ResponseEntity<Boolean> exitChatRoom(@RequestBody RoomJoinRequestDto requestDto) {
         Boolean result = memberService.exitMembers(requestDto);
 
@@ -119,7 +110,6 @@ public class ChatController {
     }
 
     @GetMapping("/member/{roomId}")
-    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     public ResponseEntity<PageResultDto> whoseInChatRoom(@PathVariable UUID roomId, PageRequestDto pageRequestDto,HttpServletRequest request) {
         PageResultDto result = memberService.checkMembers(roomId,pageRequestDto);
         return ResponseEntity.ok()
@@ -127,7 +117,6 @@ public class ChatController {
     }
 
     @GetMapping("/room/{id}")
-    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     public ResponseEntity<JSONObject> findMessageV1(@PathVariable UUID id, HttpServletRequest request) {
         JSONObject object = messageService.findMessageV1(id);
 
@@ -136,7 +125,6 @@ public class ChatController {
     }
 
     @GetMapping("/room/v2/{id}")
-    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     public ResponseEntity<JSONObject> findMessageV2(@PathVariable UUID id, @RequestBody MessageFindRequestDto dto, HttpServletRequest request) {
         JSONObject object = messageService.findMessageV2(id, dto);
 
