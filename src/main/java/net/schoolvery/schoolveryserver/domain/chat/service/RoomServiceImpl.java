@@ -52,4 +52,11 @@ public class RoomServiceImpl implements RoomService {
         return new PageResultDto<>(result, fn);
     }
 
+    @Override
+    public RoomResponseDto getByPostId(UUID postId) {
+        Room entity = roomRepository.findByPostId(postId);
+        RoomResponseDto dto = entityToDto(entity);
+        return null;
+    }
+
 }

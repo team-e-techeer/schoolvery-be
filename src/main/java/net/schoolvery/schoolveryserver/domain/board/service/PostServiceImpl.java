@@ -114,7 +114,7 @@ public class PostServiceImpl implements PostService {
         UUID categoryId = requestDto.getCategoryId();
 
         if (schoolId != null) {
-            booleanBuilder.and(qPost.schoolId.eq(schoolId));
+            booleanBuilder.and(qPost.school.schoolId.eq(schoolId));
         }
 
         if (categoryId != null) {

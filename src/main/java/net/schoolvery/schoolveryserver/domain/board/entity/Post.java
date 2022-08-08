@@ -18,6 +18,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import net.schoolvery.schoolveryserver.domain.school.entity.School;
 import net.schoolvery.schoolveryserver.domain.user.entity.User;
 import net.schoolvery.schoolveryserver.global.common.BaseEntity;
 import org.hibernate.annotations.ColumnDefault;
@@ -44,9 +45,8 @@ public class Post extends BaseEntity {
     @GenericGenerator(name = "UUID", strategy = "uuid2")
     private UUID userId;
 
-    @Column(name = "school_id", nullable = false, columnDefinition = "BINARY(16)")
-    @GenericGenerator(name = "UUID", strategy = "uuid2")
-    private UUID schoolId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private School school;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Category category;

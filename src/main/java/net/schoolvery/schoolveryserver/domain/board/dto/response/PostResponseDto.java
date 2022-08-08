@@ -15,7 +15,9 @@ public class PostResponseDto {
   private String title;
   private String location;
   private UUID schoolId;
+  private String schoolName;
   private UUID categoryId;
+  private String categoryName;
   private Integer peopleNum;
   private Integer deliveryFee;
   private LocalDateTime deadline;
