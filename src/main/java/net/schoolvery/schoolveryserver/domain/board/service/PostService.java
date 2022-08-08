@@ -6,6 +6,7 @@ import net.schoolvery.schoolveryserver.domain.board.dto.request.PostUpdateReques
 import net.schoolvery.schoolveryserver.domain.board.dto.response.PostResponseDto;
 import net.schoolvery.schoolveryserver.domain.board.entity.Category;
 import net.schoolvery.schoolveryserver.domain.board.entity.Post;
+import net.schoolvery.schoolveryserver.domain.school.entity.School;
 import net.schoolvery.schoolveryserver.domain.user.entity.User;
 import net.schoolvery.schoolveryserver.global.common.dto.PageRequestDto;
 import net.schoolvery.schoolveryserver.global.common.dto.PageResultDto;
@@ -25,7 +26,7 @@ public interface PostService {
         .userId(dto.getUserId())
         .title(dto.getTitle())
         .location(dto.getLocation())
-        .schoolId(dto.getSchoolId())
+        .school(School.builder().schoolId(dto.getSchoolId()).build())
         .category(Category.builder().id(dto.getCategoryId()).build())
         .deadline(dto.getDeadline())
         .peopleNum(dto.getPeopleNum())
@@ -53,8 +54,10 @@ public interface PostService {
             .id(entity.getId())
             .title(entity.getTitle())
             .location(entity.getLocation())
-            .schoolId(entity.getSchoolId())
+            .schoolId(entity.getSchool().getSchoolId())
+            .schoolName(entity.getSchool().getSchoolName())
             .categoryId(entity.getCategory().getId())
+            .categoryName(entity.getCategory().getName())
             .peopleNum(entity.getPeopleNum())
             .deliveryFee(entity.getDeliveryFee())
             .content(entity.getContent())
