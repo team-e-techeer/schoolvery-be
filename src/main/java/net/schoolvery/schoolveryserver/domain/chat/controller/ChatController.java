@@ -132,4 +132,12 @@ public class ChatController {
                 .body(object);
     }
 
+    @GetMapping("/postId/{id}")
+    public ResponseEntity<RoomResponseDto> getChatroomByPostId(@PathVariable UUID postId, HttpServletRequest request) {
+        RoomResponseDto room = roomService.getByPostId(postId);
+
+        return ResponseEntity.ok()
+            .body(room);
+    }
+
 }

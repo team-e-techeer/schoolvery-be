@@ -34,4 +34,6 @@ public interface RoomService {
     void deleteChatRoom(UUID room_id);
     RoomResponseDto updateChatRoom(UUID room_id, RoomUpdateRequestDto dto);
     PageResultDto<RoomResponseDto, Room> getRooms(PageRequestDto requestDto);
+
+    RoomResponseDto getByPostId(UUID postId);
 }
