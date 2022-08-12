@@ -35,5 +35,5 @@ public interface RoomService {
     RoomResponseDto updateChatRoom(UUID room_id, RoomUpdateRequestDto dto);
     PageResultDto<RoomResponseDto, Room> getRooms(PageRequestDto requestDto);
 
-    RoomResponseDto getByPostId(UUID postId);
+    RoomResponseDto getByPostId(Long id);
 }

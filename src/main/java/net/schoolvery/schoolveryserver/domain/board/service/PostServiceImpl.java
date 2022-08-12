@@ -123,15 +123,10 @@ public class PostServiceImpl implements PostService {
 
         // keyword + type : keyword 존재, type must have
         if (keyword != null) {
-            if (type.contains("store")) {
-                booleanBuilder.and(qPost.store.contains(keyword));
-            }
-            if (type.contains("title")) {
-                booleanBuilder.and(qPost.title.contains(keyword));
-            }
-            if (type.contains("location")) {
-                booleanBuilder.and(qPost.location.contains(keyword));
-            }
+            booleanBuilder.or(qPost.title.contains(keyword));
+            booleanBuilder.or(qPost.store.contains(keyword));
+            booleanBuilder.or(qPost.location.contains(keyword));
+
         }
 
         return booleanBuilder;
