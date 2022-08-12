@@ -53,10 +53,9 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
-    public RoomResponseDto getByPostId(UUID postId) {
-        Room entity = roomRepository.findByPostId(postId);
-        RoomResponseDto dto = entityToDto(entity);
-        return null;
+    public RoomResponseDto getByPostId(Long id) {
+        Room entity = roomRepository.findByPostId(id);
+        return entityToDto(entity);
     }
 
 }

@@ -18,5 +18,5 @@ public interface RoomRepository extends JpaRepository <Room,Long> {
     Room getByRoomId(@Param("id") UUID id);
 
     @Query("SELECT r FROM Room r WHERE r.post_id =:id")
-    Room findByPostId(@Param("id") UUID id);
+    Room findByPostId(@Param("id") Long id);
 }
