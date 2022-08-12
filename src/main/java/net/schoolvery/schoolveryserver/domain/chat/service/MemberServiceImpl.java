@@ -64,11 +64,20 @@ public class MemberServiceImpl implements MemberService{
 
     @Override
     public RoomJoinResponseDto joinMemebers(RoomJoinRequestDto requestDto) {
-        Optional <Member> findMember = memberRepository.findByUserId(requestDto.getUser_id());
+        Optional <Member> findMember = memberRepository.findByRoomId(requestDto.getRoom_id());
         if (findMember.isEmpty()) {
             Member member = dtoToEntity(requestDto);
             memberRepository.save(member);
             return EntityToDto(member);
+        }
+        else{
+            Optional <Member> findMember2 = findMember.stream()
+                    .filter(s-> s.getUserId().equals(requestDto.getUser_id())).findFirst();
+            if (findMember2.isEmpty()){
+                Member member = dtoToEntity(requestDto);
+                memberRepository.save(member);
+                return EntityToDto(member);
+            }
         }
         return EntityToDto(findMember.get());
     }
