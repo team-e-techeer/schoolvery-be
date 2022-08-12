@@ -13,5 +13,4 @@ import java.util.UUID;
 @Builder
 public class RoomJoinResponseDto {
     private UUID room_id;
-
 }

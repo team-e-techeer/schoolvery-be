@@ -25,6 +25,7 @@ public interface MemberService {
         return Member.builder()
                 .userId(dto.getUser_id())
                 .room(Room.builder().id(dto.getRoom_id()).build())
+                .name(dto.getName())
                 .build();
     }
 
@@ -39,6 +40,7 @@ public interface MemberService {
                 .id(member.getId())
                 .room_id(member.getRoom().getId())
                 .user_id(member.getUserId())
+                .name(member.getName())
                 .build();
     }
 

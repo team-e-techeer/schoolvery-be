@@ -14,5 +14,5 @@ import java.util.UUID;
 public class RoomJoinRequestDto {
     private UUID user_id;
     private UUID room_id;
-
+    private String name;
 }
