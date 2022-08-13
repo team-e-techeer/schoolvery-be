@@ -15,7 +15,6 @@ import javax.persistence.Table;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Authority {
-
     @Id
     @Column(name = "authority_name", length = 50)
     private String authorityName; // 권한명

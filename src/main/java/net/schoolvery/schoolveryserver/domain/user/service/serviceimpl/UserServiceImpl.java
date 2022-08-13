@@ -2,6 +2,7 @@ package net.schoolvery.schoolveryserver.domain.user.service.serviceimpl;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import net.schoolvery.schoolveryserver.domain.aws.service.FileUploadService;
 import net.schoolvery.schoolveryserver.domain.user.dto.request.UserCreateRequestDto;
 import net.schoolvery.schoolveryserver.domain.user.dto.request.UserLoginRequestDto;
 import net.schoolvery.schoolveryserver.domain.user.dto.request.UserUpdateRequestDto;
@@ -12,7 +13,6 @@ import net.schoolvery.schoolveryserver.domain.user.entity.User;
 import net.schoolvery.schoolveryserver.domain.user.repository.UserRepository;
 import net.schoolvery.schoolveryserver.domain.user.service.UserService;
 import net.schoolvery.schoolveryserver.global.error.exception.BusinessException;
-import net.schoolvery.schoolveryserver.global.error.exception.User.UserNotFoundException;
 import net.schoolvery.schoolveryserver.global.utils.jwt.TokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -49,10 +49,9 @@ public class UserServiceImpl implements UserService {
 
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
 
-
     // User Create
     @Override
-    public UserCreateResponseDto createUser(UserCreateRequestDto userCreateRequestDto) {
+    public UserCreateResponseDto createUser(UserCreateRequestDto userCreateRequestDto) throws IllegalAccessException {
         try {
             String password = passwordEncoder.encode(userCreateRequestDto.getPassword());
             userCreateRequestDto.setPassword(password);

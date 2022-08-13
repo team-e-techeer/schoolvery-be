@@ -44,7 +44,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         web.ignoring()
                 .antMatchers("/api/v1/users/**",
                         "/api/v1/school/**", "/api/v1/categories/**","/api/v1/categories","/api/v1/chats/room/**","/api/v1/chats/**","/api/v1/chats")
-                .antMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger/**", "/error");// 관한 요청은 인증없이 접근 허용
+                .antMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger/**", "/error", "/api/v1/upload");// 관한 요청은 인증없이 접근 허용
 
     }
 

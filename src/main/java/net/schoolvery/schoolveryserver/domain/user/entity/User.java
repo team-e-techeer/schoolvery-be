@@ -47,7 +47,7 @@ public class User extends BaseEntity {
     @Column(name = "password")
     private String password;
 
-    @Column(name = "profile_image_url", length = 30)
+    @Column(name = "profile_image_url")
     private String profileImageUrl;
 
     @Column(name = "phone_num", length = 25)
