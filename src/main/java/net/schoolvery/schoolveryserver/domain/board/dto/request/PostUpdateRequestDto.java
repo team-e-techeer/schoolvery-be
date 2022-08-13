@@ -1,6 +1,8 @@
 package net.schoolvery.schoolveryserver.domain.board.dto.request;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,7 +19,7 @@ public class PostUpdateRequestDto {
   private Integer peopleNum;
   private Integer deliveryFee;
   private String content;
-  private Integer categoryId;  //카테고리 ID
+  private UUID categoryId;  //카테고리 ID
   private LocalDateTime deadline;
 
 }
