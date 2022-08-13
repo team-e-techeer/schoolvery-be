@@ -76,7 +76,7 @@ public class UserController {
     @PostMapping("/signup")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<UserCreateResponseDto> CreateUsers(@Valid @RequestBody UserCreateRequestDto userCreateRequestDto
-            , HttpServletRequest request) {
+            , HttpServletRequest request) throws IllegalAccessException {
 
         UserCreateResponseDto create = userService.createUser(userCreateRequestDto);
 
@@ -87,7 +87,6 @@ public class UserController {
     @PatchMapping("/{id}")
     public ResponseEntity<Optional<User>> updateUser(@PathVariable UUID id, @RequestBody UserUpdateRequestDto userUpdateRequestDto) {
         Optional<User> update = userService.modifyUser(id, userUpdateRequestDto);
-
         return ResponseEntity.ok()
                 .body(update);
     }

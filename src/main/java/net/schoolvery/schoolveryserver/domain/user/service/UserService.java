@@ -4,11 +4,9 @@ import java.util.Collections;
 import java.util.Optional;
 import java.util.UUID;
 
+import net.schoolvery.schoolveryserver.domain.aws.service.FileUploadService;
 import net.schoolvery.schoolveryserver.domain.school.entity.School;
-import net.schoolvery.schoolveryserver.domain.user.dto.request.AuthorityRequestDto;
-import net.schoolvery.schoolveryserver.domain.user.dto.request.UserCreateRequestDto;
-import net.schoolvery.schoolveryserver.domain.user.dto.request.UserLoginRequestDto;
-import net.schoolvery.schoolveryserver.domain.user.dto.request.UserUpdateRequestDto;
+import net.schoolvery.schoolveryserver.domain.user.dto.request.*;
 import net.schoolvery.schoolveryserver.domain.user.dto.response.GetUserResponseDto;
 import net.schoolvery.schoolveryserver.domain.user.dto.response.UserCreateResponseDto;
 import net.schoolvery.schoolveryserver.domain.user.dto.response.UserLoginResponseDto;
@@ -21,7 +19,7 @@ import java.util.stream.Collectors;
 
 public interface UserService {
 
-    UserCreateResponseDto createUser(UserCreateRequestDto userCreateRequestDto);
+    UserCreateResponseDto createUser(UserCreateRequestDto userCreateRequestDto) throws IllegalAccessException;
     List<User> getAllUsers();
     Optional<User> modifyUser(UUID id, UserUpdateRequestDto userUpdateRequestDto);
     void deleteUser(UUID id);
@@ -32,12 +30,13 @@ public interface UserService {
     boolean findByUserEmail(String email);
     boolean findByUserNickname(String nickname);
 
-    default User createUserRequest(UserCreateRequestDto userCreateRequestDto) {
+    default User createUserRequest(UserCreateRequestDto userCreateRequestDto)  {
+
         User user = User.builder()
                 .name(userCreateRequestDto.getName())
                 .nickname(userCreateRequestDto.getNickname())
                 .password(userCreateRequestDto.getPassword())
-                .profileImageUrl(userCreateRequestDto.getProfileImageUrl())
+                .profileImageUrl(userCreateRequestDto.getImgUrlString())
                 .email(userCreateRequestDto.getEmail())
                 .phoneNum(userCreateRequestDto.getPhoneNum())
                 .school(School.builder().schoolId(userCreateRequestDto.getSchoolId()).build())
