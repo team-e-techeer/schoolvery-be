@@ -49,9 +49,6 @@ public class UserServiceImpl implements UserService {
 
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
 
-    private final FileUploadService fileUploadService;
-
-
     // User Create
     @Override
     public UserCreateResponseDto createUser(UserCreateRequestDto userCreateRequestDto) throws IllegalAccessException {
@@ -62,8 +59,6 @@ public class UserServiceImpl implements UserService {
         } catch (Exception e) {
             throw new BusinessException(PASSWORD_ENCRYPTION_ERROR);
         }
-        String imgUrl = fileUploadService.uploadImage(userCreateRequestDto.getProfileImageUrl());
-        userCreateRequestDto.setImgUrlString(imgUrl);
 
         User user = createUserRequest(userCreateRequestDto);
         userRepository.save(user);

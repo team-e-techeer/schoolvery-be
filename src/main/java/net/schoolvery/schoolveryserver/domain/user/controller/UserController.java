@@ -6,6 +6,7 @@ import java.util.Optional;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import net.schoolvery.schoolveryserver.domain.aws.service.FileUploadService;
 import net.schoolvery.schoolveryserver.domain.user.dto.request.*;
 import net.schoolvery.schoolveryserver.domain.user.dto.response.GetUserResponseDto;
 import net.schoolvery.schoolveryserver.domain.user.dto.response.UserCreateResponseDto;
@@ -19,8 +20,10 @@ import net.schoolvery.schoolveryserver.global.error.exception.User.UserNotFoundE
 import net.schoolvery.schoolveryserver.global.utils.jwt.JwtFilter;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -36,6 +39,8 @@ public class UserController {
     private final UserService userService;
 
     private final EmailService emailService;
+
+    private final FileUploadService fileUploadService;
 
     @GetMapping("/authorization")
     public ResponseEntity<GetUserResponseDto> getUserByToken(HttpServletRequest request) {
@@ -73,11 +78,13 @@ public class UserController {
         }
     }
 
-    @PostMapping("/signup")
+    @PostMapping(value = "/signup", consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE})
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<UserCreateResponseDto> CreateUsers(@Valid @RequestBody UserCreateRequestDto userCreateRequestDto
-            , HttpServletRequest request) throws IllegalAccessException {
+    public ResponseEntity<UserCreateResponseDto> CreateUsers(@RequestPart(name = "request") UserCreateRequestDto userCreateRequestDto
+            , @RequestPart(name = "file")MultipartFile file) throws IllegalAccessException {
 
+        String imgUrl = fileUploadService.uploadImage(file);
+        userCreateRequestDto.setProfileImageUrl(imgUrl);
         UserCreateResponseDto create = userService.createUser(userCreateRequestDto);
 
         return ResponseEntity.ok()
@@ -87,6 +94,7 @@ public class UserController {
     @PatchMapping("/{id}")
     public ResponseEntity<Optional<User>> updateUser(@PathVariable UUID id, @RequestBody UserUpdateRequestDto userUpdateRequestDto) {
         Optional<User> update = userService.modifyUser(id, userUpdateRequestDto);
+
         return ResponseEntity.ok()
                 .body(update);
     }

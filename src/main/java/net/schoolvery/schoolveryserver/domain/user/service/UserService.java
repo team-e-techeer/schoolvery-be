@@ -36,7 +36,7 @@ public interface UserService {
                 .name(userCreateRequestDto.getName())
                 .nickname(userCreateRequestDto.getNickname())
                 .password(userCreateRequestDto.getPassword())
-                .profileImageUrl(userCreateRequestDto.getImgUrlString())
+                .profileImageUrl(userCreateRequestDto.getProfileImageUrl())
                 .email(userCreateRequestDto.getEmail())
                 .phoneNum(userCreateRequestDto.getPhoneNum())
                 .school(School.builder().schoolId(userCreateRequestDto.getSchoolId()).build())
