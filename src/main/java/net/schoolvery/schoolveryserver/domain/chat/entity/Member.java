@@ -27,6 +27,9 @@ public class Member extends BaseEntity {
     @JoinColumn(name = "ROOM_ID")
     private Room room;
 
+    @Column(name = "NAME", nullable = false)
+    private String name;
+
     @Column(name = "USER_ID", nullable = false, columnDefinition = "BINARY(16)")
     @GenericGenerator(name = "UUID", strategy = "uuid2")
     private UUID userId;

@@ -41,46 +41,47 @@ services:
     volumes:
       - ./alertmanager/:/etc/alertmanager/
     restart: always
-    command: 
-      - '--config.file=/etc/alertmanager/config.yml'
-      - '--storage.path=/alertmanager'
+    command:
+      - "--config.file=/etc/alertmanager/config.yml"
+      - "--storage.path=/alertmanager"
 
   node-exporter:
-      container_name: node-exporter
-      image: prom/node-exporter
-      volumes:
-        - /proc:/host/proc:ro
-        - /sys:/host/sys:ro
-        - /:/rootfs:ro 
-      command:
-        - '--path.procfs=/host/proc'
-        - '--path.sysfs=/host/sys'
-        - --collector.filesystem.ignored-mount-points
-        - "^/(sys|proc|dev|host|etc|rootfs/var/lib/docker/containers|rootfs/var/lib/docker/overlay2|rootfs/run/docker/netns|rootfs/var/lib/docker/aufs)($$|/)"
-      ports:
-        - "9100:9100"
-      restart: always
-      deploy:
-        mode: global 
-  
+    container_name: node-exporter
+    image: prom/node-exporter
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /:/rootfs:ro
+    command:
+      - "--path.procfs=/host/proc"
+      - "--path.sysfs=/host/sys"
+      - --collector.filesystem.ignored-mount-points
+      - "^/(sys|proc|dev|host|etc|rootfs/var/lib/docker/containers|rootfs/var/lib/docker/overlay2|rootfs/run/docker/netns|rootfs/var/lib/docker/aufs)($$|/)"
+    ports:
+      - "9100:9100"
+    restart: always
+    deploy:
+      mode: global
+
   prometheus:
-      image: prom/prometheus:latest
-      restart: always
-      container_name: prometheus
-      ports:
-        - "9090:9090"
-      links:
-        - alertmanager:alertmanager
-      volumes:
-        - ./prometheus/:/etc/prometheus/
-        - ./prometheus/data:/prometheus
-      command:
-        - '--config.file=/etc/prometheus/prometheus.yml'
-        - '--storage.tsdb.path=/prometheus'
-        - '--web.console.libraries=/etc/prometheus/console_libraries'
-        - '--web.console.templates=/etc/prometheus/consoles'
-        - '--storage.tsdb.retention.time=200h'
-        - '--web.enable-lifecycle'
+    image: prom/prometheus:latest
+    restart: always
+    container_name: prometheus
+    user: root
+    ports:
+      - "9090:9090"
+    links:
+      - alertmanager:alertmanager
+    volumes:
+      - ./prometheus/:/etc/prometheus/
+      - ./prometheus/data:/prometheus
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+      - "--storage.tsdb.path=/prometheus"
+      - "--web.console.libraries=/etc/prometheus/console_libraries"
+      - "--web.console.templates=/etc/prometheus/consoles"
+      - "--storage.tsdb.retention.time=200h"
+      - "--web.enable-lifecycle"
 
   grafana:
     image: grafana/grafana:latest
@@ -95,8 +96,5 @@ services:
       - grafana_volume:/var/lib/grafana
       - ./grafana/provisioning/:/etc/grafana/provisioning
 
-  
-
 volumes:
-  grafana_volume: 
-
+  grafana_volume:

@@ -12,5 +12,6 @@ import java.util.UUID;
 public class RoomFindResponseDto {
     private UUID id;
     private UUID room_id;
+    private String name;
     private UUID user_id;
 }

@@ -16,5 +16,5 @@ INSERT INTO school (school_id, school_name) values (UNHEX(REPLACE(UUID(),'-','')
 INSERT INTO school (school_id, school_name) values (UNHEX(REPLACE(UUID(),'-','')), '성결대학교');
 
 
-INSERT INTO AUTHORITY (AUTHORITY_NAME) values ('ROLE_USER');
-INSERT INTO AUTHORITY (AUTHORITY_NAME) values ('ROLE_ADMIN');
+INSERT INTO authority (AUTHORITY_NAME) values ('ROLE_USER');
+INSERT INTO authority (AUTHORITY_NAME) values ('ROLE_ADMIN');
