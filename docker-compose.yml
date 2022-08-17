@@ -97,4 +97,4 @@ services:
       - ./grafana/provisioning/:/etc/grafana/provisioning
 
 volumes:
-  grafana_volume:
+  grafana_volume: 

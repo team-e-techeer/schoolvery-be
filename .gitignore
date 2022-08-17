@@ -43,5 +43,6 @@ secrets.yml
 © 2022 GitHub, Inc.
 logs/
 logs
+prometheus/data
 
 .env
