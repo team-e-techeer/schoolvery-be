@@ -1,0 +1,58 @@
+version: "3.9"
+services:
+  nginx-proxy:
+    container_name: nginx-proxy
+    image: nginxproxy/nginx-proxy
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - certs:/etc/nginx/certs:ro      
+      - ../nginx/log:/var/log/nginx 
+      - html:/usr/share/nginx/html
+      - vhost:/etc/nginx/vhost.d
+      - conf:/etc/nginx/conf.d
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+    labels:
+      - "com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx-proxy"
+    restart: always
+
+  letsencrypt-nginx-proxy:
+    container_name: letsencrypt-nginx-proxy
+    image: nginxproxy/acme-companion
+    depends_on:
+      - nginx-proxy
+    volumes:
+      - certs:/etc/nginx/certs:rw
+      - html:/usr/share/nginx/html
+      - vhost:/etc/nginx/vhost.d
+      - acme:/etc/acme.sh
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    restart: always
+    environment:
+      - NGINX_PROXY_CONTAINER=nginx-proxy
+      # - ACME_CA_URI=https://acme.zerossl.com/v2/DV90
+      # - ACME_EAB_KID=${ACME_EAB_KID}
+      # - ACME_EAB_HMAC_KEY=${ACME_EAB_HMAC_KEY}
+
+  springboot:
+    environment:
+      - VIRTUAL_HOST=${HOST}
+      - LETSENCRYPT_HOST=${HOST}
+    expose:
+      - "${PORT}"
+    
+  
+  adminer:
+    environment:
+      - VIRTUAL_HOST=db.${HOST}
+      - LETSENCRYPT_HOST=db.${HOST}
+    expose:
+      - "8081"
+
+volumes:
+  certs:
+  conf:
+  vhost:
+  html:
+  acme:
