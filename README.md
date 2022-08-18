@@ -9,4 +9,11 @@ schoolvery-be
    만약 ./gradlew build가 안된다면 gradle wrapper 또는 ./initialize.sh을 실행해줍니다.  
    만약 contextLoads() FAILED 에러가 나면 무시해줘도 됩니다.  
    build/libs 안에 schoolvery-server-0.0.1-SNAPSHOT.jar(추후 변경 가능) 라는 파일만 존재한다면 실행하는데 문제가 없습니다.
-5. `docker-compose up --build`
+
+### 일반(개발용) 실행
+`docker compose up --build`  
+중지: `docker compose down`
+
+### 테스트용 실행
+`./scripts/production-run.sh`  
+중지: `./scripts/production-down.sh`
