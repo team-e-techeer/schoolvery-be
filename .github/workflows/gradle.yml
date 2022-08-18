@@ -28,5 +28,5 @@ jobs:
         script: |
           cd dev/schoolvery-be
           git pull origin master
-          sh build.sh
-          sh restart_springboot.sh 
+          sh ./scripts/build.sh
+          sh ./scripts/restart_springboot.sh 
